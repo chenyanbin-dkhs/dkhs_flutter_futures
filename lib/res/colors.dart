@@ -10,8 +10,8 @@ class Colours {
   static const Color material_bg = Color(0xFFFFFFFF);
   static const Color dark_material_bg = Color(0xFF303233);
 
-  static const Color text = Color(0xFF333333);
-  static const Color dark_text = Color(0xFFB8B8B8);
+  static const Color text = Color(0xFF262932); //默认黑色
+  static const Color dark_text = Color(0xFFffffff); //白色
 
   static const Color text_gray = Color(0xFF999999);
   static const Color dark_text_gray = Color(0xFF666666);

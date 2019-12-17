@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../utils/image_utils.dart';
 import '../../../widgets/load_image.dart';
 import '../../../widgets/my_icon_button.dart';
-
 const APPBAR_SCROLL_OFFSET = 100;
 const APPBAR_BACKGROUND_COLOR = Color(0xFFf76836);
 

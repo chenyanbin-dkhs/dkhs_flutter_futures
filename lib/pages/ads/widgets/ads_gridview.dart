@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import '../models/ads_model.dart';
-// import '../../widgets/circle_image.dart';
-// import '../../widgets/load_image.dart';
-// import '../../res/resources.dart';
+import '../../../widgets/load_image.dart';
+import '../../../res/resources.dart';
+import '../../../res/resources.dart';
 // import '../../routers/navigator_utils.dart';
 
 class AdsGridView extends StatelessWidget {
   final List<AdsModel> _ads;
   final double gapWidth; //左右的边距之和,默认为0
   final int gridSize; // 一行有几个图标,默认为4
-
-  const AdsGridView(this._ads, {Key key, this.gapWidth = 0, this.gridSize = 4})
+  final bool isDarkTheme;
+  const AdsGridView(this._ads,
+      {Key key, this.gapWidth = 0, this.gridSize = 4, this.isDarkTheme = false})
       : super(key: key);
 
   @override
@@ -39,17 +40,20 @@ class AdsGridView extends StatelessWidget {
               //NavigatorUtils.goWebViewPage(context, ads.title, ads.redirectUrl);
             },
             child: new Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
+              padding: EdgeInsets.symmetric(vertical: 6),
               child: new Column(
                 children: <Widget>[
-                  //new CircleImage(ads.image, 25),
-                  // new LoadImage(
-                  //   ads.image,
-                  //   width: 30,
-                  //   height: 30,
-                  // ),
-                  // Gaps.vGap4,
-                  new Text(ads.title, style: new TextStyle(fontSize: 12.0))
+                  new LoadImage(
+                    ads.image,
+                    width: 30,
+                    height: 30,
+                  ),
+                  Gaps.vGap4,
+                  new Text(ads.title,
+                      style: new TextStyle(
+                          fontSize: 12.0,
+                          color:
+                              isDarkTheme ? Colours.dark_text : Colours.text))
                 ],
               ),
             )));

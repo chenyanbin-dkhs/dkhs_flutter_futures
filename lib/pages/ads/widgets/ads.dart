@@ -13,8 +13,13 @@ class AdsWidget extends StatefulWidget {
   final AdsWidgetType widgetType;
   final bool needUpdate; //是否需要更新
   final double gapWidth;
+  final bool isDarkTheme;
   AdsWidget(this.areaCode,
-      {Key key, this.needUpdate = false, this.widgetType, this.gapWidth})
+      {Key key,
+      this.needUpdate = false,
+      this.widgetType,
+      this.gapWidth,
+      this.isDarkTheme = false})
       : super(key: key);
 
   _AdsWidgetState createState() => _AdsWidgetState();
@@ -31,7 +36,7 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
   void initState() {
     super.initState();
     _presenter.setCode(widget.areaCode);
-    _presenter.fetchLocal();
+    _presenter.fetch();
     if (widget.needUpdate) {
       // MyEventBus().event.on<PageRefreshEvent>().listen((data) {
       //   _presenter.fetch();
@@ -61,6 +66,7 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
       return AdsGridView(
         _ads,
         gapWidth: widget.gapWidth,
+        isDarkTheme: widget.isDarkTheme,
       );
     }
     return Container();

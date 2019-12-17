@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'dart:async';
 
-const String HOST_URL = 'https://www.dkhs.com';
+const String HOST_URL = 'https://dev.dev.dkhs.com';
 
 class Http {
   static Dio dio;

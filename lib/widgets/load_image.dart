@@ -11,7 +11,7 @@ class LoadImage extends StatelessWidget {
       this.height,
       this.fit: BoxFit.cover,
       this.format: "png",
-      this.holderImg: "none"})
+      this.holderImg: "common/none"}) // 默认空白图片
       : super(key: key);
 
   final String image;
