@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../utils/image_utils.dart';
+import '../../../widgets/load_image.dart';
+import '../../../widgets/my_icon_button.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const APPBAR_BACKGROUND_COLOR = Color(0xFFf76836);
@@ -48,19 +51,17 @@ class _HomeAppBarState extends State<HomeAppBar> with TickerProviderStateMixin {
         backgroundColor: APPBAR_BACKGROUND_COLOR.withOpacity(widget.alpha ?? 0),
         elevation: 0,
         // titleSpacing: 0.0,
-        title: Text(widget.alpha.toString()),
+        title: LoadAssetImage(
+          "app/logo_futures",
+          width: 131.5,
+          height: 30.5,
+        ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.local_grocery_store,
-            ),
-            onPressed: () {},
+          MyIconButton(
+            src: 'common/ic_assistant',
           ),
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-            ),
-            onPressed: () {},
+          MyIconButton(
+            src: 'common/ic_message',
           ),
         ],
       ),
