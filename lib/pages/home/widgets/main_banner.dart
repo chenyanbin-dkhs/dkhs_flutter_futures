@@ -13,7 +13,7 @@ class MainBanner extends StatelessWidget {
           child: ImageUtils.getImage("home/bg_main_banner"),
         ),
         Positioned(
-          top: 110,
+          top: 100,
           left: 0,
           right: 0,
           child: AdsWidget(

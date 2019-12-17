@@ -40,7 +40,7 @@ class AdsGridView extends StatelessWidget {
               //NavigatorUtils.goWebViewPage(context, ads.title, ads.redirectUrl);
             },
             child: new Container(
-              padding: EdgeInsets.symmetric(vertical: 6),
+              padding: EdgeInsets.symmetric(vertical: 7),
               child: new Column(
                 children: <Widget>[
                   new LoadImage(
@@ -51,7 +51,8 @@ class AdsGridView extends StatelessWidget {
                   Gaps.vGap4,
                   new Text(ads.title,
                       style: new TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal, // todo 要用主题的方式
                           color:
                               isDarkTheme ? Colours.dark_text : Colours.text))
                 ],
