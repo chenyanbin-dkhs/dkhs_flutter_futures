@@ -17,16 +17,17 @@ class MarqueeVertical extends StatefulWidget {
 
 class _MarqueeVerticalState extends State<MarqueeVertical> {
   PageController _controller =
-      new PageController(initialPage: 0, keepPage: true);
+      new PageController(initialPage: 0, keepPage: true,viewportFraction: 1.0);
   Timer timer;
   
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((callback) {
-      startTimer();
-    });
+    startTimer();
+    // WidgetsBinding.instance.addPostFrameCallback((callback) {
+    //   startTimer();
+    // });
   }
 
   @override
