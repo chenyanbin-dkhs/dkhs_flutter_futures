@@ -26,10 +26,12 @@ class Gaps {
   static const EdgeInsetsGeometry defaultPadding = const EdgeInsets.symmetric(
       horizontal: Dimens.gap_dp15, vertical: Dimens.gap_dp10);
 
+  static const EdgeInsetsGeometry hPadding =
+      const EdgeInsets.symmetric(horizontal: Dimens.gap_dp15);
   static const EdgeInsetsGeometry vPadding5 =
       const EdgeInsets.symmetric(vertical: Dimens.gap_dp5);
 
-       static const EdgeInsetsGeometry vPadding8 =
+  static const EdgeInsetsGeometry vPadding8 =
       const EdgeInsets.symmetric(vertical: Dimens.gap_dp8);
 //  static Widget line = const SizedBox(
 //    height: 0.6,

@@ -35,6 +35,9 @@ class MyApp extends StatelessWidget {
     return _mainWidgetWithOKToast(
       MaterialApp(
         title: '期货捕猎者',
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+        ),
         //showPerformanceOverlay: true, //显示性能标签
         //debugShowCheckedModeBanner: false,
         //home: SplashPage(),
