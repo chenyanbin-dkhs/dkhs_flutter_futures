@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/marquee_vertical.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 
@@ -51,9 +52,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: <Widget>[
                     MainBanner(),
                     Container(
-                      height: 150,
+                      height: 50,
                       color: Colors.blue,
-                      width: 250,
+                      child: MarqueeVertical(),
                     ),
                     Container(
                       height: 150,
