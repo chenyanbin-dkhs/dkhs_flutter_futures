@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../utils/image_utils.dart';
 import '../../../widgets/load_image.dart';
 import '../../../widgets/my_icon_button.dart';
-const APPBAR_SCROLL_OFFSET = 100;
+
+// const APPBAR_SCROLL_OFFSET = 100;
 const APPBAR_BACKGROUND_COLOR = Color(0xFFf76836);
 
 class HomeAppBar extends StatefulWidget {
@@ -44,26 +45,29 @@ class _HomeAppBarState extends State<HomeAppBar> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: APPBAR_SCROLL_OFFSET.toDouble(),
-      child: AppBar(
-        backgroundColor: APPBAR_BACKGROUND_COLOR.withOpacity(widget.alpha ?? 0),
-        elevation: 0,
-        // titleSpacing: 0.0,
-        title: LoadAssetImage(
-          "app/logo_futures",
-          width: 131.5,
-          height: 30.5,
-        ),
-        actions: <Widget>[
-          MyIconButton(
-            src: 'common/ic_assistant',
-          ),
-          MyIconButton(
-            src: 'common/ic_message',
-          ),
-        ],
+    AppBar appBar = AppBar(
+      backgroundColor: APPBAR_BACKGROUND_COLOR.withOpacity(widget.alpha ?? 0),
+      elevation: 0,
+      // titleSpacing: 0.0,
+      title: LoadAssetImage(
+        "app/logo_futures",
+        width: 131.5,
+        height: 30.5,
       ),
+      actions: <Widget>[
+        MyIconButton(
+          src: 'common/ic_assistant',
+        ),
+        MyIconButton(
+          src: 'common/ic_message',
+        ),
+      ],
+    );
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    return Container(
+      //height: appBar.preferredSize.height + 20,
+      height: kToolbarHeight + statusBarHeight,
+      child: appBar,
     );
   }
 }

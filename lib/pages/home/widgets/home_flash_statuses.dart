@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../res/resources.dart';
 import '../../../widgets/load_image.dart';
+import '../../../widgets/ellipsis_text.dart';
 
 class HomeFlashStatuses extends StatefulWidget {
   HomeFlashStatuses({Key key}) : super(key: key);
@@ -52,12 +53,9 @@ class _HomeFlashStatusesState extends State<HomeFlashStatuses> {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(color: Colors.amber),
-                child: Text(
-                  '新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯$i',
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
+                width: double.infinity,
+                child: EllipsisText(
+                  text: '新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯 新闻快讯$i',
                 ));
           },
         );

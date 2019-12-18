@@ -1,7 +1,9 @@
+import 'package:dkhs_flutter_futures/res/gaps.dart';
 import 'package:flutter/material.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 import './widgets/home_flash_statuses.dart';
+import './widgets/home_trade_buttons.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -52,12 +54,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: <Widget>[
                     MainBanner(),
                     HomeFlashStatuses(),
-                    // Container(
-                    //   height: 50,
-                    //   color: Colors.blue,
-                    //   child: MarqueeVertical(),
-                    // ),
-                    
+                    HomeTradeButtons(),
+                    Gaps.vGap10,
                     Container(
                       height: 150,
                       color: Colors.pink,

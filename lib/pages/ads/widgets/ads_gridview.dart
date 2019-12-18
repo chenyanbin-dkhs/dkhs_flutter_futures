@@ -50,6 +50,7 @@ class AdsGridView extends StatelessWidget {
                   ),
                   Gaps.vGap4,
                   new Text(ads.title,
+                      softWrap: false,
                       style: new TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal, // todo 要用主题的方式
