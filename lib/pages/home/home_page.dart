@@ -1,9 +1,12 @@
 import 'package:dkhs_flutter_futures/res/gaps.dart';
+import 'package:dkhs_flutter_futures/widgets/image_button.dart';
 import 'package:flutter/material.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 import './widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
+import '../../widgets/list_header.dart';
+import '../../widgets/item_click.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -56,6 +59,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     HomeFlashStatuses(),
                     HomeTradeButtons(),
                     Gaps.vGap10,
+                    ItemClick(
+                      child: ListHeader(
+                        title: '收评',
+                        subTitle: '副标题',
+                        note: '更多',
+                        showLeading: true,
+                      ),
+                      onTap: () {},
+                    ),
                     Container(
                       height: 150,
                       color: Colors.pink,
