@@ -1,5 +1,8 @@
+import 'package:dkhs_flutter_futures/pages/home/widgets/home_product_review.dart';
 import 'package:dkhs_flutter_futures/res/gaps.dart';
+import 'package:dkhs_flutter_futures/utils/image_utils.dart';
 import 'package:dkhs_flutter_futures/widgets/image_button.dart';
+import 'package:dkhs_flutter_futures/widgets/image_container.dart';
 import 'package:flutter/material.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
@@ -55,10 +58,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    MainBanner(),
-                    HomeFlashStatuses(),
-                    HomeTradeButtons(),
-                    Gaps.vGap10,
+                    // MainBanner(),
+                    // HomeFlashStatuses(),
+                    // HomeTradeButtons(),
+                    Gaps.vGap50,
+                    Gaps.vGap50,
+                    Gaps.vGap50,
                     ItemClick(
                       child: ListHeader(
                         title: '收评',
@@ -68,10 +73,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                       onTap: () {},
                     ),
+                    HomeProductReview(),
                     Container(
                       height: 150,
                       color: Colors.pink,
-                      width: 250,
+                      width: 350,
                     ),
                     Container(
                       height: 150,
