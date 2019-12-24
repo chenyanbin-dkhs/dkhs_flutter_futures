@@ -10,6 +10,8 @@ import './widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
 import '../../widgets/list_header.dart';
 import '../../widgets/item_click.dart';
+import '../ads/widgets/ads.dart';
+
 const APPBAR_SCROLL_OFFSET = 100;
 
 class HomePage extends StatefulWidget {
@@ -62,8 +64,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     Container(
                       child: HomeTradeButtons(),
                     ),
-                  
-
                     ItemClick(
                       child: ListHeader(
                         title: '收评',
@@ -74,7 +74,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       onTap: () {},
                     ),
                     HomeProductReview(),
-                   
+                    Padding(
+                      padding: Gaps.defaultPadding,
+                      child: AdsWidget(
+                        'futures_home_banner',
+                        widgetType: AdsWidgetType.BANNER,
+                      ),
+                    ),
                     Container(
                       height: 150,
                       color: Colors.pink,

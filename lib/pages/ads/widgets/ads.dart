@@ -61,14 +61,10 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
 
     if (widget.widgetType == AdsWidgetType.BANNER) {
       return AdsBanner(_ads);
+    } else if (widget.widgetType == AdsWidgetType.GRID_VIEW) {
+      return AdsGridView(_ads);
+    } else {
+      return Container();
     }
-    if (widget.widgetType == AdsWidgetType.GRID_VIEW) {
-      return AdsGridView(
-        _ads,
-        gapWidth: widget.gapWidth,
-        isDarkTheme: widget.isDarkTheme,
-      );
-    }
-    return Container();
   }
 }
