@@ -1,5 +1,5 @@
 import '../models/ads_model.dart';
-import '../repository/ads_repository.dart';
+import '../http/ads_http.dart';
 
 // 尝试用MVP模式https://github.com/fabiomsr/Flutter-StepByStep/tree/master/step3/lib
 abstract class AdsAreaContract {
@@ -21,7 +21,7 @@ class AdsAreaPresenter {
     assert(_contract != null);
     assert(_areaCode.isNotEmpty, 'areaCode 未初始化');
 
-    var data = await AdsRepository().getAdsArea(_areaCode);
+    var data = await AdsHttp().getAdsArea(_areaCode);
     _contract.onLoadAdsAreaComplete(data?.ads ?? []);
 
     //CacheApiUtils.cacheModelList<AdsModel>(_cacheKey, list: data?.ads);

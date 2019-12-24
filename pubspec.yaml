@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -46,6 +46,9 @@ dependencies:
   carousel_slider: ^1.3.0
   # 获取屏幕信息 https://github.com/OpenFlutter/flutter_screenutil
   flutter_screenutil: ^0.7.0
+  # 数据处理，https://pub.flutter-io.cn/packages/collection
+  collection: ^1.14.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

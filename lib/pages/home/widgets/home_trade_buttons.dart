@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../utils/image_utils.dart';
-import '../../../widgets/load_image.dart';
+// import '../../../utils/image_utils.dart';
+// import '../../../widgets/load_image.dart';
 import '../../../res/resources.dart';
 import '../../../widgets/image_button.dart';
 
@@ -13,7 +13,7 @@ class HomeTradeButtons extends StatelessWidget {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     double buttonWidth = (ScreenUtil.screenWidth) / 4;
     double buttonHeight = buttonWidth * 0.357;
-    print(ScreenUtil.screenWidth);
+
     return Padding(
       padding: Gaps.hPadding,
       child: Row(

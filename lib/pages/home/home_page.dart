@@ -10,7 +10,6 @@ import './widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
 import '../../widgets/list_header.dart';
 import '../../widgets/item_click.dart';
-
 const APPBAR_SCROLL_OFFSET = 100;
 
 class HomePage extends StatefulWidget {
@@ -48,7 +47,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEEEEEE),
+      backgroundColor: Color(0xFFFFFFFF),
       body: NotificationListener<ScrollNotification>(
         onNotification: _scrollListener,
         child: Container(
@@ -58,12 +57,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    // MainBanner(),
-                    // HomeFlashStatuses(),
-                    // HomeTradeButtons(),
-                    Gaps.vGap50,
-                    Gaps.vGap50,
-                    Gaps.vGap50,
+                    MainBanner(),
+                    HomeFlashStatuses(),
+                    Container(
+                      child: HomeTradeButtons(),
+                    ),
+                  
+
                     ItemClick(
                       child: ListHeader(
                         title: '收评',
@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       onTap: () {},
                     ),
                     HomeProductReview(),
+                   
                     Container(
                       height: 150,
                       color: Colors.pink,

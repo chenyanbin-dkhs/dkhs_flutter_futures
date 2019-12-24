@@ -28,6 +28,10 @@ class Gaps {
 
   static const EdgeInsetsGeometry hPadding =
       const EdgeInsets.symmetric(horizontal: Dimens.gap_dp15);
+
+  static const EdgeInsetsGeometry hPadding10 =
+      const EdgeInsets.symmetric(horizontal: Dimens.gap_dp10);
+
   static const EdgeInsetsGeometry vPadding5 =
       const EdgeInsets.symmetric(vertical: Dimens.gap_dp5);
 

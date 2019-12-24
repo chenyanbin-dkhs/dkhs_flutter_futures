@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/image_utils.dart';
+import '../widgets/item_click.dart';
 
 class ImageButton extends StatelessWidget {
   final String src;
@@ -17,19 +18,14 @@ class ImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink.image(
-      image: ImageUtils.getAssetImage(this.src),
-      fit: BoxFit.fill,
-      width: this.width,
-      height: this.height,
-      child: InkWell(
-        onTap: () {
-          if(this.onTap!=null)
-          {
-            this.onTap();
-          }
-        },
+    return ItemClick(
+      child: Ink.image(
+        image: ImageUtils.getAssetImage(this.src),
+        fit: BoxFit.fill,
+        width: this.width,
+        height: this.height,
       ),
+      onTap: () {},
     );
   }
 }

@@ -14,7 +14,6 @@ class ItemClick extends StatelessWidget {
         child: new InkWell(onTap: onTap, child: child),
         color: Colors.transparent,
       ),
-      
     );
   }
 }
