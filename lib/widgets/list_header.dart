@@ -24,7 +24,7 @@ class ListHeader extends StatelessWidget {
       child: Row(
         children: <Widget>[
           getLeading(this.showLeading),
-          Text(this.title),
+          Text(this.title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
           getSubTitle(this.subTitle),
           Spacer(),
           getNote(this.note),

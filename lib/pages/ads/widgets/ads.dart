@@ -48,9 +48,11 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
 
   @override
   void onLoadAdsAreaComplete(data) async {
-    setState(() {
-      _ads = data;
-    });
+    if (mounted) {
+      setState(() {
+        _ads = data;
+      });
+    }
   }
 
   @override
@@ -62,7 +64,10 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
     if (widget.widgetType == AdsWidgetType.BANNER) {
       return AdsBanner(_ads);
     } else if (widget.widgetType == AdsWidgetType.GRID_VIEW) {
-      return AdsGridView(_ads);
+      return AdsGridView(
+        _ads,
+        isDarkTheme: widget.isDarkTheme,
+      );
     } else {
       return Container();
     }

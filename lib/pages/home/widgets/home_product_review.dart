@@ -1,3 +1,4 @@
+import 'package:dkhs_flutter_futures/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flustars/flustars.dart';
 import 'package:collection/collection.dart';
@@ -36,6 +37,7 @@ class _HomeProductReviewState extends State<HomeProductReview> {
     var data = await FuturesHttp().getProductReviews();
     if (data.results.length > 0) {
       var dataGroup = groupBy(data?.results, (obj) => obj.sectorTypeDisplay);
+      assert(mounted);
       setState(() {
         sectors = dataGroup.keys.toList().cast<String>();
         products = data?.results;
@@ -49,28 +51,17 @@ class _HomeProductReviewState extends State<HomeProductReview> {
         .toList();
   }
 
-  Widget buildProductRow(ProductReviewModel productReview) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.all(const Radius.circular(5))),
-      child: Table(
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: [
-          TableRow(
-            children: [
-              tableRowCell(productReview.instrumentName),
-              tableRowCell(productReview.resistancePrice.toString(),
-                  alignment: Alignment.centerRight),
-              tableRowCell(productReview.supportPrice.toString(),
-                  alignment: Alignment.centerRight),
-              tableRowCell(productReview.suggestion,
-                  alignment: Alignment.centerRight),
-            ],
-          ),
-        ],
-      ),
+  TableRow buildProductRow(ProductReviewModel productReview) {
+    return TableRow(
+      children: [
+        tableRowCell(productReview.instrumentName),
+        tableRowCell(productReview.resistancePrice.toString(),
+            alignment: Alignment.centerRight),
+        tableRowCell(productReview.supportPrice.toString(),
+            alignment: Alignment.centerRight),
+        tableRowCell(productReview.suggestion,
+            alignment: Alignment.centerRight),
+      ],
     );
   }
 
@@ -83,7 +74,6 @@ class _HomeProductReviewState extends State<HomeProductReview> {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: sectors
                   .asMap()
                   .map((index, value) =>
@@ -91,11 +81,11 @@ class _HomeProductReviewState extends State<HomeProductReview> {
                   .values
                   .toList(),
             ),
-            Gaps.vGap5,
-            Container(
+            Gaps.vGap10,
+            MyCard(
               color: backgroundColor,
-              padding: Gaps.hPadding10,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Table(children: [
                     TableRow(
@@ -110,9 +100,16 @@ class _HomeProductReviewState extends State<HomeProductReview> {
                       ],
                     ),
                   ]),
-                  for (var item in filterProduct(currentIndex))
-                    buildProductRow(item),
                   Gaps.vGap10,
+                  Container(
+                    color: Colors.white,
+                    child: Table(
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        children: filterProduct(currentIndex)
+                            .map((item) => buildProductRow(item))
+                            .toList()),
+                  ),
                 ],
               ),
             )
@@ -181,7 +178,6 @@ class _HomeProductReviewState extends State<HomeProductReview> {
   Widget tableHeaderCell(String title,
       {AlignmentGeometry alignment: Alignment.centerLeft}) {
     return Container(
-        height: 30,
         padding: Gaps.hPadding10,
         child: Align(
           alignment: alignment,

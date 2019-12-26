@@ -10,6 +10,8 @@ class EllipsisText extends StatelessWidget {
       this.text,
       overflow: TextOverflow.ellipsis,
       softWrap: false,
+      maxLines: 1,
+      style: TextStyle(fontWeight: FontWeight.w500),
     );
   }
 }
