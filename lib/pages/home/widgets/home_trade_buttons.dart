@@ -20,25 +20,27 @@ class HomeTradeButtons extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: ImageButton(
-              src: 'home/btn_real_trade',
-              width: buttonWidth,
-              height: buttonHeight,
-              onTap: () {
-                print('object');
-              },
+            child: AspectRatio(
+              aspectRatio: 329.0 / 121.0, 
+              child: ImageButton(
+                src: 'home/btn_real_trade',
+                onTap: () {
+                  print('object');
+                },
+              ),
             ),
           ),
           Gaps.hGap10,
           Expanded(
             flex: 1,
-            child: ImageButton(
-              src: 'home/btn_simulate_trade',
-              width: buttonWidth,
-              height: buttonHeight,
-              onTap: () {
-                print('object');
-              },
+            child: AspectRatio(
+              aspectRatio: 329.0 / 121.0, 
+              child: ImageButton(
+                src: 'home/btn_simulate_trade',
+                onTap: () {
+                  print('object');
+                },
+              ),
             ),
           ),
         ],
