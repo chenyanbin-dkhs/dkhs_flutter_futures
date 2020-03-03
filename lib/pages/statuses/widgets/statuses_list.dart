@@ -28,7 +28,7 @@ class _StatuseslistState extends State<Statuseslist> {
 
   @override
   Widget build(BuildContext context) {
-    if (statuses.length == 0) {
+    if (statuses.isEmpty) {
       return SizedBox();
     }
 

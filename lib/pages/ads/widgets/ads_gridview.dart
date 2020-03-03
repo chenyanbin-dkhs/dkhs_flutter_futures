@@ -16,7 +16,7 @@ class AdsGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_ads == null || _ads?.length == 0) {
+    if (_ads == null ||  _ads.isEmpty) {
       return Container();
     }
     double width =

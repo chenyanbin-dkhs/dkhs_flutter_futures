@@ -35,7 +35,7 @@ class _HomeProductReviewState extends State<HomeProductReview> {
 
   void fetchData() async {
     var data = await FuturesHttp().getProductReviews();
-    if (data.results.length > 0) {
+    if (data.results.isNotEmpty ) {
       var dataGroup = groupBy(data?.results, (obj) => obj.sectorTypeDisplay);
       assert(mounted);
       setState(() {
@@ -67,7 +67,7 @@ class _HomeProductReviewState extends State<HomeProductReview> {
 
   @override
   Widget build(BuildContext context) {
-    if (products == null || products.length == 0) return SizedBox();
+    if (products == null || products.isEmpty) return SizedBox();
     return Padding(
         padding: Gaps.hPadding,
         child: Column(

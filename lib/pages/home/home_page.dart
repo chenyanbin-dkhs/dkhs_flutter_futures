@@ -1,20 +1,18 @@
-import 'package:dkhs_flutter_futures/pages/home/widgets/home_product_review.dart';
-import 'package:dkhs_flutter_futures/pages/statuses/widgets/statuses_list.dart';
-import 'package:dkhs_flutter_futures/res/gaps.dart';
-import 'package:dkhs_flutter_futures/utils/image_utils.dart';
-import 'package:dkhs_flutter_futures/widgets/image_button.dart';
-import 'package:dkhs_flutter_futures/widgets/image_container.dart';
-import 'package:dkhs_flutter_futures/widgets/load_image.dart';
-import 'package:dkhs_flutter_futures/widgets/my_card.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/list_header.dart';
+import '../../widgets/item_click.dart';
+import '../../res/gaps.dart';
+
+import './widgets/home_product_review.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 import './widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
-import '../../widgets/list_header.dart';
-import '../../widgets/item_click.dart';
+
 import '../ads/widgets/ads.dart';
-import '../statuses/widgets/statuses_item.dart';
+import '../statuses/widgets/statuses_list.dart';
+
+
 const APPBAR_SCROLL_OFFSET = 100;
 
 class HomePage extends StatefulWidget {

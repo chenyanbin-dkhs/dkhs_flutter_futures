@@ -11,7 +11,7 @@ class StatusesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ItemClick(
-      onTap: (){},
+      onTap: () {},
       child: Container(
         height: 100,
         padding: Gaps.defaultPadding,
@@ -33,7 +33,8 @@ class StatusesItem extends StatelessWidget {
                           statuse.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -47,7 +48,9 @@ class StatusesItem extends StatelessWidget {
                         Row(
                           children: <Widget>[
                             Text(
-                              statuse.source.title,
+                              statuse.source == null
+                                  ? '--'
+                                  : statuse.source.title,
                             ),
                             Gaps.hGap10,
                             Text(statuse.viewsCount.toString() + '阅读'),
