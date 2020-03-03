@@ -11,7 +11,7 @@ class Statuseslist extends StatefulWidget {
 }
 
 class _StatuseslistState extends State<Statuseslist> {
-  List<StatusesModel> statuses = [];
+  List<StatusesModel> _statuses = [];
   @override
   void initState() {
     super.initState();
@@ -22,24 +22,23 @@ class _StatuseslistState extends State<Statuseslist> {
     var data = await StatusesHttp().getGategoryTimeline();
     assert(mounted);
     setState(() {
-      statuses = data.results;
+      _statuses = data.results;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (statuses.isEmpty) {
+    if (_statuses.isEmpty) {
       return SizedBox();
     }
-    // todo 这里用ListView.Builder 会报错
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        for (var item in statuses)
-          StatusesItem(
-            statuse: item,
-          )
-      ],
+
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: _statuses.length,
+      itemBuilder: (context, index) => StatusesItem(
+        statuse: _statuses[index],
+      ),
     );
   }
 }
