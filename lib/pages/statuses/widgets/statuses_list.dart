@@ -31,7 +31,7 @@ class _StatuseslistState extends State<Statuseslist> {
     if (statuses.isEmpty) {
       return SizedBox();
     }
-
+    // todo 这里用ListView.Builder 会报错
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

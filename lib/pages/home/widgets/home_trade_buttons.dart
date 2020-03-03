@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import '../../../utils/image_utils.dart';
 // import '../../../widgets/load_image.dart';
 import '../../../res/resources.dart';
@@ -10,9 +10,9 @@ class HomeTradeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    double buttonWidth = (ScreenUtil.screenWidth) / 4;
-    double buttonHeight = buttonWidth * 0.357;
+    // ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    // double buttonWidth = (ScreenUtil.screenWidth) / 4;
+    // double buttonHeight = buttonWidth * 0.357;
 
     return Padding(
       padding: Gaps.hPadding,
@@ -21,7 +21,7 @@ class HomeTradeButtons extends StatelessWidget {
           Expanded(
             flex: 1,
             child: AspectRatio(
-              aspectRatio: 329.0 / 121.0, 
+              aspectRatio: 329.0 / 121.0,
               child: ImageButton(
                 src: 'home/btn_real_trade',
                 onTap: () {
@@ -34,7 +34,7 @@ class HomeTradeButtons extends StatelessWidget {
           Expanded(
             flex: 1,
             child: AspectRatio(
-              aspectRatio: 329.0 / 121.0, 
+              aspectRatio: 329.0 / 121.0,
               child: ImageButton(
                 src: 'home/btn_simulate_trade',
                 onTap: () {

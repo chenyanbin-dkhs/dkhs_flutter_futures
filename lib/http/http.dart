@@ -17,9 +17,9 @@ class Http {
   static const String DELETE = 'delete';
 
   static Future<dynamic> request(String url, {data, method}) async {
-    data = data ?? {};
-    method = method ?? 'GET';
-
+    data = data ?? {'_id': 1}; // todo get时，这个data还不能是空对象
+    method = method ?? GET;
+    Response response;
     data.forEach((key, value) {
       if (url.indexOf(key) != -1) {
         url = url.replaceAll(':$key', value.toString());
@@ -33,9 +33,15 @@ class Http {
     var result;
 
     try {
-      Response response = await dio.request(url,
-          data: data, options: new Options(method: method));
-      result = response.data;
+      if (method == GET) {
+        // todo 奇怪的DIO，GET和POST的参数命名竟然不一样
+        response = await dio.get(url, queryParameters: data);
+        result = response.data;
+      } else {
+        response = await dio.request(url,
+            data: data, options: new Options(method: method));
+        result = response.data;
+      }
     } on DioError catch (e) {
       print('请求错误:' + e.toString()); // todo:要抛出去给视图层
     }
