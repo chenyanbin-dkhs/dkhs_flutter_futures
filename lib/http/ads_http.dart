@@ -1,6 +1,6 @@
 import 'dart:async' show Future;
-import '../../../http/http.dart';
-import '../models/ads_area_model.dart';
+import './http.dart';
+import '../models/ads/ads_area_model.dart';
 
 class AdsHttp {
   Future<AdsAreaModel> getAdsArea(String areaCode) async {

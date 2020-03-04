@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../models/ads_model.dart';
+import '../../../models/ads/ads_model.dart';
 import '../../../widgets/load_image.dart';
 
 class AdsBanner extends StatelessWidget {

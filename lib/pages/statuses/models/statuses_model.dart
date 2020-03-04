@@ -1,5 +1,5 @@
 import './statuses_source_model.dart';
-import '../../accounts/models/user_model.dart';
+import '../../../models/accounts/user.dart';
 
 class StatusesModel {
   int id;

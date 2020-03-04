@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/ads_model.dart';
+import '../../../models/ads/ads_model.dart';
 import '../presenter/ads_presenter.dart';
 // import '../../event_bus/my_event_bus.dart';
 // import '../../event_bus/page_refresh_event.dart';
