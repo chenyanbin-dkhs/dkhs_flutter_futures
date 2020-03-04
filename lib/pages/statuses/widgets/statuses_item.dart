@@ -1,6 +1,6 @@
 import 'package:dkhs_flutter_futures/res/gaps.dart';
 import 'package:flutter/material.dart';
-import '../models/statuses_model.dart';
+import '../../../models/statuses/statuses_model.dart';
 import '../../../widgets/load_image.dart';
 import '../../../widgets/item_click.dart';
 

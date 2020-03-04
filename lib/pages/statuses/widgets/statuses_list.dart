@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../http/statuses_http.dart';
-import '../models/statuses_model.dart';
+import '../../../http/statuses_http.dart';
+import '../../../models/statuses/statuses_model.dart';
 import './statuses_item.dart';
 import '../../../widgets/list_header.dart';
 import '../../../widgets/item_click.dart';

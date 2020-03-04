@@ -5,6 +5,8 @@ class InstrumentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('InstrumentsPage');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('交易'),
