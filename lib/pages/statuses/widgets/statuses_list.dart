@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../http/statuses_http.dart';
 import '../models/statuses_model.dart';
 import './statuses_item.dart';
+import '../../../widgets/list_header.dart';
+import '../../../widgets/item_click.dart';
 
 class Statuseslist extends StatefulWidget {
   Statuseslist({Key key}) : super(key: key);
@@ -31,14 +33,26 @@ class _StatuseslistState extends State<Statuseslist> {
     if (_statuses.isEmpty) {
       return SizedBox();
     }
-
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: _statuses.length,
-      itemBuilder: (context, index) => StatusesItem(
-        statuse: _statuses[index],
-      ),
-    );
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          ItemClick(
+            child: ListHeader(
+              title: '期货资讯',
+              note: '更多',
+              showLeading: true,
+            ),
+            onTap: () {},
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: _statuses.length,
+            itemBuilder: (context, index) => StatusesItem(
+              statuse: _statuses[index],
+            ),
+          )
+        ]);
   }
 }

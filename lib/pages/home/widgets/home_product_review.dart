@@ -7,6 +7,7 @@ import '../../../res/resources.dart';
 import '../../../utils/image_utils.dart';
 import '../../../widgets/item_click.dart';
 import '../../../http/futures_http.dart';
+import '../../../widgets/list_header.dart';
 
 const SECTOR_SPACER_WIDTH = 10; // 每个板块之间的间隔
 const GAPS_WIDTH = 30; //左右边距
@@ -35,7 +36,7 @@ class _HomeProductReviewState extends State<HomeProductReview> {
 
   void fetchData() async {
     var data = await FuturesHttp().getProductReviews();
-    if (data.results.isNotEmpty ) {
+    if (data.results.isNotEmpty) {
       var dataGroup = groupBy(data?.results, (obj) => obj.sectorTypeDisplay);
       assert(mounted);
       setState(() {
@@ -68,53 +69,64 @@ class _HomeProductReviewState extends State<HomeProductReview> {
   @override
   Widget build(BuildContext context) {
     if (products == null || products.isEmpty) return SizedBox();
-    return Padding(
-        padding: Gaps.hPadding,
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: sectors
-                  .asMap()
-                  .map((index, value) =>
-                      MapEntry(index, _buildSectorWidget(index, value)))
-                  .values
-                  .toList(),
-            ),
-            Gaps.vGap10,
-            MyCard(
-              color: backgroundColor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Table(children: [
-                    TableRow(
-                      children: [
-                        tableHeaderCell("合约名称"),
-                        tableHeaderCell("压力位",
-                            alignment: Alignment.centerRight),
-                        tableHeaderCell("支撑位",
-                            alignment: Alignment.centerRight),
-                        tableHeaderCell("操作建议",
-                            alignment: Alignment.centerRight),
-                      ],
-                    ),
-                  ]),
-                  Gaps.vGap10,
-                  Container(
-                    color: Colors.white,
-                    child: Table(
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        children: filterProduct(currentIndex)
-                            .map((item) => buildProductRow(item))
-                            .toList()),
-                  ),
-                ],
+    return Column(children: [
+      ItemClick(
+        child: ListHeader(
+          title: '收评',
+          subTitle: '副标题',
+          note: '更多',
+          showLeading: true,
+        ),
+        onTap: () {},
+      ),
+      Padding(
+          padding: Gaps.hPadding,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: sectors
+                    .asMap()
+                    .map((index, value) =>
+                        MapEntry(index, _buildSectorWidget(index, value)))
+                    .values
+                    .toList(),
               ),
-            )
-          ],
-        ));
+              Gaps.vGap10,
+              MyCard(
+                color: backgroundColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Table(children: [
+                      TableRow(
+                        children: [
+                          tableHeaderCell("合约名称"),
+                          tableHeaderCell("压力位",
+                              alignment: Alignment.centerRight),
+                          tableHeaderCell("支撑位",
+                              alignment: Alignment.centerRight),
+                          tableHeaderCell("操作建议",
+                              alignment: Alignment.centerRight),
+                        ],
+                      ),
+                    ]),
+                    Gaps.vGap10,
+                    Container(
+                      color: Colors.white,
+                      child: Table(
+                          defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                          children: filterProduct(currentIndex)
+                              .map((item) => buildProductRow(item))
+                              .toList()),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ))
+    ]);
   }
 
   Widget _buildSectorWidget(int index, String title) {

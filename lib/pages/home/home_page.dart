@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../widgets/list_header.dart';
-import '../../widgets/item_click.dart';
 import '../../res/gaps.dart';
 
 import './widgets/home_product_review.dart';
@@ -11,7 +9,6 @@ import './widgets/home_trade_buttons.dart';
 
 import '../ads/widgets/ads.dart';
 import '../statuses/widgets/statuses_list.dart';
-
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -62,33 +59,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: <Widget>[
                     MainBanner(),
                     HomeFlashStatuses(),
-                    Container(
-                      child: HomeTradeButtons(),
-                    ),
-                    ItemClick(
-                      child: ListHeader(
-                        title: '收评',
-                        subTitle: '副标题',
-                        note: '更多',
-                        showLeading: true,
-                      ),
-                      onTap: () {},
-                    ),
+                    HomeTradeButtons(),
                     HomeProductReview(),
-                    Padding(
-                      padding: Gaps.defaultPadding,
-                      child: AdsWidget(
-                        'futures_home_banner',
-                        widgetType: AdsWidgetType.BANNER,
-                      ),
-                    ),
-                    ItemClick(
-                      child: ListHeader(
-                        title: '期货资讯',
-                        note: '更多',
-                        showLeading: true,
-                      ),
-                      onTap: () {},
+                    AdsWidget(
+                      'futures_home_banner',
+                      widgetType: AdsWidgetType.BANNER,
+                      hasPadding: true,
                     ),
                     Statuseslist(),
                     Gaps.vGap10,

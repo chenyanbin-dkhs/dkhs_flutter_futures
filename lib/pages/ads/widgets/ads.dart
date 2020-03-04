@@ -5,6 +5,7 @@ import '../presenter/ads_presenter.dart';
 // import '../../event_bus/page_refresh_event.dart';
 import './ads_banner.dart';
 import './ads_gridview.dart';
+import '../../../res/gaps.dart';
 
 enum AdsWidgetType { BANNER, GRID_VIEW }
 
@@ -14,12 +15,14 @@ class AdsWidget extends StatefulWidget {
   final bool needUpdate; //是否需要更新
   final double gapWidth;
   final bool isDarkTheme;
+  final bool hasPadding;
   AdsWidget(this.areaCode,
       {Key key,
       this.needUpdate = false,
       this.widgetType,
       this.gapWidth,
-      this.isDarkTheme = false})
+      this.isDarkTheme = false,
+      this.hasPadding = false})
       : super(key: key);
 
   _AdsWidgetState createState() => _AdsWidgetState();
@@ -62,7 +65,10 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
     }
 
     if (widget.widgetType == AdsWidgetType.BANNER) {
-      return AdsBanner(_ads);
+      return Padding(
+        padding: widget.hasPadding ? Gaps.defaultPadding : EdgeInsets.all(0),
+        child: AdsBanner(_ads),
+      );
     } else if (widget.widgetType == AdsWidgetType.GRID_VIEW) {
       return AdsGridView(
         _ads,
