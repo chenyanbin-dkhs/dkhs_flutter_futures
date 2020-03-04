@@ -45,7 +45,7 @@ class _AdsWidgetState extends State<AdsWidget> implements AdsAreaContract {
       //   _presenter.fetch();
       // });
     } else {
-      _presenter.fetch();
+      //_presenter.fetch();
     }
   }
 

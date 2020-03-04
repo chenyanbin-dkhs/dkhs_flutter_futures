@@ -26,9 +26,6 @@ class Http {
       }
     });
 
-    print('请求地址：【' + method + '  ' + API_PREFIX + url + '】');
-    print('请求参数：' + data.toString());
-
     Dio dio = createInstance();
     var result;
 
@@ -36,6 +33,12 @@ class Http {
       if (method == GET) {
         // todo 奇怪的DIO，GET和POST的参数命名竟然不一样
         response = await dio.get(url, queryParameters: data);
+        var errorObj = response.data['errors'] as Map;
+        if (errorObj != null) {
+          {
+            errorObj.forEach((k, v) => throw Exception('$v'));
+          }
+        }
         result = response.data;
       } else {
         response = await dio.request(url,
@@ -43,7 +46,13 @@ class Http {
         result = response.data;
       }
     } on DioError catch (e) {
-      print('请求错误:' + e.toString()); // todo:要抛出去给视图层
+      var statusCode = e.response.statusCode;
+      if (statusCode == 404) {
+        throw Exception('404:接口请求路径有误');
+      }
+      print('请求地址：【' + method + '  ' + API_PREFIX + url + '】');
+      print('请求参数：' + data.toString());
+      throw e;
     }
 
     return result;
