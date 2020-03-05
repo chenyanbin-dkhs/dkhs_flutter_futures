@@ -1,9 +1,11 @@
 import 'dart:async' show Future;
+
 import './http.dart';
-import '../models/statuses/statuses_list_model.dart';
+import '../models/statuses/statuses.dart';
+import '../models/page_results.dart';
 
 class StatusesHttp {
-  Future<StatusesListModel> getGategoryTimeline() async {
+  Future<PageResults<Statuses>> getGategoryTimeline() async {
     var data = {
       'is_recommended': 1,
       'category': 'futures_home_headline',
@@ -12,6 +14,6 @@ class StatusesHttp {
     final jsonResponse =
         await Http.get('/statuses/category_timeline/', data: data);
 
-    return new StatusesListModel.fromJson(jsonResponse);
+    return PageResults<Statuses>.fromJson(jsonResponse, Statuses.fromJson);
   }
 }

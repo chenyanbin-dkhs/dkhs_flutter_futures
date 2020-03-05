@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../http/statuses_http.dart';
 import '../../../models/statuses/statuses_list_model.dart';
-import '../../../models/statuses/statuses_model.dart';
+import '../../../models/statuses/statuses.dart';
+import '../../../models/page_results.dart';
+
 import '../../statuses/widgets/statuses_item.dart';
 import '../../../widgets/list_header.dart';
 import '../../../widgets/item_click.dart';
@@ -14,7 +16,7 @@ class StatusesTimeline extends StatefulWidget {
 }
 
 class _StatusesTimelineState extends State<StatusesTimeline> {
-  Future<StatusesListModel> statuses;
+  Future<PageResults<Statuses>> statuses;
 
   @override
   void initState() {
@@ -25,7 +27,7 @@ class _StatusesTimelineState extends State<StatusesTimeline> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: FutureBuilder<StatusesListModel>(
+        child: FutureBuilder<PageResults<Statuses>>(
             future: statuses,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -37,7 +39,7 @@ class _StatusesTimelineState extends State<StatusesTimeline> {
             }));
   }
 
-  Widget _buildList(List<StatusesModel> _statuses) {
+  Widget _buildList(List<Statuses> _statuses) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[

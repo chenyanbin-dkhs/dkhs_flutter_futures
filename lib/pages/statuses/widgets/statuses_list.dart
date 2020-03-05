@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../http/statuses_http.dart';
-import '../../../models/statuses/statuses_model.dart';
+import '../../../models/statuses/statuses.dart';
 import './statuses_item.dart';
 import '../../../widgets/list_header.dart';
 import '../../../widgets/item_click.dart';
@@ -13,7 +13,7 @@ class Statuseslist extends StatefulWidget {
 }
 
 class _StatuseslistState extends State<Statuseslist> {
-  List<StatusesModel> _statuses = [];
+  List<Statuses> _statuses = [];
   @override
   void initState() {
     super.initState();
