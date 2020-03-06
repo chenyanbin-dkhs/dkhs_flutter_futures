@@ -10,24 +10,22 @@ typedef Future<Object> InitStateCallback();
 enum AsyncStatus { Error, Loading, Success }
 
 class AsyncLoader extends StatefulWidget {
-  AsyncLoader(
-      {Key key,
-      this.loading,
-      this.success,
-      this.error,
-      this.initState})
+  AsyncLoader({Key key, this.loading, this.success, this.error, this.init})
       : super(key: key);
 
   final LoadingCallback loading;
   final SuccessCallback success;
   final ErrorCallback error;
-  final InitStateCallback initState;
+  final InitStateCallback init;
+
+  // @override
+  // _AsyncLoaderState createState() => _AsyncLoaderState();
 
   @override
-  _AsyncLoaderState createState() => _AsyncLoaderState();
+  State<StatefulWidget> createState() => new AsyncLoaderState();
 }
 
-class _AsyncLoaderState extends State<AsyncLoader> {
+class AsyncLoaderState extends State<AsyncLoader> {
   var _asyncStatus = AsyncStatus.Loading;
   dynamic _data;
   dynamic _error;
@@ -50,7 +48,7 @@ class _AsyncLoaderState extends State<AsyncLoader> {
     });
 
     try {
-      var data = await widget.initState();
+      var data = await widget.init();
 
       if (!mounted) return;
 
