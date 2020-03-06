@@ -4,6 +4,24 @@ import './http.dart';
 import '../models/statuses/statuses.dart';
 import '../models/page_results.dart';
 
+/*
+ 使用方法：
+ ```
+  Future<PageResults<Statuses>> statuses;
+  statuses = StatusesHttp().getGategoryTimeline(); // initState
+  FutureBuilder<PageResults<Statuses>>(
+            future: statuses,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return _buildList(snapshot.data.results);
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return CircularProgressIndicator();
+            })
+```
+ * 
+*/
 class StatusesHttp {
   Future<PageResults<Statuses>> getGategoryTimeline() async {
     var data = {

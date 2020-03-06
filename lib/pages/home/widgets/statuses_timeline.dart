@@ -1,41 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../../http/statuses_http.dart';
 import '../../../models/statuses/statuses.dart';
-import '../../../models/page_results.dart';
-
 import '../../statuses/widgets/statuses_item.dart';
 import '../../../widgets/list_header.dart';
 import '../../../widgets/item_click.dart';
+import '../../../widgets/async_loader.dart';
 
-class StatusesTimeline extends StatefulWidget {
-  StatusesTimeline({Key key}) : super(key: key);
-
-  @override
-  _StatusesTimelineState createState() => _StatusesTimelineState();
-}
-
-class _StatusesTimelineState extends State<StatusesTimeline> {
-  Future<PageResults<Statuses>> statuses;
-
-  @override
-  void initState() {
-    super.initState();
-    statuses = StatusesHttp().getGategoryTimeline();
-  }
+class StatusesTimeline extends StatelessWidget {
+  const StatusesTimeline({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: FutureBuilder<PageResults<Statuses>>(
-            future: statuses,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return _buildList(snapshot.data.results);
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return CircularProgressIndicator();
-            }));
+    var _asyncLoader = AsyncLoader(
+      initState: () async => await StatusesHttp().getGategoryTimeline(),
+      loading: () => Center(child: Text('数据加载中...')),
+      error: ([error]) => Center(child: Text(error.toString())),
+      success: ({data}) => _buildList(data.results),
+    );
+
+    return Container(child: _asyncLoader);
   }
 
   Widget _buildList(List<Statuses> _statuses) {
