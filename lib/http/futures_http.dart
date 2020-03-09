@@ -13,6 +13,7 @@ class FuturesHttp {
   static Future<PageResults<Instrument>> fetchFuturesInstruments() async {
     var data = {
       "is_recommended": 1,
+      "page_size": 1,
     };
     final jsonResponse = await Http.get('/futures/instruments/', data: data);
     return PageResults<Instrument>.fromJson(jsonResponse, Instrument.fromJson);

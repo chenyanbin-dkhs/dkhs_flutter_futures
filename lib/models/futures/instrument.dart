@@ -80,41 +80,12 @@ class Instrument {
   String exchangeAbbr;
 
   @JsonKey(name: 'is_major')
-  String isMajor;
+  bool isMajor;
 
   @JsonKey(name: 'time_ranges')
   List<InstrumentTimeRanges> timeRanges;
 
-  Instrument(
-      {this.code,
-      this.name,
-      this.instrumentName,
-      this.productCode,
-      this.productId,
-      this.isHot,
-      this.isRecommended,
-      this.pricePerPoint,
-      this.figuresPrice,
-      this.priceFormat,
-      this.allowAnyPrice,
-      this.maxTradeAmount,
-      this.takeProfitMin,
-      this.takeProfitMax,
-      this.takeProfitStep,
-      this.takeProfitDefault,
-      this.stopLossMin,
-      this.stopLossMax,
-      this.stopLossStep,
-      this.stopLossDefault,
-      this.lightningPoints,
-      this.minValueRange,
-      this.minRealtimeValueRange,
-      this.timeRanges,
-      this.icon,
-      this.exchange,
-      this.exchangeInst,
-      this.exchangeAbbr,
-      this.isMajor});
+  Instrument();
 
   // factory Instrument.fromJson(Map<String, dynamic> json) =>
   //     _$InstrumentFromJson(json);

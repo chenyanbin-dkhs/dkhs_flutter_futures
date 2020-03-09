@@ -7,42 +7,41 @@ part of 'instrument.dart';
 // **************************************************************************
 
 Instrument _$InstrumentFromJson(Map<String, dynamic> json) {
-  return Instrument(
-    code: json['code'] as String,
-    name: json['name'] as String,
-    instrumentName: json['instrument_name'] as String,
-    productCode: json['product_code'] as String,
-    productId: json['product_id'] as String,
-    isHot: json['is_hot'] as bool,
-    isRecommended: json['is_recommended'] as bool,
-    pricePerPoint: (json['price_per_point'] as num)?.toDouble(),
-    figuresPrice: (json['figures_price'] as num)?.toDouble(),
-    priceFormat: json['price_format'] as String,
-    allowAnyPrice: json['allow_any_price'] as int,
-    maxTradeAmount: json['max_trade_amount'] as int,
-    takeProfitMin: json['take_profit_min'] as String,
-    takeProfitMax: json['take_profit_max'] as String,
-    takeProfitStep: json['take_profit_step'] as String,
-    takeProfitDefault: json['take_profit_default'] as String,
-    stopLossMin: json['stop_loss_min'] as String,
-    stopLossMax: json['stop_loss_max'] as String,
-    stopLossStep: json['stop_loss_step'] as String,
-    stopLossDefault: json['stop_loss_default'] as String,
-    lightningPoints: json['lightning_points'] as int,
-    minValueRange: (json['min_value_range'] as num)?.toDouble(),
-    minRealtimeValueRange:
-        (json['min_realtime_value_range'] as num)?.toDouble(),
-    timeRanges: (json['time_ranges'] as List)
+  return Instrument()
+    ..code = json['code'] as String
+    ..name = json['name'] as String
+    ..instrumentName = json['instrument_name'] as String
+    ..productCode = json['product_code'] as String
+    ..productId = json['product_id'] as String
+    ..isHot = json['is_hot'] as bool
+    ..isRecommended = json['is_recommended'] as bool
+    ..pricePerPoint = (json['price_per_point'] as num)?.toDouble()
+    ..figuresPrice = (json['figures_price'] as num)?.toDouble()
+    ..priceFormat = json['price_format'] as String
+    ..allowAnyPrice = json['allow_any_price'] as int
+    ..maxTradeAmount = json['max_trade_amount'] as int
+    ..takeProfitMin = json['take_profit_min'] as String
+    ..takeProfitMax = json['take_profit_max'] as String
+    ..takeProfitStep = json['take_profit_step'] as String
+    ..takeProfitDefault = json['take_profit_default'] as String
+    ..stopLossMin = json['stop_loss_min'] as String
+    ..stopLossMax = json['stop_loss_max'] as String
+    ..stopLossStep = json['stop_loss_step'] as String
+    ..stopLossDefault = json['stop_loss_default'] as String
+    ..lightningPoints = json['lightning_points'] as int
+    ..minValueRange = (json['min_value_range'] as num)?.toDouble()
+    ..minRealtimeValueRange =
+        (json['min_realtime_value_range'] as num)?.toDouble()
+    ..icon = json['icon'] as String
+    ..exchange = json['exchange'] as String
+    ..exchangeInst = json['exchange_inst'] as String
+    ..exchangeAbbr = json['exchange_abbr'] as String
+    ..isMajor = json['is_major'] as bool
+    ..timeRanges = (json['time_ranges'] as List)
         ?.map((e) => e == null
             ? null
             : InstrumentTimeRanges.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    icon: json['icon'] as String,
-    exchange: json['exchange'] as String,
-    exchangeInst: json['exchange_inst'] as String,
-    exchangeAbbr: json['exchange_abbr'] as String,
-    isMajor: json['is_major'] as String,
-  );
+        ?.toList();
 }
 
 Map<String, dynamic> _$InstrumentToJson(Instrument instance) =>
