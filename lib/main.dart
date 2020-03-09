@@ -6,7 +6,7 @@ import 'package:fluro/fluro.dart';
 import './routers/application.dart';
 import './routers/routers.dart';
 import 'package:oktoast/oktoast.dart';
-
+import './res/themes.dart';
 void main() async {
 //  debugProfileBuildsEnabled = true;
 //  debugPaintLayerBordersEnabled = true;
@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
     return _mainWidgetWithOKToast(
       MaterialApp(
         title: '期货捕猎者',
-        theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-        ),
+        theme: MyThemes.lightTheme,
         //showPerformanceOverlay: true, //显示性能标签
         //debugShowCheckedModeBanner: false,
         //home: SplashPage(),

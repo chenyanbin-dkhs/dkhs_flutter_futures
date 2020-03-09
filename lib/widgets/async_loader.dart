@@ -7,7 +7,7 @@ typedef Widget ErrorCallback([dynamic error]);
 typedef Widget SuccessCallback({dynamic data});
 typedef Future<Object> InitStateCallback();
 
-enum AsyncStatus { Error, Loading, Success }
+enum AsyncStatus { error, loading, success }
 
 class AsyncLoader extends StatefulWidget {
   AsyncLoader({Key key, this.loading, this.success, this.error, this.init})
@@ -26,7 +26,7 @@ class AsyncLoader extends StatefulWidget {
 }
 
 class AsyncLoaderState extends State<AsyncLoader> {
-  var _asyncStatus = AsyncStatus.Loading;
+  var _asyncStatus = AsyncStatus.loading;
   dynamic _data;
   dynamic _error;
 
@@ -44,7 +44,7 @@ class AsyncLoaderState extends State<AsyncLoader> {
     if (!mounted) return;
 
     setState(() {
-      _asyncStatus = AsyncStatus.Loading;
+      _asyncStatus = AsyncStatus.loading;
     });
 
     try {
@@ -54,22 +54,22 @@ class AsyncLoaderState extends State<AsyncLoader> {
 
       setState(() {
         _data = data;
-        _asyncStatus = AsyncStatus.Success;
+        _asyncStatus = AsyncStatus.success;
       });
     } catch (e) {
       print(e);
       setState(() {
         _error = e;
         _data = null;
-        _asyncStatus = AsyncStatus.Error;
+        _asyncStatus = AsyncStatus.error;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_asyncStatus == AsyncStatus.Loading) return widget.loading();
-    if (_asyncStatus == AsyncStatus.Error) return widget.error(_error);
+    if (_asyncStatus == AsyncStatus.loading) return widget.loading();
+    if (_asyncStatus == AsyncStatus.error) return widget.error(_error);
 
     return widget.success(data: _data);
   }
