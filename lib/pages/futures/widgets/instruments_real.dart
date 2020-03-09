@@ -5,7 +5,7 @@ import '../../ads/widgets/ads.dart';
 import '../../../widgets/async_loader.dart';
 import '../../../http/futures_http.dart';
 import '../../../models/futures/instrument.dart';
-import '../../../widgets/badge.dart';
+import './instrument_grid_item.dart';
 
 class InstrumentsReal extends StatefulWidget {
   InstrumentsReal({Key key}) : super(key: key);
@@ -49,43 +49,11 @@ class _InstrumentsRealState extends State<InstrumentsReal> {
       shrinkWrap: true, //重要
       primary: false,
 
-      children: <Widget>[...list.map((item) => _buildItem(item))],
+      children: <Widget>[
+        ...list.map((item) => InstrumentGridItem(
+              instrument: item,
+            ))
+      ],
     );
-  }
-
-  Widget _buildItem(Instrument item) {
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      decoration: new BoxDecoration(
-        borderRadius: new BorderRadius.all(const Radius.circular(4.0)),
-        color: Colours.bg_gray,
-      ),
-      child: Row(
-        children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              item.instrumentName,
-              style: TextStyles.textBold16,
-            ),
-            Gaps.vGap5,
-            Text(item.code),
-            Gaps.vGap5,
-            Row(
-              children: <Widget>[
-                Badge(
-                  text: '日盘',
-                  color: Colours.positiveColor,
-                ),
-                Badge(
-                  text: '夜盘',
-                  color: Colours.blue,
-                ),
-              ],
-            )
-          ])
-        ],
-      ),
-    );
-    //return FlatButton(onPressed: () => {}, child: Text(item.name));
   }
 }

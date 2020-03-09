@@ -29,6 +29,7 @@ class MyThemes {
       textTheme: TextTheme(
         /// 默认文字
         body1: TextStyle(fontSize: 14.0, color: Color(0xff23252b)),
+        subtitle: TextStyle(fontSize: 12.0, color: Color(0xff8f949d)),
       ),
       buttonTheme: ButtonThemeData(
           height: 30,

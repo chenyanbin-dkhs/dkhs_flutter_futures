@@ -4,7 +4,7 @@ import '../res/resources.dart';
 class Badge extends StatelessWidget {
   final String text;
   final Color color;
-  const Badge({Key key, this.text, this.color}) : super(key: key);
+  const Badge(this.text, this.color, {Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
