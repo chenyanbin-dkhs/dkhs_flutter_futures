@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/futures/instrument_trade_type.dart';
 import '../../widgets/my_tab_bar.dart';
 import './widgets/instruments_real.dart';
-
+import '../../widgets/async_loader.dart';
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
 
