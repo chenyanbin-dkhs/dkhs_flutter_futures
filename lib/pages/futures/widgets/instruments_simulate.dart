@@ -6,14 +6,14 @@ import './instrument_grids.dart';
 import '../widgets/instrument_accounts.dart';
 import '../../../models/futures/instrument.dart';
 
-class InstrumentsReal extends StatefulWidget {
-  InstrumentsReal({Key key, @required this.list}) : super(key: key);
+class InstrumentsSimulate extends StatefulWidget {
+  InstrumentsSimulate({Key key, @required this.list}) : super(key: key);
   final List<Instrument> list;
   @override
-  _InstrumentsRealState createState() => _InstrumentsRealState();
+  _InstrumentsSimulateState createState() => _InstrumentsSimulateState();
 }
 
-class _InstrumentsRealState extends State<InstrumentsReal>
+class _InstrumentsSimulateState extends State<InstrumentsSimulate>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -23,14 +23,14 @@ class _InstrumentsRealState extends State<InstrumentsReal>
     super.build(context);
 
     return ListView(
-      key: PageStorageKey('real'),
+      key: PageStorageKey('simulate'),
       scrollDirection: Axis.vertical,
       padding: Gaps.defaultPadding,
       physics: AlwaysScrollableScrollPhysics(), //重要
       shrinkWrap: true, //重要
       children: <Widget>[
         AdsWidget(
-          'futures_traders_banner',
+          'futures_virtual_traders_banner',
           widgetType: AdsWidgetType.BANNER,
         ),
         InstrumentAccounts(),

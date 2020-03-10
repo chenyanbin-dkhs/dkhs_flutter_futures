@@ -2,7 +2,14 @@ import 'package:dkhs_flutter_futures/widgets/my_header_bar.dart';
 import 'package:flutter/material.dart';
 import '../../models/futures/instrument_trade_type.dart';
 import './widgets/instruments_real.dart';
+import './widgets/instruments_simulate.dart';
+import './widgets/instrument_practice.dart';
+
 import './widgets/instrument_types_tab.dart';
+import '../../widgets/async_loader.dart';
+import '../../http/futures_http.dart';
+import '../../models/futures/instrument.dart';
+
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
 
@@ -40,6 +47,17 @@ class _InstrumentsPageState extends State<InstrumentsPage>
   Widget build(BuildContext context) {
     super.build(context);
 
+    var _asyncLoaderInstruments = AsyncLoader(
+      init: () async => await FuturesHttp.fetchFuturesInstruments(),
+      loading: () => Center(child: Text('loading')),
+      success: ({data}) => TabBarView(controller: _tabController, children: [
+        InstrumentsReal(list: data.results),
+        InstrumentsSimulate(list: data.results),
+        InstrumentsPractice(list: data.results),
+      ]),
+      error: ([error]) => Center(child: Text(error.toString())),
+    );
+
     return Scaffold(
       appBar: MyHeaderBar(
         titleWidget: Center(
@@ -47,11 +65,7 @@ class _InstrumentsPageState extends State<InstrumentsPage>
           controller: _tabController,
         )),
       ),
-      body: TabBarView(controller: _tabController, children: [
-        InstrumentsReal(),
-        Center(child: Text('123')),
-        Center(child: Text('123')),
-      ]),
+      body: _asyncLoaderInstruments,
     );
   }
 }

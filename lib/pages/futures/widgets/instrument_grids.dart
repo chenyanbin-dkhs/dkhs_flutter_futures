@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/async_loader.dart';
-import '../../../http/futures_http.dart';
 import '../../../models/futures/instrument.dart';
 import './instrument_grid_item.dart';
 import './instrument_grid_item_fake.dart';
 
 class InstrumentGrids extends StatelessWidget {
-  const InstrumentGrids({Key key}) : super(key: key);
-
+  const InstrumentGrids({Key key, @required this.list}) : super(key: key);
+  final List<Instrument> list;
   @override
   Widget build(BuildContext context) {
-    return AsyncLoader(
-      init: () async => await FuturesHttp.fetchFuturesInstruments(),
-      loading: () => _buildLoadingList(),
-      success: ({data}) => _buildList(data.results),
-      error: ([error]) => Center(child: Text(error.toString())),
-    );
+    if (list == null || list.isEmpty) {
+      return _buildLoadingList();
+    } else {
+      return _buildList(this.list);
+    }
   }
 
   Widget _gridViewWrapper(List<Widget> children) {

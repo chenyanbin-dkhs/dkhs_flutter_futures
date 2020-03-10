@@ -1,1 +1,1 @@
-enum InstrumentTradeType { real, simulate, practise }
+enum InstrumentTradeType { real, simulate, practice }
