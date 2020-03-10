@@ -3,6 +3,7 @@ import '../../../widgets/async_loader.dart';
 import '../../../http/futures_http.dart';
 import '../../../models/futures/instrument.dart';
 import './instrument_grid_item.dart';
+import './instrument_grid_item_fake.dart';
 
 class InstrumentGrids extends StatelessWidget {
   const InstrumentGrids({Key key}) : super(key: key);
@@ -11,13 +12,13 @@ class InstrumentGrids extends StatelessWidget {
   Widget build(BuildContext context) {
     return AsyncLoader(
       init: () async => await FuturesHttp.fetchFuturesInstruments(),
-      loading: () => Center(child: Text('loading')),
+      loading: () => _buildLoadingList(),
       success: ({data}) => _buildList(data.results),
       error: ([error]) => Center(child: Text(error.toString())),
     );
   }
 
-  Widget _buildList(List<Instrument> list) {
+  Widget _gridViewWrapper(List<Widget> children) {
     return GridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 10.0,
@@ -27,11 +28,23 @@ class InstrumentGrids extends StatelessWidget {
       shrinkWrap: true, //重要
       primary: false,
 
-      children: <Widget>[
-        ...list.map((item) => InstrumentGridItem(
-              instrument: item,
-            ))
-      ],
+      children: children,
     );
+  }
+
+  Widget _buildList(List<Instrument> list) {
+    return _gridViewWrapper([
+      ...list.map((item) => InstrumentGridItem(
+            instrument: item,
+          ))
+    ]);
+  }
+
+  Widget _buildLoadingList() {
+    return _gridViewWrapper([
+      ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+        (item) => InstrumentGridItemFake(),
+      )
+    ]);
   }
 }

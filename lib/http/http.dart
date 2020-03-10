@@ -46,6 +46,9 @@ class Http {
         result = response.data;
       }
     } on DioError catch (e) {
+      if (e.response == null) {
+        throw Exception('500:数据请求失败');
+      }
       var statusCode = e.response.statusCode;
       if (statusCode == 404) {
         throw Exception('404:接口请求路径有误');
