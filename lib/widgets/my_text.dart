@@ -8,9 +8,12 @@ class MyText extends StatelessWidget {
   final String text;
   final TextSizeType size;
   final bool bold;
-
+  final int maxLines;
   const MyText(this.text,
-      {Key key, this.size = TextSizeType.def, this.bold = false})
+      {Key key,
+      this.size = TextSizeType.def,
+      this.bold = false,
+      this.maxLines = 2})
       : super(key: key);
 
   @override
@@ -20,10 +23,12 @@ class MyText extends StatelessWidget {
     final fontColor = _buildColor(textTheme, this.size);
     return Text(
       this.text,
+      maxLines: this.maxLines,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
           fontSize: fontSize,
           color: fontColor,
-          fontWeight: this.bold ? FontWeight.bold : FontWeight.normal),
+          fontWeight: this.bold ? FontWeight.w500 : FontWeight.normal),
     );
   }
 

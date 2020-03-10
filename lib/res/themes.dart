@@ -26,6 +26,7 @@ class MyThemes {
 
       ///前景色
       accentColor: Color(0xff23252b),
+      dividerColor: Color(0xffF5F5F5),
       textTheme: TextTheme(
         /// 默认文字
         body1: TextStyle(fontSize: 14.0, color: Color(0xff23252b)),

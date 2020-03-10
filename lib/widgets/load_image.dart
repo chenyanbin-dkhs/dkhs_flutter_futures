@@ -37,6 +37,7 @@ class LoadImage extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
+         
         );
       } else {
         return LoadAssetImage(image,

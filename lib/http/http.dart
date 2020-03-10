@@ -28,7 +28,7 @@ class Http {
 
     Dio dio = createInstance();
     var result;
-
+    print('请求地址：【' + method + '  ' + API_PREFIX + url + '】');
     try {
       if (method == GET) {
         // todo 奇怪的DIO，GET和POST的参数命名竟然不一样

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../res/resources.dart';
+import './my_text.dart';
 
 class ListHeader extends StatelessWidget {
   final bool showLeading;
@@ -24,7 +25,7 @@ class ListHeader extends StatelessWidget {
       child: Row(
         children: <Widget>[
           getLeading(this.showLeading),
-          Text(this.title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+          MyLargeText(this.title),
           getSubTitle(this.subTitle),
           Spacer(),
           getNote(this.note),
@@ -57,10 +58,8 @@ class ListHeader extends StatelessWidget {
     return Row(
       children: <Widget>[
         Gaps.hGap5,
-        Text(
+        MySmallText(
           title,
-          style: TextStyle(
-              fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w300),
         ),
       ],
     );
@@ -73,12 +72,8 @@ class ListHeader extends StatelessWidget {
 
     return Row(
       children: <Widget>[
-        Text(
+        MySmallText(
           title,
-          style: TextStyle(
-              fontSize: 12,
-              color: Color(0xffb4b4c8),
-              fontWeight: FontWeight.w300),
         ),
       ],
     );

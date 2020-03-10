@@ -6,6 +6,7 @@ import '../../../widgets/badge.dart';
 import '../../../widgets/my_text.dart';
 import '../../../widgets/my_card.dart';
 import '../../../widgets/load_image.dart';
+import '../../../widgets/clear_button.dart';
 
 class InstrumentGridItem extends StatelessWidget {
   const InstrumentGridItem({Key key, @required this.instrument})
@@ -14,39 +15,42 @@ class InstrumentGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyCard(
-      color: Theme.of(context).buttonColor,
-      child: Stack(
-        children: <Widget>[
-          new Positioned(
-            child: new LoadImage(
-              instrument.icon,
-              width: 115,
-              height: 60.5,
-              fit: BoxFit.fill,
-            ),
-            right: 0,
-            top: 6,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 5, left: 7.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyLargeText(instrument.instrumentName),
-                Gaps.vGap5,
-                MySmallText(instrument.code),
-                Gaps.vGap5,
-                Row(
+        color: Theme.of(context).dividerColor,
+        noPadding: true,
+        child: ClearButton(
+          onTap: () => {},
+          child: Stack(
+            children: <Widget>[
+              new Positioned(
+                child: new LoadImage(
+                  instrument.icon,
+                  width: 115,
+                  height: 60.5,
+                  fit: BoxFit.fill,
+                ),
+                right: 0,
+                top: 10,
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 10, left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Badge('日盘', Colours.positiveColor),
-                    Badge('夜盘', Colours.blue),
+                    MyLargeText(instrument.instrumentName),
+                    Gaps.vGap5,
+                    MySmallText(instrument.code),
+                    Gaps.vGap5,
+                    Row(
+                      children: [
+                        Badge('日盘', Colours.positiveColor),
+                        Badge('夜盘', Colours.blue),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }

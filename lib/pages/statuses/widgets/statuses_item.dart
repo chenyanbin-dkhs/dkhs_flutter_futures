@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/statuses/statuses.dart';
 import '../../../widgets/load_image.dart';
 import '../../../widgets/item_click.dart';
+import '../../../widgets/my_text.dart';
 
 class StatusesItem extends StatelessWidget {
   final Statuses statuse;
@@ -29,13 +30,7 @@ class StatusesItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          statuse.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
+                        MyLargeText(statuse.title),
                       ],
                     ),
                   ),
@@ -47,15 +42,15 @@ class StatusesItem extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text(
+                            MySmallText(
                               statuse.source == null
                                   ? '--'
                                   : statuse.source.title,
                             ),
                             Gaps.hGap10,
-                            Text(statuse.viewsCount.toString() + '阅读'),
+                            MySmallText(statuse.viewsCount.toString() + '阅读'),
                             Gaps.hGap10,
-                            Text(statuse.createdAtRelative),
+                            MySmallText(statuse.createdAtRelative),
                           ],
                         ),
                       ],

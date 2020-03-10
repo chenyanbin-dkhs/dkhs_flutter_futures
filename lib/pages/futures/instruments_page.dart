@@ -1,9 +1,9 @@
 import 'package:dkhs_flutter_futures/widgets/my_header_bar.dart';
 import 'package:flutter/material.dart';
 import '../../models/futures/instrument_trade_type.dart';
-import '../../widgets/my_tab_bar.dart';
 import './widgets/instruments_real.dart';
-import '../../widgets/async_loader.dart';
+import './widgets/instrument_types_tab.dart';
+
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
 
@@ -41,13 +41,12 @@ class _InstrumentsPageState extends State<InstrumentsPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    var _tabs = MyTabBar(
-      controller: _tabController,
-      tabs: ['实盘捕猎', '实盘模拟', '历史模拟'],
-    );
     return Scaffold(
       appBar: MyHeaderBar(
-        titleWidget: Center(child: _tabs),
+        titleWidget: Center(
+            child: InstrumentTypesTab(
+          controller: _tabController,
+        )),
       ),
       body: TabBarView(controller: _tabController, children: [
         InstrumentsReal(),
