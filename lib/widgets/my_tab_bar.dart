@@ -12,30 +12,31 @@ class MyTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color bgColor = Theme.of(context).primaryColorDark;
     return Container(
       width: tabs.length * tabWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
-          border: Border.all(color: Colors.redAccent, width: 0.5)),
+          border: Border.all(color: bgColor, width: 0.5)),
       child: TabBar(
         controller: controller,
         indicatorSize: TabBarIndicatorSize.label,
         indicatorWeight: 0,
-        unselectedLabelColor: Colors.redAccent,
-
-        indicator: BoxDecoration(color: Colors.redAccent),
+        unselectedLabelColor: bgColor,
+        labelColor: Colors.white,
+        indicator: BoxDecoration(color: bgColor),
         labelPadding: EdgeInsets.all(0), // 找了半天，才知道是这个属性
         tabs: tabs
             .asMap()
-            .map(
-                (index, value) => MapEntry(index, _buildTab(value, index == 0)))
+            .map((index, value) =>
+                MapEntry(index, _buildTab(bgColor, value, index == 0)))
             .values
             .toList(),
       ),
     );
   }
 
-  Widget _buildTab(String text, [bool isFirst = false]) {
+  Widget _buildTab(Color bgColor, String text, [bool isFirst = false]) {
     var borderLeftDecoration = isFirst
         ? BoxDecoration(
             // borderRadius: BorderRadius.only(
@@ -43,8 +44,7 @@ class MyTabBar extends StatelessWidget {
             //     bottomRight: Radius.circular(15.0)),
             )
         : BoxDecoration(
-            border:
-                Border(left: BorderSide(color: Colors.redAccent, width: 0.5)));
+            border: Border(left: BorderSide(color: bgColor, width: 0.5)));
 
     return Container(
       width: tabWidth,

@@ -20,6 +20,7 @@ class MyThemes {
 
       /// Toolbar、Tabbar 背景色
       primaryColor: Color(0xffffffff),
+      primaryColorDark: Color(0xfff76836),
 
       /// 窗体背景颜色
       scaffoldBackgroundColor: Color(0xfffafafa),
