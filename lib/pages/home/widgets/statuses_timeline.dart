@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../http/statuses_http.dart';
 import '../../../models/statuses/statuses.dart';
 import '../../statuses/widgets/statuses_item.dart';
+import '../../statuses/widgets/statuses_item_fake.dart';
+import '../../../res/resources.dart';
 import '../../../widgets/list_header.dart';
 import '../../../widgets/item_click.dart';
 import '../../../widgets/async_loader.dart';
@@ -15,15 +18,15 @@ class StatusesTimeline extends StatelessWidget {
     var _asyncLoader = AsyncLoader(
       // key: _asyncLoaderState,
       init: () async => await StatusesHttp().getGategoryTimeline(),
-      loading: () => Center(child: Text('数据加载中...')),
+      loading: () => Column(children: [
+        ...[1, 2, 3, 4, 5].map(
+          (item) => StatusesItemFake(),
+        )
+      ]),
       error: ([error]) => Center(child: Text(error.toString())),
       success: ({data}) => _buildList(data.results),
     );
 
-    return Container(child: _asyncLoader);
-  }
-
-  Widget _buildList(List<Statuses> _statuses) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -35,15 +38,19 @@ class StatusesTimeline extends StatelessWidget {
             ),
             onTap: () {},
           ),
-          ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: _statuses.length,
-            itemBuilder: (context, index) => StatusesItem(
-              statuse: _statuses[index],
-            ),
-          )
+          _asyncLoader,
         ]);
+  }
+
+  Widget _buildList(List<Statuses> _statuses) {
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: _statuses.length,
+      itemBuilder: (context, index) => StatusesItem(
+        statuse: _statuses[index],
+      ),
+    );
   }
 }

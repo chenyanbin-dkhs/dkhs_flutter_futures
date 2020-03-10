@@ -17,7 +17,7 @@ class ImageContainer extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: ImageUtils.getAssetImage(this.src),
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ),
         child: this.child);

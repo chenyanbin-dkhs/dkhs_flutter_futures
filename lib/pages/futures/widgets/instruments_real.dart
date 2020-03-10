@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../res/resources.dart';
 import '../../ads/widgets/ads.dart';
 import './instrument_grids.dart';
+import '../widgets/instrument_accounts.dart';
 
 class InstrumentsReal extends StatefulWidget {
   InstrumentsReal({Key key}) : super(key: key);
@@ -31,7 +32,15 @@ class _InstrumentsRealState extends State<InstrumentsReal>
           'futures_traders_banner',
           widgetType: AdsWidgetType.BANNER,
         ),
-        Text("List Item"),
+        InstrumentAccounts(),
+        Row(
+          children: [
+            RaisedButton(
+              onPressed: () => {},
+              child: Text('data'),
+            ),
+          ],
+        ),
         InstrumentGrids(),
       ],
     );

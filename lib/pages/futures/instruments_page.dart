@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../models/futures/instrument_trade_type.dart';
 import './widgets/instruments_real.dart';
 import './widgets/instrument_types_tab.dart';
-
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
 

@@ -50,7 +50,8 @@ dependencies:
   collection: ^1.14.11
   # JSON自动转换 https://flutter.cn/docs/development/data-and-backend/json 运行：flutter pub run build_runner build
   json_annotation: ^3.0.1
-
+  # LOADING 骨架屏 https://github.com/victorevox/flutter_placeholder_textlines
+  flutter_placeholder_textlines: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,7 @@ flutter:
     - assets/images/app/
     - assets/images/common/
     - assets/images/home/
+    - assets/images/futures/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

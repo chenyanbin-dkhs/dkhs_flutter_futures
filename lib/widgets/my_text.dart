@@ -9,18 +9,21 @@ class MyText extends StatelessWidget {
   final TextSizeType size;
   final bool bold;
   final int maxLines;
+  final Color color;
+
   const MyText(this.text,
       {Key key,
       this.size = TextSizeType.def,
       this.bold = false,
-      this.maxLines = 2})
+      this.maxLines = 2,
+      this.color})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final fontSize = _buildSize(this.size);
     final textTheme = Theme.of(context).textTheme;
-    final fontColor = _buildColor(textTheme, this.size);
+    final fontColor = this.color ?? _buildColor(textTheme, this.size);
     return Text(
       this.text,
       maxLines: this.maxLines,
@@ -28,7 +31,7 @@ class MyText extends StatelessWidget {
       style: TextStyle(
           fontSize: fontSize,
           color: fontColor,
-          fontWeight: this.bold ? FontWeight.w500 : FontWeight.normal),
+          fontWeight: this.bold ? FontWeight.w500 : FontWeight.w400),
     );
   }
 
@@ -58,14 +61,16 @@ class MyText extends StatelessWidget {
 
 class MySmallText extends StatelessWidget {
   final String text;
+  final Color color;
 
-  const MySmallText(this.text, {Key key}) : super(key: key);
+  const MySmallText(this.text, {Key key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MyText(
       this.text,
       size: TextSizeType.small,
+      color: this.color,
     );
   }
 }
