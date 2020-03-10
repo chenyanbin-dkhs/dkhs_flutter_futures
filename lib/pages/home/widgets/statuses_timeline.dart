@@ -19,7 +19,7 @@ class StatusesTimeline extends StatelessWidget {
       // key: _asyncLoaderState,
       init: () async => await StatusesHttp().getGategoryTimeline(),
       loading: () => Column(children: [
-        ...[1, 2, 3, 4, 5].map(
+        ...List(5).map(
           (item) => StatusesItemFake(),
         )
       ]),
