@@ -34,7 +34,8 @@ class MyThemes {
         subtitle: TextStyle(fontSize: 12.0, color: Color(0xff8f949d)),
       ),
       buttonTheme: ButtonThemeData(
-          height: 30,
+          height: 22,
+          minWidth: 10,
           buttonColor: Color(0xffEFEEF4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(const Radius.circular(4)),

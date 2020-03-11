@@ -5,6 +5,9 @@ import '../../ads/widgets/ads.dart';
 import './instrument_grids.dart';
 import '../widgets/instrument_accounts.dart';
 import '../../../models/futures/instrument.dart';
+import '../../../widgets/my_button.dart';
+
+enum CardType { grid, list }
 
 class InstrumentsReal extends StatefulWidget {
   InstrumentsReal({Key key, @required this.list}) : super(key: key);
@@ -17,7 +20,7 @@ class _InstrumentsRealState extends State<InstrumentsReal>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
+  CardType currentCard = CardType.grid;
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -36,9 +39,22 @@ class _InstrumentsRealState extends State<InstrumentsReal>
         InstrumentAccounts(),
         Row(
           children: [
-            RaisedButton(
+            MyButton(child: Text('时常'), onPressed: () => {}),
+            MyButton(
+                type: ButtonType.primary,
+                child: Text('时常'),
+                onPressed: () => {}),
+            MyButton(
+                type: ButtonType.link, child: Text('时常'), onPressed: () => {}),
+            MyButton(
+                size: ButtonSize.large, child: Text('时常'), onPressed: () => {}),
+            MyButton(
+                size: ButtonSize.small, child: Text('时常'), onPressed: () => {}),
+            MyButton(
+              child: Text('时常'),
               onPressed: () => {},
-              child: Text('data'),
+              type: ButtonType.primary,
+              isOutline: true,
             ),
           ],
         ),
