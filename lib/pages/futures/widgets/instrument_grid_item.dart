@@ -36,7 +36,7 @@ class InstrumentGridItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MyLargeText(instrument.instrumentName),
+                    MyLargeText(instrument.name),
                     Gaps.vGap5,
                     MySmallText(instrument.code),
                     Gaps.vGap5,

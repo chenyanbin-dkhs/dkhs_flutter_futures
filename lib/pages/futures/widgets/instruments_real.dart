@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../res/resources.dart';
 import '../../ads/widgets/ads.dart';
 import './instrument_grids.dart';
+import './instrument_list.dart';
+
 import '../widgets/instrument_accounts.dart';
 import '../../../models/futures/instrument.dart';
 import '../../../widgets/my_button.dart';
@@ -39,29 +41,31 @@ class _InstrumentsRealState extends State<InstrumentsReal>
         InstrumentAccounts(),
         Row(
           children: [
-            MyButton(child: Text('时常'), onPressed: () => {}),
-            MyButton(
-                type: ButtonType.primary,
-                child: Text('时常'),
-                onPressed: () => {}),
-            MyButton(
-                type: ButtonType.link, child: Text('时常'), onPressed: () => {}),
-            MyButton(
-                size: ButtonSize.large, child: Text('时常'), onPressed: () => {}),
-            MyButton(
-                size: ButtonSize.small, child: Text('时常'), onPressed: () => {}),
-            MyButton(
-              child: Text('时常'),
-              onPressed: () => {},
-              type: ButtonType.primary,
-              isOutline: true,
-            ),
+            _buildCardTypeButton(CardType.grid),
+            Gaps.hGap5,
+            _buildCardTypeButton(CardType.list),
           ],
         ),
-        InstrumentGrids(
-          list: widget.list,
-        ),
+        currentCard == CardType.grid
+            ? InstrumentGrids(
+                list: widget.list,
+              )
+            : InstrumentList(
+                list: widget.list,
+              ),
       ],
+    );
+  }
+
+  Widget _buildCardTypeButton(CardType type) {
+    return MyButton(
+      child: Text(type == CardType.grid ? '简约' : '专业'),
+      isOutline: currentCard == type,
+      onPressed: () => {
+        setState(() {
+          currentCard = type;
+        })
+      },
     );
   }
 }

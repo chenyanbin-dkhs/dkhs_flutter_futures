@@ -1,4 +1,3 @@
-import 'package:dkhs_flutter_futures/widgets/my_header_bar.dart';
 import 'package:flutter/material.dart';
 import '../../models/futures/instrument_trade_type.dart';
 import './widgets/instruments_real.dart';
@@ -7,8 +6,9 @@ import './widgets/instrument_practice.dart';
 
 import './widgets/instrument_types_tab.dart';
 import '../../widgets/async_loader.dart';
+import '../../widgets/my_header_bar.dart';
+
 import '../../http/futures_http.dart';
-import '../../models/futures/instrument.dart';
 
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
