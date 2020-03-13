@@ -53,7 +53,7 @@ dependencies:
   # LOADING 骨架屏 https://github.com/victorevox/flutter_placeholder_textlines
   flutter_placeholder_textlines: ^1.0.3
   # https://pub.dev/packages/web_socket_channel
-  web_socket_channel: ^1.0.12
+  web_socket_channel: ^1.1.0
 
 dev_dependencies:
   flutter_test:

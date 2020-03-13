@@ -85,6 +85,11 @@ class Instrument {
   @JsonKey(name: 'time_ranges')
   List<InstrumentTimeRanges> timeRanges;
 
+  /// 是否有夜盘
+  bool get isTradingNight {
+    return this.timeRanges.length >= 3;
+  }
+
   Instrument();
 
   // factory Instrument.fromJson(Map<String, dynamic> json) =>

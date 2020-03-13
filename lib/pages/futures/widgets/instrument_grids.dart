@@ -31,18 +31,15 @@ class InstrumentGrids extends StatelessWidget {
 
   Widget _buildList(List<Instrument> list) {
     return _gridViewWrapper([
-      ...list.map((item) => InstrumentGridItem(
-            instrument: item,
-          ))
+      for (var item in list)
+        InstrumentGridItem(
+          instrument: item,
+        )
     ]);
   }
 
   Widget _buildLoadingList() {
-    var list = new List(10);
-    return _gridViewWrapper([
-      ...list.map(
-        (item) => InstrumentGridItemFake(),
-      )
-    ]);
+    return _gridViewWrapper(
+        [for (var item in List(10)) InstrumentGridItemFake()]);
   }
 }

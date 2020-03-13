@@ -43,7 +43,7 @@ class InstrumentGridItem extends StatelessWidget {
                     Row(
                       children: [
                         Badge('日盘', Colours.positiveColor),
-                        Badge('夜盘', Colours.blue),
+                        if (instrument.isTradingNight) Badge('夜盘', Colours.blue)
                       ],
                     )
                   ],
