@@ -11,8 +11,8 @@ typedef Widget ErrorCallback(dynamic error);
 typedef Widget SuccessCallback(List<InstrumentQuote> data);
 typedef Widget Closedback();
 
-class SocketLoader extends StatefulWidget {
-  SocketLoader(
+class SocketMarketSnapLoader extends StatefulWidget {
+  SocketMarketSnapLoader(
       {Key key,
       @required this.channel,
       @required this.instruments,
@@ -26,10 +26,10 @@ class SocketLoader extends StatefulWidget {
   final SuccessCallback success;
   final ErrorCallback error;
   @override
-  _SocketLoaderState createState() => _SocketLoaderState();
+  _SocketMarketSnapLoaderState createState() => _SocketMarketSnapLoaderState();
 }
 
-class _SocketLoaderState extends State<SocketLoader> {
+class _SocketMarketSnapLoaderState extends State<SocketMarketSnapLoader> {
   SocketConnectStatus _status = SocketConnectStatus.none;
   dynamic _data;
   dynamic _error;

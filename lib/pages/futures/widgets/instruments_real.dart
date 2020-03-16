@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../res/resources.dart';
-import '../../ads/widgets/ads.dart';
-import './instrument_grids.dart';
-import './instrument_list.dart';
 
-import '../widgets/instrument_accounts.dart';
 import '../../../models/futures/instrument.dart';
 import '../../../widgets/my_button.dart';
+import '../../../res/resources.dart';
+
+import '../../ads/widgets/ads.dart';
+
+import './instrument_accounts.dart';
+import './instrument_grids.dart';
+import './instrument_list.dart';
 
 enum CardType { grid, list }
 
@@ -23,6 +25,7 @@ class _InstrumentsRealState extends State<InstrumentsReal>
   @override
   bool get wantKeepAlive => true;
   CardType currentCard = CardType.grid;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

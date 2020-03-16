@@ -8,6 +8,9 @@ import '../../../widgets/my_text.dart';
 import '../../../widgets/my_card.dart';
 import '../../../widgets/load_image.dart';
 import '../../../widgets/clear_button.dart';
+import '../../../widgets/finance_value.dart';
+import 'package:provider/provider.dart';
+import '../../../websocket/socket_market_snap_provider.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})
@@ -51,19 +54,30 @@ class InstrumentListItem extends StatelessWidget {
                   Gaps.hGap15,
                   Container(
                     width: 80,
-                    child: Column(children: [
-                      MyText('3638.8'),
-                      Gaps.vGap5,
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                        child: Text(
-                          '+1.25%',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Colors.red,
-                      )
-                    ]),
+                    child: Consumer<SocketMarketSnapProvider>(
+                      builder: (context, value, child) {
+                        var quote = value.quoteByCode(this.instrument.code);
+                        return Column(children: [
+                          FinanceValue(quote?.price),
+                          Gaps.vGap5,
+                          FinanceValue(
+                            quote?.percentage,
+                            percentable: true,
+                            colorable: true,
+                            onBuild: ({text, value, color}) => Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 8),
+                              child: Text(
+                                text,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: color,
+                            ),
+                          ),
+                        ]);
+                        // return Text(quote?.id ?? '');
+                      },
+                    ),
                   )
                 ])),
           )),

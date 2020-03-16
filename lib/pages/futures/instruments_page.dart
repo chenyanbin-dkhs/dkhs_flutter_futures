@@ -9,6 +9,8 @@ import '../../widgets/async_loader.dart';
 import '../../widgets/my_header_bar.dart';
 
 import '../../http/futures_http.dart';
+import 'package:provider/provider.dart';
+import '../../websocket/socket_market_snap_provider.dart';
 
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
@@ -19,6 +21,8 @@ class InstrumentsPage extends StatefulWidget {
 
 class _InstrumentsPageState extends State<InstrumentsPage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  GlobalKey _scaffold = GlobalKey();
+
   TabController _tabController;
 
   @override
@@ -40,6 +44,7 @@ class _InstrumentsPageState extends State<InstrumentsPage>
   @override
   void dispose() {
     _tabController.dispose();
+    SocketMarketSnapProvider().closeWebSocket();
     super.dispose();
   }
 
@@ -58,14 +63,18 @@ class _InstrumentsPageState extends State<InstrumentsPage>
       error: ([error]) => Center(child: Text(error.toString())),
     );
 
-    return Scaffold(
-      appBar: MyHeaderBar(
-        titleWidget: Center(
-            child: InstrumentTypesTab(
-          controller: _tabController,
-        )),
+    return ChangeNotifierProvider(
+      create: (context) => SocketMarketSnapProvider(),
+      child: Scaffold(
+        key: _scaffold,
+        appBar: MyHeaderBar(
+          titleWidget: Center(
+              child: InstrumentTypesTab(
+            controller: _tabController,
+          )),
+        ),
+        body: _asyncLoaderInstruments,
       ),
-      body: _asyncLoaderInstruments,
     );
   }
 }

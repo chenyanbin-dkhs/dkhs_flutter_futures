@@ -27,6 +27,21 @@ class InstrumentQuote {
   String turnover;
   String preclose;
 
+  double get percentage {
+    var _pre = double.tryParse(this.pre) ?? null;
+    if (_pre > 0) {
+      var _delta = double.tryParse(this.delta) ?? null;
+      var _price = double.tryParse(this.price) ?? null;
+
+      if (_delta != null) {
+        return _delta / _pre * 100;
+      } else if (_price != null) {
+        return (_price - _pre) / _pre * 100;
+      }
+    }
+    return _pre;
+  }
+
   InstrumentQuote(
       {this.id,
       this.date,
@@ -51,6 +66,19 @@ class InstrumentQuote {
       this.settle,
       this.turnover,
       this.preclose});
+
+//       - (NSString *)percentage {
+//     CGFloat pre = self.pre.floatValue;
+//     if (pre > 0 && (self.delta || self.price)) {
+//         if (self.delta) {
+//             return NUMBER_TO_PERCENT_STRING(@((self.delta.floatValue) / pre * 100));
+//         } else {
+//             return NUMBER_TO_PERCENT_STRING(@((self.price.floatValue - pre) / pre * 100));
+//         }
+//     } else {
+//         return @"--";
+//     }
+// }
 
   factory InstrumentQuote.fromJson(Map<String, dynamic> json) =>
       _$InstrumentQuoteFromJson(json);

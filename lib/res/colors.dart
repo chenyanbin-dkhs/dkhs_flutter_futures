@@ -28,6 +28,9 @@ class Colours {
   static const Color red = Color(0xFFFF4759);
   static const Color dark_red = Color(0xFFE03E4E);
 
+  static const Color green = Color(0xFF00AC2E);
+  static const Color gray = Color(0xFF8D939E);
+
   static const Color text_disabled = Color(0xFFD4E2FA);
   static const Color dark_text_disabled = Color(0xFFCEDBF2);
 

@@ -89,7 +89,7 @@ class _StatusesPageState extends State<StatusesPage> {
           title: Text('话题'),
         ),
         body: Center(
-          child: SocketLoader(
+          child: SocketMarketSnapLoader(
             channel: channel,
             instruments: ['IF1909', 'IF2003'],
             success: (data) => Center(child: Text(data.length.toString())),

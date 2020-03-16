@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:web_socket_channel/io.dart';
 
 const tradeUrl = 'wss://ws.dkhs.com/futures/trade';

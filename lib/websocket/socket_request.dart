@@ -1,17 +1,21 @@
 import 'dart:convert';
 
 class SocketRequest {
-  String action, instrument;
+  /// req_market_snap
+  String action;
 
-  SocketRequest(this.action, this.instrument);
+  /// IF1909
+  String instrumentCode;
+
+  SocketRequest(this.action, this.instrumentCode);
 
   /// 获取合约最新行情
-  SocketRequest.reqMarketSnap(String instrument)
-      : this('req_market_snap', instrument);
+  SocketRequest.reqMarketSnap(String instrumentCode)
+      : this('req_market_snap', instrumentCode);
 
   String get parameters {
     var obj = {
-      "payload": {"instrument": this.instrument},
+      "payload": {"instrument": this.instrumentCode},
       "action": this.action
     };
     return json.encode(obj).toString();
