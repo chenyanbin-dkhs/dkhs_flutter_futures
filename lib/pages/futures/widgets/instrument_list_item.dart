@@ -69,8 +69,10 @@ class InstrumentListItem extends StatelessWidget {
                                   vertical: 4, horizontal: 8),
                               child: Text(
                                 text,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.white),
                               ),
+                              width: 70,
                               color: color,
                             ),
                           ),

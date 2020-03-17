@@ -19,7 +19,6 @@ class _InstrumentListState extends State<InstrumentList> {
   void initState() {
     super.initState();
     List<String> codes = widget.list.map((item) => item.code).toList();
-    print(codes);
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       Provider.of<SocketMarketSnapProvider>(context, listen: false)
           .requestQuotes(codes);
