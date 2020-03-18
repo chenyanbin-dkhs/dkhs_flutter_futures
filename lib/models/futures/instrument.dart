@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:intl/intl.dart';
+
 import './instrument_time_ranges.dart';
+import './instrument_time_line.dart';
 part 'instrument.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -90,6 +93,15 @@ class Instrument {
     return this.timeRanges.length >= 3;
   }
 
+  allTimeRanges() {
+    List<String> fullTimeRanges = [];
+
+    for (var item in this.timeRanges) {
+      fullTimeRanges.addAll(generateTimeArray(item.start, item.end));
+    }
+    return fullTimeRanges;
+  }
+
   Instrument();
 
   // factory Instrument.fromJson(Map<String, dynamic> json) =>
@@ -98,4 +110,19 @@ class Instrument {
   static Instrument fromJson(Map<String, dynamic> json) =>
       _$InstrumentFromJson(json);
   Map<String, dynamic> toJson() => _$InstrumentToJson(this);
+}
+
+List<String> generateTimeArray(fromStr, toStr) {
+  DateFormat formatter = new DateFormat("HH:mm");
+  DateTime from = formatter.parse(fromStr);
+  DateTime to = formatter.parse(toStr);
+
+  Duration difference = to.difference(from);
+  int deffMinutes = difference.inMinutes;
+  List<String> timeRanges = [];
+  for (var i = 0; i <= deffMinutes; i++) {
+    timeRanges.add(formatter.format(from.add(Duration(minutes: i))));
+    //timeRanges.add([formatter.format(from.add(Duration(minutes: i))), null]);
+  }
+  return timeRanges;
 }

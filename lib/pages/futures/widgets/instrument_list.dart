@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/futures/instrument.dart';
 import '../../../websocket/socket_market_snap_provider.dart';
+import '../../../websocket/socket_market_time_line_provider.dart';
 
 import './instrument_list_item.dart';
 
@@ -22,6 +23,9 @@ class _InstrumentListState extends State<InstrumentList> {
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       Provider.of<SocketMarketSnapProvider>(context, listen: false)
           .requestQuotes(codes);
+
+      Provider.of<SocketMarketTimeLineProvider>(context, listen: false)
+          .requestTimelines(codes);
     });
   }
 

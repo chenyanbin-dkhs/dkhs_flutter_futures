@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/futures/instrument.dart';
 import '../../../res/resources.dart';
 
+import '../../../widgets/chart/line_chart/index.dart';
 import '../../../widgets/badge.dart';
 import '../../../widgets/my_text.dart';
 import '../../../widgets/my_card.dart';
@@ -11,6 +12,7 @@ import '../../../widgets/clear_button.dart';
 import '../../../widgets/finance_value.dart';
 import 'package:provider/provider.dart';
 import '../../../websocket/socket_market_snap_provider.dart';
+import '../../../websocket/socket_market_time_line_provider.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})
@@ -46,43 +48,71 @@ class InstrumentListItem extends StatelessWidget {
                   Spacer(),
                   Container(
                     width: 120,
+                    padding: EdgeInsets.all(2),
                     color: Colors.red,
-                    child: Column(children: [
-                      Text('图表'),
-                    ]),
+                    child: _buildTimeline(),
                   ),
                   Gaps.hGap15,
                   Container(
                     width: 80,
-                    child: Consumer<SocketMarketSnapProvider>(
-                      builder: (context, value, child) {
-                        var quote = value.quoteByCode(this.instrument.code);
-                        return Column(children: [
-                          FinanceValue(quote?.price),
-                          Gaps.vGap5,
-                          FinanceValue(
-                            quote?.percentage,
-                            percentable: true,
-                            colorable: true,
-                            onBuild: ({text, value, color}) => Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 8),
-                              child: Text(
-                                text,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              width: 70,
-                              color: color,
-                            ),
-                          ),
-                        ]);
-                        // return Text(quote?.id ?? '');
-                      },
-                    ),
+                    child: _buildPrice(),
                   )
                 ])),
           )),
+    );
+  }
+
+  Widget _buildPrice() {
+    return Consumer<SocketMarketSnapProvider>(
+      builder: (context, value, child) {
+        var quote = value.quoteByCode(this.instrument.code);
+        return Column(children: [
+          FinanceValue(quote?.price),
+          Gaps.vGap5,
+          FinanceValue(
+            quote?.percentage,
+            percentable: true,
+            colorable: true,
+            onBuild: ({text, value, color}) => Container(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+              ),
+              width: 70,
+              color: color,
+            ),
+          ),
+        ]);
+        // return Text(quote?.id ?? '');
+      },
+    );
+  }
+
+  Widget _buildTimeline() {
+    return Consumer<SocketMarketTimeLineProvider>(
+      builder: (context, value, child) {
+        var timeline = value.timelineByCode(this.instrument.code);
+
+        if (timeline != null) {
+          var fullTimeline =
+              timeline.fullTimeline(this.instrument.allTimeRanges());
+          List<double> data = fullTimeline
+              .map((item) =>
+                  item.price == null ? null : double.parse(item.price))
+              .toList();
+          return new LineChartSimple(
+            data,
+            width: 120,
+            height: 40,
+          );
+        }
+        return SizedBox(
+          width: 120,
+          height: 40,
+        );
+      },
     );
   }
 }

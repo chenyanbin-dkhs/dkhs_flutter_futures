@@ -19,11 +19,20 @@ class LineChartPainter {
     var yScale = lineChartData.yScale;
 
     List<Offset> points = [];
+    for (int i = 0; i < list.length; i++) {
       points.add(Offset(xScale(i, size.width), yScale(list[i], size.height)));
     }
+
     for (int i = 0; i < points.length - 1; i++) {
-      canvas.drawLine(points[i], points[i + 1], paint);
+      Offset from = points[i];
+      Offset to = points[i + 1];
+
+      if (from.dx != null &&
+          from.dy != null &&
+          to.dx != null &&
+          to.dy != null) {
+        canvas.drawLine(points[i], points[i + 1], paint);
+      }
     }
   }
-  
 }

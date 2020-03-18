@@ -10,12 +10,12 @@ import './socket_channle.dart';
 import './socket_request.dart';
 import './socket_response.dart';
 
-import '../models/futures/instrument_quote.dart';
+import '../models/futures/instrument_time_line.dart';
 
-class SocketMarketSnapProvider with ChangeNotifier {
+class SocketMarketTimeLineProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
-  Map<String, InstrumentQuote> mapInstrumentQuotes = {};
-  InstrumentQuote quoteByCode(String code) => mapInstrumentQuotes[code];
+  Map<String, InstrumentTimeLine> mapInstrumentTimelines = {};
+  InstrumentTimeLine timelineByCode(String code) => mapInstrumentTimelines[code];
 
   createWebsocket() {
     channel = initializeWebSocketTradeChannel();
@@ -32,27 +32,27 @@ class SocketMarketSnapProvider with ChangeNotifier {
     var obj = jsonDecode(data);
 
     if (obj is Map) {
-      var quote =
-          InstrumentQuote.fromJson(SocketResponse.fromJson(obj).payload);
-      if (quote != null) {
-        mapInstrumentQuotes[quote.id] = quote;
+      var data =
+          InstrumentTimeLine.fromJson(SocketResponse.fromJson(obj).payload);
+      if (data != null) {
+        mapInstrumentTimelines[data.instrument] = data;
       }
     }
     notifyListeners();
   }
 
-  requestQuote(String instrumentCode) {
+  requestTimeline(String instrumentCode) {
     if (channel == null) {
       createWebsocket();
     }
-    var req = SocketRequest.reqMarketSnap(instrumentCode);
+    var req = SocketRequest.reqMarketTimeLine(instrumentCode, 0);
     channel.sink.add(req.parameters);
-    //print('requestQuote');
+    //print('requestTimeline:' + instrumentCode);
   }
 
-  requestQuotes(List<String> instrumentCodes) {
+  requestTimelines(List<String> instrumentCodes) {
     for (var code in instrumentCodes) {
-      requestQuote(code);
+      requestTimeline(code);
     }
   }
 

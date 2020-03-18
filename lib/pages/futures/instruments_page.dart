@@ -11,6 +11,7 @@ import '../../widgets/my_header_bar.dart';
 import '../../http/futures_http.dart';
 import 'package:provider/provider.dart';
 import '../../websocket/socket_market_snap_provider.dart';
+import '../../websocket/socket_market_time_line_provider.dart';
 
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);
@@ -63,8 +64,11 @@ class _InstrumentsPageState extends State<InstrumentsPage>
       error: ([error]) => Center(child: Text(error.toString())),
     );
 
-    return ChangeNotifierProvider(
-      create: (context) => SocketMarketSnapProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SocketMarketSnapProvider()),
+        ChangeNotifierProvider(create: (_) => SocketMarketTimeLineProvider()),
+      ],
       child: Scaffold(
         key: _scaffold,
         appBar: MyHeaderBar(

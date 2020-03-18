@@ -7,10 +7,10 @@ class Point {
 }
 
 class LineChartData {
-  List<double> list;
+  List<double> list = [];
 
   /// 完整的点数
-  int _dataSize;
+  int _dataSize = 0;
 
   LineChartData(List<double> list) {
     this.list = list;
@@ -28,14 +28,14 @@ class LineChartData {
     if (this.list.length == 0) {
       return null;
     }
-    return this.list.reduce(DartMath.min);
+    return this.list.where((item) => item != null).reduce(DartMath.min);
   }
 
   double get max {
     if (this.list.length == 0) {
       return null;
     }
-    return this.list.reduce(DartMath.max);
+    return this.list.where((item) => item != null).reduce(DartMath.max);
   }
 
   double xScale(int index, double chartWidth) {
@@ -47,6 +47,9 @@ class LineChartData {
   }
 
   double yScale(double value, double chartHeight) {
+    if (value == null) {
+      return null;
+    }
     var scaleValue = scaleBetween(value, min, max);
     return chartHeight - (chartHeight * scaleValue / 100);
   }
@@ -55,6 +58,10 @@ class LineChartData {
 const scaledMin = 0;
 const scaledMax = 100;
 double scaleBetween(unscaledNum, min, max) {
+  if (min == max) {
+    max += max.abs() * 0.01;
+    min -= min.abs() * 0.01;
+  }
   return (scaledMax - scaledMin) * (unscaledNum - min) / (max - min) +
       scaledMin;
 }
