@@ -10,7 +10,11 @@ class LineChartPainter {
     this.size = size;
     this.paint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 2;
+      ..strokeWidth = 0.8;
+  }
+
+  void setPaintColor(Color color) {
+    this.paint.color = color;
   }
 
   void drawLine(LineChartData lineChartData) {

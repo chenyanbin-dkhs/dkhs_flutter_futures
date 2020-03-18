@@ -34,15 +34,7 @@ class FinanceValue extends StatelessWidget {
     }
     var _color = Theme.of(context).accentColor;
     if (this.colorable) {
-      if (_value == null) {
-        _color = Colours.gray;
-      } else if (value > 0) {
-        _color = Colours.red;
-      } else if (value < 0) {
-        _color = Colours.green;
-      } else {
-        _color = Colours.gray;
-      }
+      _color = financeColor(context, this.value);
     }
 
     if (this.onBuild == null) {
@@ -51,4 +43,19 @@ class FinanceValue extends StatelessWidget {
       return this.onBuild(text: displayValue, value: _value, color: _color);
     }
   }
+}
+
+Color financeColor(BuildContext context, dynamic value) {
+  var _value = double.tryParse(value.toString()) ?? null;
+  var _color = Theme.of(context).accentColor;
+  if (_value == null) {
+    _color = Colours.gray;
+  } else if (value > 0) {
+    _color = Colours.red;
+  } else if (value < 0) {
+    _color = Colours.green;
+  } else {
+    _color = Colours.gray;
+  }
+  return _color;
 }

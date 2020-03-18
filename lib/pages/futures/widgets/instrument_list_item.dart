@@ -47,26 +47,41 @@ class InstrumentListItem extends StatelessWidget {
                   ),
                   Spacer(),
                   Container(
-                    width: 120,
-                    padding: EdgeInsets.all(2),
-                    color: Colors.red,
-                    child: _buildTimeline(),
+                    width: 215,
+                    child: Consumer<SocketMarketSnapProvider>(
+                      builder: _onBuilderMacketSnap,
+                    ),
                   ),
-                  Gaps.hGap15,
-                  Container(
-                    width: 80,
-                    child: _buildPrice(),
-                  )
+                  // Container(
+                  //   width: 120,
+                  //   padding: EdgeInsets.all(2),
+                  //   child: _buildTimeline(),
+                  // ),
+                  // Gaps.hGap15,
+                  // Container(
+                  //   width: 80,
+                  //   child: Consumer<SocketMarketSnapProvider>(
+                  //     builder: _onBuilderMacketSnap,
+                  //   ),
+                  // )
                 ])),
           )),
     );
   }
 
-  Widget _buildPrice() {
-    return Consumer<SocketMarketSnapProvider>(
-      builder: (context, value, child) {
-        var quote = value.quoteByCode(this.instrument.code);
-        return Column(children: [
+  Widget _onBuilderMacketSnap(
+      BuildContext context, SocketMarketSnapProvider value, Widget child) {
+    var quote = value.quoteByCode(this.instrument.code);
+    return Row(children: [
+      Container(
+        width: 120,
+        padding: EdgeInsets.all(2),
+        child: _buildTimeline(financeColor(context, quote?.percentage)),
+      ),
+      Gaps.hGap15,
+      Container(
+        width: 80,
+        child: Column(children: [
           FinanceValue(quote?.price),
           Gaps.vGap5,
           FinanceValue(
@@ -84,13 +99,12 @@ class InstrumentListItem extends StatelessWidget {
               color: color,
             ),
           ),
-        ]);
-        // return Text(quote?.id ?? '');
-      },
-    );
+        ]),
+      )
+    ]);
   }
 
-  Widget _buildTimeline() {
+  Widget _buildTimeline(Color color) {
     return Consumer<SocketMarketTimeLineProvider>(
       builder: (context, value, child) {
         var timeline = value.timelineByCode(this.instrument.code);
@@ -104,6 +118,7 @@ class InstrumentListItem extends StatelessWidget {
               .toList();
           return new LineChartSimple(
             data,
+            color: color,
             width: 120,
             height: 40,
           );
