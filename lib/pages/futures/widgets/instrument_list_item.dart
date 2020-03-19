@@ -21,9 +21,6 @@ class InstrumentListItem extends StatelessWidget {
   final Instrument instrument;
   @override
   Widget build(BuildContext context) {
-    if (instrument.code == 'au2006') {
-      print(this.instrument.code);
-    }
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: MyCard(
@@ -63,7 +60,9 @@ class InstrumentListItem extends StatelessWidget {
 
   Widget _onBuilderMacketSnap(
       BuildContext context, SocketMarketSnapProvider value, Widget child) {
+    print('_onBuilderMacketSnap'+DateTime.now().toString());
     var quote = value.quoteByCode(this.instrument.code);
+
     return Row(children: [
       Container(
         width: 120,
@@ -95,15 +94,6 @@ class InstrumentListItem extends StatelessWidget {
       )
     ]);
   }
-
-  // Widget _buildTimeline(String instrumentCode, Color color) {
-  //   print(instrumentCode);
-
-  //   return SizedBox(
-  //     width: 120,
-  //     height: 40,
-  //   );
-  // }
 
   Widget _buildTimeline(Color color) {
     return Consumer<SocketMarketTimeLineProvider>(

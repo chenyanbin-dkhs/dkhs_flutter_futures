@@ -56,6 +56,7 @@ class _InstrumentsRealState extends State<InstrumentsReal>
             _buildCardTypeButton(CardType.list),
           ],
         ),
+
         Offstage(
           offstage: currentCard != CardType.grid,
           child: InstrumentGrids(
@@ -92,9 +93,12 @@ class _InstrumentsRealState extends State<InstrumentsReal>
       child: Text(type == CardType.grid ? '简约' : '专业'),
       isOutline: currentCard == type,
       onPressed: () => {
-        setState(() {
-          currentCard = type;
-        })
+        if (currentCard != type)
+          {
+            setState(() {
+              currentCard = type;
+            })
+          }
       },
     );
   }

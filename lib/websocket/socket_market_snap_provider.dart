@@ -19,7 +19,7 @@ class SocketMarketSnapProvider with ChangeNotifier {
 
   createWebsocket() {
     channel = initializeWebSocketTradeChannel();
-    print('建立连接');
+    print('建立连接' + DateTime.now().toString());
     //监听到服务器返回消息
     channel.stream.listen((data) => listenMessage(data),
         onError: onError, onDone: onDone);
