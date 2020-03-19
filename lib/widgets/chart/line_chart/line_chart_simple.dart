@@ -10,6 +10,7 @@ class LineChartSimple extends StatelessWidget {
   final List<double> data;
   final double width;
   final double height;
+  /// 曲线颜色
   final Color color;
 
   @override
@@ -28,6 +29,7 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    
     var painter = new LineChartPainter(canvas, size);
     if (this.color != null) {
       painter.setPaintColor(this.color);
@@ -38,6 +40,6 @@ class MyPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter old) {
-    return true;
+    return false;
   }
 }

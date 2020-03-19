@@ -87,19 +87,22 @@ class Instrument {
 
   @JsonKey(name: 'time_ranges')
   List<InstrumentTimeRanges> timeRanges;
+  Map<String, TimeLine> _timeRangesMap;
+
+  Map<String, TimeLine> get timeRangesMap {
+    if (_timeRangesMap == null) {
+      _timeRangesMap = {};
+      for (var item in this.timeRanges) {
+        _timeRangesMap.addAll(generateTimeMap(item.start, item.end));
+      }
+    }
+
+    return this._timeRangesMap;
+  }
 
   /// 是否有夜盘
   bool get isTradingNight {
     return this.timeRanges.length >= 3;
-  }
-
-  allTimeRanges() {
-    List<String> fullTimeRanges = [];
-
-    for (var item in this.timeRanges) {
-      fullTimeRanges.addAll(generateTimeArray(item.start, item.end));
-    }
-    return fullTimeRanges;
   }
 
   Instrument();
@@ -112,17 +115,16 @@ class Instrument {
   Map<String, dynamic> toJson() => _$InstrumentToJson(this);
 }
 
-List<String> generateTimeArray(fromStr, toStr) {
+Map<String, TimeLine> generateTimeMap(fromStr, toStr) {
   DateFormat formatter = new DateFormat("HH:mm");
   DateTime from = formatter.parse(fromStr);
   DateTime to = formatter.parse(toStr);
 
   Duration difference = to.difference(from);
   int deffMinutes = difference.inMinutes;
-  List<String> timeRanges = [];
+  Map<String, TimeLine> timeMap = {};
   for (var i = 0; i <= deffMinutes; i++) {
-    timeRanges.add(formatter.format(from.add(Duration(minutes: i))));
-    //timeRanges.add([formatter.format(from.add(Duration(minutes: i))), null]);
+    timeMap[formatter.format(from.add(Duration(minutes: i)))] = null;
   }
-  return timeRanges;
+  return timeMap;
 }

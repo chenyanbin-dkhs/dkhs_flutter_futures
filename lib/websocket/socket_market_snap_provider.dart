@@ -51,6 +51,7 @@ class SocketMarketSnapProvider with ChangeNotifier {
   }
 
   requestQuotes(List<String> instrumentCodes) {
+    print('requestQuotes');
     for (var code in instrumentCodes) {
       requestQuote(code);
     }

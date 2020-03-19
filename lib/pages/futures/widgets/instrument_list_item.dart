@@ -13,6 +13,7 @@ import '../../../widgets/finance_value.dart';
 import 'package:provider/provider.dart';
 import '../../../websocket/socket_market_snap_provider.dart';
 import '../../../websocket/socket_market_time_line_provider.dart';
+import '../../../utils/number_util.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})
@@ -20,6 +21,9 @@ class InstrumentListItem extends StatelessWidget {
   final Instrument instrument;
   @override
   Widget build(BuildContext context) {
+    if (instrument.code == 'au2006') {
+      print(this.instrument.code);
+    }
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: MyCard(
@@ -52,18 +56,6 @@ class InstrumentListItem extends StatelessWidget {
                       builder: _onBuilderMacketSnap,
                     ),
                   ),
-                  // Container(
-                  //   width: 120,
-                  //   padding: EdgeInsets.all(2),
-                  //   child: _buildTimeline(),
-                  // ),
-                  // Gaps.hGap15,
-                  // Container(
-                  //   width: 80,
-                  //   child: Consumer<SocketMarketSnapProvider>(
-                  //     builder: _onBuilderMacketSnap,
-                  //   ),
-                  // )
                 ])),
           )),
     );
@@ -76,7 +68,7 @@ class InstrumentListItem extends StatelessWidget {
       Container(
         width: 120,
         padding: EdgeInsets.all(2),
-        child: _buildTimeline(financeColor(context, quote?.percentage)),
+        child: _buildTimeline(Colors.red),
       ),
       Gaps.hGap15,
       Container(
@@ -104,18 +96,27 @@ class InstrumentListItem extends StatelessWidget {
     ]);
   }
 
+  // Widget _buildTimeline(String instrumentCode, Color color) {
+  //   print(instrumentCode);
+
+  //   return SizedBox(
+  //     width: 120,
+  //     height: 40,
+  //   );
+  // }
+
   Widget _buildTimeline(Color color) {
     return Consumer<SocketMarketTimeLineProvider>(
       builder: (context, value, child) {
         var timeline = value.timelineByCode(this.instrument.code);
 
         if (timeline != null) {
-          var fullTimeline =
-              timeline.fullTimeline(this.instrument.allTimeRanges());
-          List<double> data = fullTimeline
-              .map((item) =>
-                  item.price == null ? null : double.parse(item.price))
-              .toList();
+          var timeRangesMap =
+              timeline.fullTimelineMap(this.instrument.timeRangesMap);
+          List<double> data = [];
+          timeRangesMap
+              .forEach((k, v) => {data.add(NumberUtils.doubleParse(v?.price))});
+
           return new LineChartSimple(
             data,
             color: color,

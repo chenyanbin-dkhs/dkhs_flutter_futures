@@ -3,15 +3,27 @@ import '../../../models/futures/instrument.dart';
 import './instrument_grid_item.dart';
 import './instrument_grid_item_fake.dart';
 
-class InstrumentGrids extends StatelessWidget {
+class InstrumentGrids extends StatefulWidget {
   const InstrumentGrids({Key key, @required this.list}) : super(key: key);
   final List<Instrument> list;
+
+  @override
+  _InstrumentGridsState createState() => _InstrumentGridsState();
+}
+
+class _InstrumentGridsState extends State<InstrumentGrids>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
-    if (list == null || list.isEmpty) {
+    super.build(context);
+
+    if (widget.list == null || widget.list.isEmpty) {
       return _buildLoadingList();
     } else {
-      return _buildList(this.list);
+      return _buildList(widget.list);
     }
   }
 

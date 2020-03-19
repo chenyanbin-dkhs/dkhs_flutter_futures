@@ -35,6 +35,7 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
       var data =
           InstrumentTimeLine.fromJson(SocketResponse.fromJson(obj).payload);
       if (data != null) {
+        
         mapInstrumentTimelines[data.instrument] = data;
       }
     }

@@ -21,6 +21,7 @@ class _InstrumentsSimulateState extends State<InstrumentsSimulate>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    print('simu'+DateTime.now().toString());
 
     return ListView(
       key: PageStorageKey('simulate'),

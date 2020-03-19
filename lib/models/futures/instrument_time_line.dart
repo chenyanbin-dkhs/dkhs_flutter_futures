@@ -23,26 +23,14 @@ class InstrumentTimeLine {
     return data;
   }
 
-  /// 根据合约里的 timeRange，返回一个完整的分时数组
-  List<TimeLine> fullTimeline(List<String> fullTimeRanges) {
+  Map<String, TimeLine> fullTimelineMap(Map<String, TimeLine> originTimeLines) {
     if (this.timeLine == null || this.timeLine.length == 0) {
-      return [];
+      return originTimeLines;
     }
-    List<TimeLine> list = [];
-
-    for (var i = 0; i < fullTimeRanges.length; i++) {
-      TimeLine timeline = this.timeLine.firstWhere(
-          (element) => element.time.substring(0, 5) == fullTimeRanges[i],
-          orElse: () => null);
-
-      if (timeline == null) {
-        list.add(TimeLine(
-            time: fullTimeRanges[i], price: null, volume: null, openVol: null));
-      } else {
-        list.add(timeline);
-      }
+    for (var i = 0; i < timeLine.length; i++) {
+      originTimeLines[timeLine[i].time.substring(0, 5)] = timeLine[i];
     }
-    return list;
+    return originTimeLines;
   }
 }
 
