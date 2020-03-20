@@ -48,31 +48,27 @@ class InstrumentListItem extends StatelessWidget {
                   ),
                   Spacer(),
                   Container(
-                    width: 215,
-                    child: Consumer<SocketMarketSnapProvider>(
-                      builder: _onBuilderMacketSnap,
-                    ),
+                    width: 120,
+                    padding: EdgeInsets.all(2),
+                    child: _buildTimeline(),
+                  ),
+                  Gaps.hGap15,
+                  Container(
+                    width: 80,
+                    child: _buildPrice(),
                   ),
                 ])),
           )),
     );
   }
 
-  Widget _onBuilderMacketSnap(
-      BuildContext context, SocketMarketSnapProvider value, Widget child) {
-    print('_onBuilderMacketSnap'+DateTime.now().toString());
-    var quote = value.quoteByCode(this.instrument.code);
+  Widget _buildPrice() {
+    return Consumer<SocketMarketSnapProvider>(
+      builder: (context, value, child) {
+        var quote = value.quoteByCode(this.instrument.code);
+        print('_buildPrice' + this.instrument.code);
 
-    return Row(children: [
-      Container(
-        width: 120,
-        padding: EdgeInsets.all(2),
-        child: _buildTimeline(Colors.red),
-      ),
-      Gaps.hGap15,
-      Container(
-        width: 80,
-        child: Column(children: [
+        return Column(children: [
           FinanceValue(quote?.price),
           Gaps.vGap5,
           FinanceValue(
@@ -90,22 +86,28 @@ class InstrumentListItem extends StatelessWidget {
               color: color,
             ),
           ),
-        ]),
-      )
-    ]);
+        ]);
+      },
+    );
   }
 
-  Widget _buildTimeline(Color color) {
+  Widget _buildTimeline() {
     return Consumer<SocketMarketTimeLineProvider>(
       builder: (context, value, child) {
-        var timeline = value.timelineByCode(this.instrument.code);
+        var code = this.instrument.code;
+        var timeline = value.timelineByCode(code);
+        var isPercentagePositive = value.instrumentPercentageMap[code];
 
-        if (timeline != null) {
+        if (timeline != null && isPercentagePositive != null) {
+          print('_buildTimeline_' + code + ':' + DateTime.now().toString());
+
+          Color color = financeColor(context, isPercentagePositive ? 1 : -1);
           var timeRangesMap =
               timeline.fullTimelineMap(this.instrument.timeRangesMap);
           List<double> data = [];
           timeRangesMap
               .forEach((k, v) => {data.add(NumberUtils.doubleParse(v?.price))});
+          //print(DateTime.now());
 
           return new LineChartSimple(
             data,

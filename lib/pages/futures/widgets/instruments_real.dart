@@ -36,7 +36,6 @@ class _InstrumentsRealState extends State<InstrumentsReal>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return ListView(
       key: PageStorageKey('real'),
       scrollDirection: Axis.vertical,
@@ -57,48 +56,49 @@ class _InstrumentsRealState extends State<InstrumentsReal>
           ],
         ),
 
-        Offstage(
-          offstage: currentCard != CardType.grid,
-          child: InstrumentGrids(
-            list: widget.list,
-          ),
-        ),
-        Offstage(
-          offstage: currentCard != CardType.list,
-          child: InstrumentList(
-            list: widget.list,
-          ),
-        ),
-        // Column(
-        //   children: <Widget>[
-        //     TabBarView(
-        //       children: [
-        //         InstrumentGrids(
-        //           list: widget.list,
-        //         ),
-        //         InstrumentList(
-        //           list: widget.list,
-        //         ),
-        //       ],
-        //       controller: _tabController,
-        //     ),
-        //   ],
+        // Offstage(
+        //   offstage: currentCard != CardType.grid,
+        //   child: InstrumentGrids(
+        //     list: widget.list,
+        //   ),
         // ),
+        // Offstage(
+        //   offstage: currentCard != CardType.list,
+        //   child: InstrumentList(
+        //     list: widget.list,
+        //   ),
+        // ),
+        Container(
+          height: 2000,
+          child: TabBarView(
+            physics: BouncingScrollPhysics(),
+            children: [
+              InstrumentGrids(
+                list: widget.list,
+              ),
+              InstrumentList(
+                list: widget.list,
+              ),
+            ],
+            controller: _tabController,
+          ),
+        )
       ],
     );
   }
 
   Widget _buildCardTypeButton(CardType type) {
+    bool isCardGrid = type == CardType.grid;
     return MyButton(
-      child: Text(type == CardType.grid ? '简约' : '专业'),
+      child: Text(isCardGrid ? '简约' : '专业'),
       isOutline: currentCard == type,
-      onPressed: () => {
-        if (currentCard != type)
-          {
-            setState(() {
-              currentCard = type;
-            })
-          }
+      onPressed: () {
+        if (currentCard != type) {
+          setState(() {
+            currentCard = type;
+          });
+          _tabController.index = isCardGrid ? 0 : 1;
+        }
       },
     );
   }

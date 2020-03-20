@@ -67,7 +67,15 @@ class _InstrumentsPageState extends State<InstrumentsPage>
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SocketMarketSnapProvider()),
-        ChangeNotifierProvider(create: (_) => SocketMarketTimeLineProvider()),
+        ChangeNotifierProxyProvider<SocketMarketSnapProvider,
+            SocketMarketTimeLineProvider>(
+          create: (context) => SocketMarketTimeLineProvider(),
+          update: (context, marketSnap, marketTimeLine) {
+            marketTimeLine
+                .setMapInstrumentQuotes(marketSnap.mapInstrumentQuotes);
+            return marketTimeLine;
+          },
+        ),
       ],
       child: Scaffold(
         key: _scaffold,

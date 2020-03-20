@@ -3,7 +3,8 @@ part 'instrument_quote.g.dart';
 
 @JsonSerializable()
 class InstrumentQuote {
-  String id;
+  /// instrument code
+  String id; 
   String date;
   String time;
   String price;

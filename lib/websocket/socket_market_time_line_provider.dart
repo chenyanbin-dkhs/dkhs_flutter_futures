@@ -11,11 +11,34 @@ import './socket_request.dart';
 import './socket_response.dart';
 
 import '../models/futures/instrument_time_line.dart';
+import '../models/futures/instrument_quote.dart';
+import '../utils/number_util.dart';
 
 class SocketMarketTimeLineProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
   Map<String, InstrumentTimeLine> mapInstrumentTimelines = {};
-  InstrumentTimeLine timelineByCode(String code) => mapInstrumentTimelines[code];
+  InstrumentTimeLine timelineByCode(String code) =>
+      mapInstrumentTimelines[code];
+
+  Map<String, bool> instrumentPercentageMap = {};
+
+  void setMapInstrumentQuotes(Map<String, InstrumentQuote> value) {
+    bool shouldNotify = false;
+    value.forEach((k, v) {
+      bool newPercentagePositive = v.percentage >= 0;
+      bool oldPercentagePositive = instrumentPercentageMap[k];
+
+      if (newPercentagePositive != oldPercentagePositive) {
+        instrumentPercentageMap[k] = newPercentagePositive;
+        shouldNotify = true;
+      }
+    });
+
+    if (shouldNotify) {
+      print('通过 marketSnap 更新 timeline 涨跌');
+      notifyListeners();
+    }
+  }
 
   createWebsocket() {
     channel = initializeWebSocketTradeChannel();
@@ -30,16 +53,24 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
       return;
     }
     var obj = jsonDecode(data);
-
+    bool shouldNotify = false;
     if (obj is Map) {
       var data =
           InstrumentTimeLine.fromJson(SocketResponse.fromJson(obj).payload);
       if (data != null) {
-        
-        mapInstrumentTimelines[data.instrument] = data;
+        String code = data.instrument;
+        var newTimeline = data;
+        var oldTimeline = mapInstrumentTimelines[code];
+        if (oldTimeline == null ||
+            oldTimeline.timeLine.length != newTimeline.timeLine.length) {
+          mapInstrumentTimelines[code] = data;
+          shouldNotify = true;
+        }
       }
     }
-    notifyListeners();
+    if (shouldNotify) {
+      notifyListeners();
+    }
   }
 
   requestTimeline(String instrumentCode) {

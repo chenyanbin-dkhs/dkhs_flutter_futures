@@ -32,13 +32,20 @@ class SocketMarketSnapProvider with ChangeNotifier {
     var obj = jsonDecode(data);
 
     if (obj is Map) {
-      var quote =
+      var newQuote =
           InstrumentQuote.fromJson(SocketResponse.fromJson(obj).payload);
-      if (quote != null) {
-        mapInstrumentQuotes[quote.id] = quote;
+      if (newQuote != null) {
+        var olderQuote = mapInstrumentQuotes[newQuote.id];
+        // 多一层判断可以优化性能
+        if (olderQuote == null ||
+            olderQuote.time != newQuote.time ||
+            olderQuote.price != newQuote.price) {
+          mapInstrumentQuotes[newQuote.id] = newQuote;
+          notifyListeners();
+          print('marketSnap notifyListeners:' + newQuote.id);
+        }
       }
     }
-    notifyListeners();
   }
 
   requestQuote(String instrumentCode) {
@@ -76,3 +83,18 @@ class SocketMarketSnapProvider with ChangeNotifier {
     //notifyListeners();
   }
 }
+
+// class SocketMarketSnapPercentageProvider with ChangeNotifier {
+//   Map<String, bool> instrumentPercentageMap = {};
+//   bool isPercentagePositve(String instrumentCode) =>
+//       instrumentPercentageMap[instrumentCode];
+
+//   void setInstrumentPercentage(String instrumentCode, double value) {
+//     bool oldValue = instrumentPercentageMap[instrumentCode];
+//     bool newValue = value >= 0;
+//     if (oldValue != newValue) {
+//       instrumentPercentageMap[instrumentCode] = newValue;
+//       notifyListeners();
+//     }
+//   }
+// }
