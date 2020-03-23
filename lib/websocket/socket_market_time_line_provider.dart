@@ -93,14 +93,14 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
   }
 
   requestTimeline(String instrumentCode) {
-    if (channel == null) {
-      createWebsocket();
-    }
     var req = SocketRequest.reqMarketTimeLine(instrumentCode, 0);
     channel.sink.add(req.parameters);
   }
 
   requestTimelines(List<Instrument> list) {
+    if (channel == null) {
+      createWebsocket();
+    }
     this._listInstrument = list;
     for (var item in list) {
       requestTimeline(item.code);

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import './instrument_time_ranges.dart';
 import './instrument_time_line.dart';
+import './instrument_quote.dart';
 import '../../utils/number_util.dart';
 part 'instrument.g.dart';
 
@@ -91,10 +92,12 @@ class Instrument {
 
   Map<String, TimeLine> _timelineMap;
 
+  /// 行情信息
+  //InstrumentQuote quote;
+
   /// 获取每个合约的完整分时时间数组
   /// {'09:30':TimeLine,'09:31':TimeLine}
   Map<String, TimeLine> get timeLineMap {
-    // 只在首次时生成，提升性能
     if (_timelineMap == null) {
       _timelineMap = {};
       for (var item in this.timeRanges) {
@@ -118,6 +121,10 @@ class Instrument {
   bool get isTradingNight {
     return this.timeRanges.length >= 3;
   }
+
+  // void updateQuote(InstrumentQuote newQuote) {
+  //   this.quote = newQuote;
+  // }
 
   Instrument();
 

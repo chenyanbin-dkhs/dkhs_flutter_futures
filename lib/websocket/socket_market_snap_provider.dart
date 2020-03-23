@@ -59,7 +59,6 @@ class SocketMarketSnapProvider with ChangeNotifier {
     if (channel == null) {
       createWebsocket();
     }
-    print('requestQuotes');
     for (var code in instrumentCodes) {
       var req = SocketRequest.reqMarketSnap(code);
       channel.sink.add(req.parameters);

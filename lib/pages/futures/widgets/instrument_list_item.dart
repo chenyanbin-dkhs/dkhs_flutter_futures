@@ -95,34 +95,19 @@ class InstrumentListItem extends StatelessWidget {
     return Consumer<SocketMarketTimeLineProvider>(
       builder: (context, value, child) {
         var instrument = value.getInstrument(this.instrument.code);
-        if (instrument != null) {
+        var isPercentagePositive =
+            value.instrumentPercentageMap[this.instrument.code];
+        if (instrument != null && isPercentagePositive != null) {
+          Color color = financeColor(context, isPercentagePositive ? 1 : -1);
+
           return new LineChartSimple(
             instrument.timeLinePrices,
-            color: Colors.green,
+            color: color,
             width: 120,
             height: 40,
           );
         }
 
-        // var timeline = value.mapInstrumentTimelines[code];
-        // var isPercentagePositive = value.instrumentPercentageMap[code];
-
-        // if (timeline != null && isPercentagePositive != null) {
-        //   print('_buildTimeline_' + code);
-
-        //   Color color = financeColor(context, isPercentagePositive ? 1 : -1);
-        //   var timeRangesMap =
-        //       timeline.fullTimelineMap(this.instrument.timeLineMap);
-
-        //   //print(DateTime.now());
-
-        //   return new LineChartSimple(
-        //     data,
-        //     color: color,
-        //     width: 120,
-        //     height: 40,
-        //   );
-        // }
         return SizedBox(
           width: 120,
           height: 40,
