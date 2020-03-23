@@ -14,7 +14,11 @@ import '../models/futures/instrument_quote.dart';
 
 class SocketMarketSnapProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
+
+  /// 保存每个合约的行情
   Map<String, InstrumentQuote> mapInstrumentQuotes = {};
+
+  /// 获取每个合约的行情
   InstrumentQuote quoteByCode(String code) => mapInstrumentQuotes[code];
 
   createWebsocket() {
@@ -36,31 +40,29 @@ class SocketMarketSnapProvider with ChangeNotifier {
           InstrumentQuote.fromJson(SocketResponse.fromJson(obj).payload);
       if (newQuote != null) {
         var olderQuote = mapInstrumentQuotes[newQuote.id];
-        // 多一层判断可以优化性能
+        // 对比下新推送过来的行情，如果有变化，再发出通知。
         if (olderQuote == null ||
             olderQuote.time != newQuote.time ||
             olderQuote.price != newQuote.price) {
           mapInstrumentQuotes[newQuote.id] = newQuote;
+
           notifyListeners();
+
           print('marketSnap notifyListeners:' + newQuote.id);
         }
       }
     }
   }
 
-  requestQuote(String instrumentCode) {
+  /// 请求历史行情 
+  requestQuotes(List<String> instrumentCodes) {
     if (channel == null) {
       createWebsocket();
     }
-    var req = SocketRequest.reqMarketSnap(instrumentCode);
-    channel.sink.add(req.parameters);
-    //print('requestQuote');
-  }
-
-  requestQuotes(List<String> instrumentCodes) {
     print('requestQuotes');
     for (var code in instrumentCodes) {
-      requestQuote(code);
+      var req = SocketRequest.reqMarketSnap(code);
+      channel.sink.add(req.parameters);
     }
   }
 
@@ -83,18 +85,3 @@ class SocketMarketSnapProvider with ChangeNotifier {
     //notifyListeners();
   }
 }
-
-// class SocketMarketSnapPercentageProvider with ChangeNotifier {
-//   Map<String, bool> instrumentPercentageMap = {};
-//   bool isPercentagePositve(String instrumentCode) =>
-//       instrumentPercentageMap[instrumentCode];
-
-//   void setInstrumentPercentage(String instrumentCode, double value) {
-//     bool oldValue = instrumentPercentageMap[instrumentCode];
-//     bool newValue = value >= 0;
-//     if (oldValue != newValue) {
-//       instrumentPercentageMap[instrumentCode] = newValue;
-//       notifyListeners();
-//     }
-//   }
-// }

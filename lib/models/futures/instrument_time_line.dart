@@ -22,16 +22,6 @@ class InstrumentTimeLine {
     }
     return data;
   }
-
-  Map<String, TimeLine> fullTimelineMap(Map<String, TimeLine> originTimeLines) {
-    if (this.timeLine == null || this.timeLine.length == 0) {
-      return originTimeLines;
-    }
-    for (var i = 0; i < timeLine.length; i++) {
-      originTimeLines[timeLine[i].time.substring(0, 5)] = timeLine[i];
-    }
-    return originTimeLines;
-  }
 }
 
 class TimeLine {

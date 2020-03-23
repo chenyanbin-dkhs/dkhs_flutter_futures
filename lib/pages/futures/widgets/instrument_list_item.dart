@@ -94,28 +94,35 @@ class InstrumentListItem extends StatelessWidget {
   Widget _buildTimeline() {
     return Consumer<SocketMarketTimeLineProvider>(
       builder: (context, value, child) {
-        var code = this.instrument.code;
-        var timeline = value.timelineByCode(code);
-        var isPercentagePositive = value.instrumentPercentageMap[code];
-
-        if (timeline != null && isPercentagePositive != null) {
-          print('_buildTimeline_' + code + ':' + DateTime.now().toString());
-
-          Color color = financeColor(context, isPercentagePositive ? 1 : -1);
-          var timeRangesMap =
-              timeline.fullTimelineMap(this.instrument.timeRangesMap);
-          List<double> data = [];
-          timeRangesMap
-              .forEach((k, v) => {data.add(NumberUtils.doubleParse(v?.price))});
-          //print(DateTime.now());
-
+        var instrument = value.getInstrument(this.instrument.code);
+        if (instrument != null) {
           return new LineChartSimple(
-            data,
-            color: color,
+            instrument.timeLinePrices,
+            color: Colors.green,
             width: 120,
             height: 40,
           );
         }
+
+        // var timeline = value.mapInstrumentTimelines[code];
+        // var isPercentagePositive = value.instrumentPercentageMap[code];
+
+        // if (timeline != null && isPercentagePositive != null) {
+        //   print('_buildTimeline_' + code);
+
+        //   Color color = financeColor(context, isPercentagePositive ? 1 : -1);
+        //   var timeRangesMap =
+        //       timeline.fullTimelineMap(this.instrument.timeLineMap);
+
+        //   //print(DateTime.now());
+
+        //   return new LineChartSimple(
+        //     data,
+        //     color: color,
+        //     width: 120,
+        //     height: 40,
+        //   );
+        // }
         return SizedBox(
           width: 120,
           height: 40,

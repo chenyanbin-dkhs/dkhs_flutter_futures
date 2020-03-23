@@ -29,14 +29,14 @@ class _InstrumentListState extends State<InstrumentList>
           .requestQuotes(codes);
 
       Provider.of<SocketMarketTimeLineProvider>(context, listen: false)
-          .requestTimelines(codes);
-     });
+          .requestTimelines(widget.list);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
+
     return Column(children: [
       ...widget.list.map((item) => InstrumentListItem(
             instrument: item,

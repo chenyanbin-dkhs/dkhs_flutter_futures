@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import './instrument_time_ranges.dart';
 import './instrument_time_line.dart';
+import '../../utils/number_util.dart';
 part 'instrument.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -87,17 +88,30 @@ class Instrument {
 
   @JsonKey(name: 'time_ranges')
   List<InstrumentTimeRanges> timeRanges;
-  Map<String, TimeLine> _timeRangesMap;
 
-  Map<String, TimeLine> get timeRangesMap {
-    if (_timeRangesMap == null) {
-      _timeRangesMap = {};
+  Map<String, TimeLine> _timelineMap;
+
+  /// 获取每个合约的完整分时时间数组
+  /// {'09:30':TimeLine,'09:31':TimeLine}
+  Map<String, TimeLine> get timeLineMap {
+    // 只在首次时生成，提升性能
+    if (_timelineMap == null) {
+      _timelineMap = {};
       for (var item in this.timeRanges) {
-        _timeRangesMap.addAll(generateTimeMap(item.start, item.end));
+        _timelineMap
+            .addAll(_generateTimeMapWithEmptyData(item.start, item.end));
       }
     }
 
-    return this._timeRangesMap;
+    return this._timelineMap;
+  }
+
+  List<double> get timeLinePrices {
+    List<double> data = [];
+    this
+        .timeLineMap
+        .forEach((k, v) => {data.add(NumberUtils.doubleParse(v?.price))});
+    return data;
   }
 
   /// 是否有夜盘
@@ -115,7 +129,7 @@ class Instrument {
   Map<String, dynamic> toJson() => _$InstrumentToJson(this);
 }
 
-Map<String, TimeLine> generateTimeMap(fromStr, toStr) {
+Map<String, TimeLine> _generateTimeMapWithEmptyData(fromStr, toStr) {
   DateFormat formatter = new DateFormat("HH:mm");
   DateTime from = formatter.parse(fromStr);
   DateTime to = formatter.parse(toStr);

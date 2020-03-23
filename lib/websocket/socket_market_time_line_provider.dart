@@ -10,15 +10,22 @@ import './socket_channle.dart';
 import './socket_request.dart';
 import './socket_response.dart';
 
+import '../models/futures/instrument.dart';
 import '../models/futures/instrument_time_line.dart';
 import '../models/futures/instrument_quote.dart';
 import '../utils/number_util.dart';
 
+/*
+ * 1、请求合约列表，给每个合约生成一个Instrument.TimeLinesMap<TimeString,null> 的值 
+ * 2、请求req_market_time_line  ,填充上述这个TimeLinesMap
+ * 
+ */
 class SocketMarketTimeLineProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
-  Map<String, InstrumentTimeLine> mapInstrumentTimelines = {};
-  InstrumentTimeLine timelineByCode(String code) =>
-      mapInstrumentTimelines[code];
+  List<Instrument> _listInstrument = [];
+
+  Instrument getInstrument(String code) => _listInstrument
+      .firstWhere((item) => item.code == code, orElse: () => null);
 
   Map<String, bool> instrumentPercentageMap = {};
 
@@ -55,17 +62,29 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
     var obj = jsonDecode(data);
     bool shouldNotify = false;
     if (obj is Map) {
-      var data =
+      var marketTimeLine =
           InstrumentTimeLine.fromJson(SocketResponse.fromJson(obj).payload);
-      if (data != null) {
-        String code = data.instrument;
-        var newTimeline = data;
-        var oldTimeline = mapInstrumentTimelines[code];
-        if (oldTimeline == null ||
-            oldTimeline.timeLine.length != newTimeline.timeLine.length) {
-          mapInstrumentTimelines[code] = data;
-          shouldNotify = true;
+
+      if (marketTimeLine != null) {
+        String code = marketTimeLine.instrument;
+        int instrumentIndex =
+            _listInstrument.indexWhere((item) => item.code == code);
+        if (instrumentIndex >= 0) {
+          var oldTimeLineMap = _listInstrument[instrumentIndex].timeLineMap;
+          var newTimeLines = marketTimeLine.timeLine;
+
+          for (var timeline in newTimeLines) {
+            oldTimeLineMap[timeline.time.substring(0, 5)] = timeline;
+          }
         }
+        // var newTimeline = timeLine;
+        // var oldTimeline = mapInstrumentTimelines[code];
+        // if (oldTimeline == null ||
+        //     oldTimeline.timeLine.length != newTimeline.timeLine.length) {
+        //   mapInstrumentTimelines[code] = timeLine;
+
+        //   shouldNotify = true;
+        // }
       }
     }
     if (shouldNotify) {
@@ -79,12 +98,12 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
     }
     var req = SocketRequest.reqMarketTimeLine(instrumentCode, 0);
     channel.sink.add(req.parameters);
-    //print('requestTimeline:' + instrumentCode);
   }
 
-  requestTimelines(List<String> instrumentCodes) {
-    for (var code in instrumentCodes) {
-      requestTimeline(code);
+  requestTimelines(List<Instrument> list) {
+    this._listInstrument = list;
+    for (var item in list) {
+      requestTimeline(item.code);
     }
   }
 

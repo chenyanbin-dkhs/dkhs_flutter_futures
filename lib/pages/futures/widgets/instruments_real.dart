@@ -25,11 +25,9 @@ class _InstrumentsRealState extends State<InstrumentsReal>
   @override
   bool get wantKeepAlive => true;
   CardType currentCard = CardType.grid;
-  TabController _tabController;
 
   @override
   void initState() {
-    _tabController = new TabController(length: 2, vsync: this);
     super.initState();
   }
 
@@ -55,34 +53,18 @@ class _InstrumentsRealState extends State<InstrumentsReal>
             _buildCardTypeButton(CardType.list),
           ],
         ),
-
-        // Offstage(
-        //   offstage: currentCard != CardType.grid,
-        //   child: InstrumentGrids(
-        //     list: widget.list,
-        //   ),
-        // ),
-        // Offstage(
-        //   offstage: currentCard != CardType.list,
-        //   child: InstrumentList(
-        //     list: widget.list,
-        //   ),
-        // ),
-        Container(
-          height: 2000,
-          child: TabBarView(
-            physics: BouncingScrollPhysics(),
-            children: [
-              InstrumentGrids(
-                list: widget.list,
-              ),
-              InstrumentList(
-                list: widget.list,
-              ),
-            ],
-            controller: _tabController,
+        Visibility(
+          visible: currentCard == CardType.grid,
+          child: InstrumentGrids(
+            list: widget.list,
           ),
-        )
+        ),
+        Visibility(
+          visible: currentCard == CardType.list,
+          child: InstrumentList(
+            list: widget.list,
+          ),
+        ),
       ],
     );
   }
@@ -97,7 +79,6 @@ class _InstrumentsRealState extends State<InstrumentsReal>
           setState(() {
             currentCard = type;
           });
-          _tabController.index = isCardGrid ? 0 : 1;
         }
       },
     );
