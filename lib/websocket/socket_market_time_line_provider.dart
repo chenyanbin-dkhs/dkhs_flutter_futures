@@ -13,7 +13,6 @@ import './socket_response.dart';
 import '../models/futures/instrument.dart';
 import '../models/futures/instrument_time_line.dart';
 import '../models/futures/instrument_quote.dart';
-import '../utils/number_util.dart';
 
 /*
  * 1、请求合约列表，给每个合约生成一个Instrument.TimeLinesMap<TimeString,null> 的值 
@@ -87,9 +86,7 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
         // }
       }
     }
-    if (shouldNotify) {
-      notifyListeners();
-    }
+    notifyListeners();
   }
 
   requestTimeline(String instrumentCode) {

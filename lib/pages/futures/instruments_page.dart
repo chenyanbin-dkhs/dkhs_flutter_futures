@@ -52,7 +52,6 @@ class _InstrumentsPageState extends State<InstrumentsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     var _asyncLoaderInstruments = AsyncLoader(
       init: () async => await FuturesHttp.fetchFuturesInstruments(),
       loading: () => Center(child: Text('loading')),

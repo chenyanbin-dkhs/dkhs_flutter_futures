@@ -10,8 +10,7 @@ import '../../ads/widgets/ads.dart';
 import './instrument_accounts.dart';
 import './instrument_grids.dart';
 import './instrument_list.dart';
-
-enum CardType { grid, list }
+import './instrument_grid_list_switch.dart';
 
 class InstrumentsReal extends StatefulWidget {
   InstrumentsReal({Key key, @required this.list}) : super(key: key);
@@ -24,16 +23,20 @@ class _InstrumentsRealState extends State<InstrumentsReal>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  CardType currentCard = CardType.grid;
+  int typeIndex = 0;
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return ListView(
       key: PageStorageKey('real'),
       scrollDirection: Axis.vertical,
@@ -46,41 +49,44 @@ class _InstrumentsRealState extends State<InstrumentsReal>
           widgetType: AdsWidgetType.BANNER,
         ),
         InstrumentAccounts(),
-        Row(
-          children: [
-            _buildCardTypeButton(CardType.grid),
-            Gaps.hGap5,
-            _buildCardTypeButton(CardType.list),
-          ],
-        ),
-        Visibility(
-          visible: currentCard == CardType.grid,
-          child: InstrumentGrids(
-            list: widget.list,
-          ),
-        ),
-        Visibility(
-          visible: currentCard == CardType.list,
-          child: InstrumentList(
-            list: widget.list,
+        InstrumentGridListSwittch(onCardChange),
+        Container(
+          color: Colors.red,
+          height: typeIndex == 0 ? 960 : 1540,
+          child: Stack(
+            children: <Widget>[
+              AnimatedContainer(
+                child: InstrumentGrids(
+                  list: widget.list,
+                ),
+                width: screenWidth,
+                transform: Matrix4.translationValues(
+                    typeIndex == 0 ? 0 : -screenWidth, 0, 0),
+                duration: Duration(milliseconds: 10),
+                curve: Curves.easeIn,
+              ),
+              AnimatedContainer(
+                child: InstrumentList(
+                  list: widget.list,
+                ),
+                width: screenWidth,
+                transform: Matrix4.translationValues(
+                    typeIndex == 1 ? 0 : screenWidth, 0, 0),
+                duration: Duration(milliseconds: 10),
+                curve: Curves.easeIn,
+              ),
+            ],
           ),
         ),
       ],
     );
   }
 
-  Widget _buildCardTypeButton(CardType type) {
-    bool isCardGrid = type == CardType.grid;
-    return MyButton(
-      child: Text(isCardGrid ? '简约' : '专业'),
-      isOutline: currentCard == type,
-      onPressed: () {
-        if (currentCard != type) {
-          setState(() {
-            currentCard = type;
-          });
-        }
-      },
-    );
+  void onCardChange(int index) {
+    setState(() {
+      typeIndex = index;
+    });
+    // _pagecontroller.animateToPage(index,
+    //     duration: const Duration(milliseconds: 1), curve: Curves.ease);
   }
 }

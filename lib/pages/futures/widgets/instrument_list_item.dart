@@ -66,7 +66,6 @@ class InstrumentListItem extends StatelessWidget {
     return Consumer<SocketMarketSnapProvider>(
       builder: (context, value, child) {
         var quote = value.quoteByCode(this.instrument.code);
-        print('_buildPrice' + this.instrument.code);
 
         return Column(children: [
           FinanceValue(quote?.price),
