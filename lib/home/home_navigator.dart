@@ -5,7 +5,7 @@ import './models/navigator_model.dart';
 import '../res/resources.dart';
 import '../widgets/load_image.dart';
 
-import '../pages/home/home_page.dart';
+import './home_page.dart';
 import '../pages/futures/instruments_page.dart';
 import '../pages/statuses/statuses_page.dart';
 import '../pages/mine/mine_page.dart';

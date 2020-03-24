@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import './router_init.dart';
-import '../navigator/futures_navigator.dart';
+import '../home/home_navigator.dart';
 import './404.dart';
 
 class Routers {
