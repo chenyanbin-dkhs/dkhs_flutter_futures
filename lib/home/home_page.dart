@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../res/gaps.dart';
 
-import './widgets/home_product_review.dart';
+import '../futures/widgets/home_product_review.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 import './widgets/home_flash_statuses.dart';

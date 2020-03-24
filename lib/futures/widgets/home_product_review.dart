@@ -2,11 +2,11 @@ import 'package:dkhs_flutter_futures/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flustars/flustars.dart';
 import 'package:collection/collection.dart';
-import '../../models/product_review_model.dart';
+import '../models/product_review_model.dart';
 import '../../res/resources.dart';
 import '../../utils/image_utils.dart';
 import '../../widgets/item_click.dart';
-import '../../http/futures_http.dart';
+import '../http/futures_http.dart';
 import '../../widgets/list_header.dart';
 
 const SECTOR_SPACER_WIDTH = 10; // 每个板块之间的间隔

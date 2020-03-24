@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../utils/image_utils.dart';
 
 import './models/navigator_model.dart';
 import '../res/resources.dart';
