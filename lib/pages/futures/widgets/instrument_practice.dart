@@ -22,30 +22,22 @@ class _InstrumentsPracticeState extends State<InstrumentsPractice>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return ListView(
+    return SingleChildScrollView(
       key: PageStorageKey('practice'),
       scrollDirection: Axis.vertical,
       padding: Gaps.defaultPadding,
-      physics: AlwaysScrollableScrollPhysics(), //重要
-      shrinkWrap: true, //重要
-      children: <Widget>[
-        AdsWidget(
-          'futures_practice_banner',
-          widgetType: AdsWidgetType.BANNER,
-        ),
-        InstrumentAccounts(),
-        Row(
-          children: [
-            RaisedButton(
-              onPressed: () => {},
-              child: Text('data'),
-            ),
-          ],
-        ),
-        InstrumentGrids(
-          list: widget.list,
-        ),
-      ],
+      child: Column(
+        children: <Widget>[
+          AdsWidget(
+            'futures_practice_banner',
+            widgetType: AdsWidgetType.BANNER,
+          ),
+          InstrumentAccounts(),
+          InstrumentGrids(
+            list: widget.list,
+          ),
+        ],
+      ),
     );
   }
 }

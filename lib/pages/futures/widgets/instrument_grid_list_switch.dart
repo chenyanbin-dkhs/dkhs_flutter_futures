@@ -15,9 +15,17 @@ class InstrumentGridListSwittch extends StatefulWidget {
 }
 
 class _InstrumentGridListSwittchState extends State<InstrumentGridListSwittch> {
-  CardType currentCard = CardType.grid;
+  CardType currentCard;
+
+  @override
+  void initState() {
+    currentCard = CardType.grid;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('_InstrumentGridListSwittchState build');
     return Row(
       children: [
         _buildCardTypeButton(CardType.grid),

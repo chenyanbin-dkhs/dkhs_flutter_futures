@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/futures/instrument.dart';
-import '../../../widgets/my_button.dart';
 import '../../../res/resources.dart';
 
 import '../../ads/widgets/ads.dart';
@@ -24,26 +22,15 @@ class _InstrumentsRealState extends State<InstrumentsReal>
   @override
   bool get wantKeepAlive => true;
   int typeIndex = 0;
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final double gridHeight = (widget.list.length / 2).round() * 96.0;
+    final double listHeight = widget.list.length * 77.0;
     var screenWidth = MediaQuery.of(context).size.width;
-
-    return ListView(
-      key: PageStorageKey('real'),
-      scrollDirection: Axis.vertical,
+    return SingleChildScrollView(
       padding: Gaps.defaultPadding,
-      physics: AlwaysScrollableScrollPhysics(), //重要
-      shrinkWrap: true, //重要
-      children: <Widget>[
+      child: Column(children: [
         AdsWidget(
           'futures_traders_banner',
           widgetType: AdsWidgetType.BANNER,
@@ -51,8 +38,7 @@ class _InstrumentsRealState extends State<InstrumentsReal>
         InstrumentAccounts(),
         InstrumentGridListSwittch(onCardChange),
         Container(
-          color: Colors.red,
-          height: typeIndex == 0 ? 960 : 1540,
+          height: typeIndex == 0 ? gridHeight : listHeight,
           child: Stack(
             children: <Widget>[
               AnimatedContainer(
@@ -63,7 +49,6 @@ class _InstrumentsRealState extends State<InstrumentsReal>
                 transform: Matrix4.translationValues(
                     typeIndex == 0 ? 0 : -screenWidth, 0, 0),
                 duration: Duration(milliseconds: 10),
-                curve: Curves.easeIn,
               ),
               AnimatedContainer(
                 child: InstrumentList(
@@ -73,12 +58,11 @@ class _InstrumentsRealState extends State<InstrumentsReal>
                 transform: Matrix4.translationValues(
                     typeIndex == 1 ? 0 : screenWidth, 0, 0),
                 duration: Duration(milliseconds: 10),
-                curve: Curves.easeIn,
               ),
             ],
           ),
         ),
-      ],
+      ]),
     );
   }
 
@@ -86,7 +70,5 @@ class _InstrumentsRealState extends State<InstrumentsReal>
     setState(() {
       typeIndex = index;
     });
-    // _pagecontroller.animateToPage(index,
-    //     duration: const Duration(milliseconds: 1), curve: Curves.ease);
   }
 }

@@ -6,7 +6,6 @@ import './instrument_grid_item_fake.dart';
 class InstrumentGrids extends StatefulWidget {
   const InstrumentGrids({Key key, @required this.list}) : super(key: key);
   final List<Instrument> list;
-
   @override
   _InstrumentGridsState createState() => _InstrumentGridsState();
 }

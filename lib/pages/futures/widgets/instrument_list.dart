@@ -36,11 +36,14 @@ class _InstrumentListState extends State<InstrumentList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    return Column(children: [
-      ...widget.list.map((item) => InstrumentListItem(
-            instrument: item,
-          ))
-    ]);
+    return ListView(
+        scrollDirection: Axis.vertical,
+        physics:NeverScrollableScrollPhysics(), //重要
+        shrinkWrap: true,
+        children: [
+          ...widget.list.map((item) => InstrumentListItem(
+                instrument: item,
+              ))
+        ]);
   }
 }
