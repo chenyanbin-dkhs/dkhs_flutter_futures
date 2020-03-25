@@ -10,8 +10,8 @@ import '../../widgets/my_header_bar.dart';
 
 import '../http/futures_http.dart';
 import 'package:provider/provider.dart';
-import '../../websocket/socket_market_snap_provider.dart';
-import '../../websocket/socket_market_time_line_provider.dart';
+import '../websocket/socket_market_snap_provider.dart';
+import '../websocket/socket_market_time_line_provider.dart';
 
 class InstrumentsPage extends StatefulWidget {
   InstrumentsPage({Key key}) : super(key: key);

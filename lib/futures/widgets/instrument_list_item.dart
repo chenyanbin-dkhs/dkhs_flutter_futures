@@ -10,8 +10,8 @@ import '../../widgets/my_card.dart';
 import '../../widgets/clear_button.dart';
 import '../../widgets/finance_value.dart';
 import 'package:provider/provider.dart';
-import '../../websocket/socket_market_snap_provider.dart';
-import '../../websocket/socket_market_time_line_provider.dart';
+import '../websocket/socket_market_snap_provider.dart';
+import '../websocket/socket_market_time_line_provider.dart';
 import '../../utils/number_util.dart';
 
 class InstrumentListItem extends StatelessWidget {

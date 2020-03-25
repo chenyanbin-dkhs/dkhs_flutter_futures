@@ -10,7 +10,7 @@ import './socket_channle.dart';
 import './socket_request.dart';
 import './socket_response.dart';
 
-import '../futures/models/instrument_quote.dart';
+import '../models/instrument_quote.dart';
 
 class SocketMarketSnapProvider with ChangeNotifier {
   static IOWebSocketChannel channel;

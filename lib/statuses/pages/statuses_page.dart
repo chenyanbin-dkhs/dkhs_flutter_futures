@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../futures/models/instrument_quote.dart';
 import 'package:web_socket_channel/io.dart';
-import '../../websocket/index.dart';
+import '../../futures/websocket/index.dart';
 
 class StatusesPage extends StatefulWidget {
   StatusesPage({Key key}) : super(key: key);
