@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../models/ads/ads_model.dart';
-import '../../../widgets/load_image.dart';
-import '../../../res/resources.dart';
+import '../models/ads_model.dart';
+import '../../widgets/load_image.dart';
+import '../../res/resources.dart';
 // import '../../routers/navigator_utils.dart';
 
 class AdsGridView extends StatelessWidget {

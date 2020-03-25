@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/futures/instrument.dart';
 import '../../../res/resources.dart';
 
-import '../../ads/widgets/ads.dart';
+import '../../../ads/widgets/ads.dart';
 
 import './instrument_accounts.dart';
 import './instrument_grids.dart';

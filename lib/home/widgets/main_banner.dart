@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/image_utils.dart';
-import '../../pages/ads/widgets/ads.dart';
+import '../../ads/widgets/ads.dart';
 import '../../res/resources.dart';
 
 class MainBanner extends StatelessWidget {

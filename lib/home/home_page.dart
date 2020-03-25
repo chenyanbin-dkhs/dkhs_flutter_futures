@@ -4,10 +4,10 @@ import '../res/gaps.dart';
 import '../futures/widgets/home_product_review.dart';
 import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
-import './widgets/home_flash_statuses.dart';
+import '../statuses/widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
 import './widgets/statuses_timeline.dart';
-import '../pages/ads/widgets/ads.dart';
+import '../ads/widgets/ads.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 

@@ -54,7 +54,7 @@ class _InstrumentsPageState extends State<InstrumentsPage>
     super.build(context);
     var _asyncLoaderInstruments = AsyncLoader(
       init: () async => await FuturesHttp.fetchFuturesInstruments(),
-      loading: () => Center(child: Text('loading')),
+      loading: () => Center(child: Text('加载中...')),
       success: ({data}) => TabBarView(controller: _tabController, children: [
         InstrumentsReal(list: data.results),
         InstrumentsSimulate(list: data.results),

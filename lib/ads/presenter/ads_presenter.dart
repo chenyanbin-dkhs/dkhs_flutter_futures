@@ -1,5 +1,5 @@
-import '../../../http/ads_http.dart';
-import '../../../models/ads/ads_model.dart';
+import '../http/ads_http.dart';
+import '../models/ads_model.dart';
 
 // 尝试用MVP模式https://github.com/fabiomsr/Flutter-StepByStep/tree/master/step3/lib
 abstract class AdsAreaContract {
