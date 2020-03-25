@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/futures/instrument.dart';
-import '../../../res/resources.dart';
+import '../models/instrument.dart';
+import '../../res/resources.dart';
 
-import '../../../ads/widgets/ads.dart';
+import '../../ads/widgets/ads.dart';
 
 import './instrument_accounts.dart';
 import './instrument_grids.dart';
 import './instrument_list.dart';
 import './instrument_grid_list_switch.dart';
 
-class InstrumentsReal extends StatefulWidget {
-  InstrumentsReal({Key key, @required this.list}) : super(key: key);
+class InstrumentsSimulate extends StatefulWidget {
+  InstrumentsSimulate({Key key, @required this.list}) : super(key: key);
   final List<Instrument> list;
   @override
-  _InstrumentsRealState createState() => _InstrumentsRealState();
+  _InstrumentsSimulateState createState() => _InstrumentsSimulateState();
 }
 
-class _InstrumentsRealState extends State<InstrumentsReal>
+class _InstrumentsSimulateState extends State<InstrumentsSimulate>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -28,11 +28,12 @@ class _InstrumentsRealState extends State<InstrumentsReal>
     final double gridHeight = (widget.list.length / 2).round() * 96.0;
     final double listHeight = widget.list.length * 77.0;
     var screenWidth = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
       padding: Gaps.defaultPadding,
       child: Column(children: [
         AdsWidget(
-          'futures_traders_banner',
+          'futures_virtual_traders_banner',
           widgetType: AdsWidgetType.BANNER,
         ),
         InstrumentAccounts(),

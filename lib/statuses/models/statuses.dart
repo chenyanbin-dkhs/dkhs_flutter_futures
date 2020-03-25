@@ -1,5 +1,5 @@
 import './statuses_source.dart';
-import '../accounts/user.dart';
+import '../../accounts/models/user.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 part 'statuses.g.dart';

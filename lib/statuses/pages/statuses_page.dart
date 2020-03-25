@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../../models/futures/instrument_quote.dart';
+import '../../futures/models/instrument_quote.dart';
 import 'package:web_socket_channel/io.dart';
 import '../../websocket/index.dart';
 

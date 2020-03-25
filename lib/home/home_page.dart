@@ -6,7 +6,7 @@ import './widgets/main_banner.dart';
 import './widgets/home_app_bar.dart';
 import '../statuses/widgets/home_flash_statuses.dart';
 import './widgets/home_trade_buttons.dart';
-import './widgets/statuses_timeline.dart';
+import '../statuses/widgets/home_timeline_statuses.dart';
 import '../ads/widgets/ads.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage>
                       widgetType: AdsWidgetType.BANNER,
                       hasPadding: true,
                     ),
-                    StatusesTimeline(),
+                    HomeTimelineStatuses(),
                     Gaps.vGap10,
                   ],
                 ),

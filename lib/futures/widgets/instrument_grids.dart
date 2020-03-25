@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/futures/instrument.dart';
+import '../models/instrument.dart';
 import './instrument_grid_item.dart';
 import './instrument_grid_item_fake.dart';
 

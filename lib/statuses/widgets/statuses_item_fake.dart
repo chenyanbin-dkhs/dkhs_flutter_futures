@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_placeholder_textlines/placeholder_lines.dart';
-import '../../../res/resources.dart';
+import '../../res/resources.dart';
 
 class StatusesItemFake extends StatelessWidget {
   const StatusesItemFake({Key key}) : super(key: key);

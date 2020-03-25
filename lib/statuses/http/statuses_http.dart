@@ -1,8 +1,8 @@
 import 'dart:async' show Future;
 
-import './http.dart';
-import '../models/statuses/statuses.dart';
-import '../models/page_results.dart';
+import '../../common/http/http.dart';
+import '../models/statuses.dart';
+import '../../common/models/page_results.dart';
 
 /*
  使用方法：

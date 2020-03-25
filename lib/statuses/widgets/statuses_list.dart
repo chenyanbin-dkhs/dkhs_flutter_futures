@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../http/statuses_http.dart';
-import '../../../models/statuses/statuses.dart';
+import '../http/statuses_http.dart';
+import '../models/statuses.dart';
 import './statuses_item.dart';
-import '../../../widgets/list_header.dart';
-import '../../../widgets/item_click.dart';
+import '../../widgets/list_header.dart';
+import '../../widgets/item_click.dart';
 
 class Statuseslist extends StatefulWidget {
   Statuseslist({Key key}) : super(key: key);

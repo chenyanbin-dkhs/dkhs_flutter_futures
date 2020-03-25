@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 import './socket_request.dart';
 import './socket_response.dart';
-import '../models/futures/instrument_quote.dart';
+import '../futures/models/instrument_quote.dart';
 
 enum SocketConnectStatus { none, error, connected, closed }
 typedef Widget ErrorCallback(dynamic error);

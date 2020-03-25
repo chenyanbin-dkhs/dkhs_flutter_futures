@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/image_container.dart';
-import '../../../widgets/my_text.dart';
+import '../../widgets/image_container.dart';
+import '../../widgets/my_text.dart';
 
-import '../../../res/resources.dart';
+import '../../res/resources.dart';
 
 class InstrumentAccounts extends StatelessWidget {
   const InstrumentAccounts({Key key}) : super(key: key);

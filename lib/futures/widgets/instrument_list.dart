@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/futures/instrument.dart';
-import '../../../websocket/socket_market_snap_provider.dart';
-import '../../../websocket/socket_market_time_line_provider.dart';
+import '../models/instrument.dart';
+import '../../websocket/socket_market_snap_provider.dart';
+import '../../websocket/socket_market_time_line_provider.dart';
 
 import './instrument_list_item.dart';
 

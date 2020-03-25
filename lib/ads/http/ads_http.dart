@@ -1,5 +1,5 @@
 import 'dart:async' show Future;
-import '../../common/http.dart';
+import '../../common/http/http.dart';
 import '../models/ads_area_model.dart';
 
 class AdsHttp {

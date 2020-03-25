@@ -1,9 +1,9 @@
 import 'package:dkhs_flutter_futures/res/gaps.dart';
 import 'package:flutter/material.dart';
-import '../../../models/statuses/statuses.dart';
-import '../../../widgets/load_image.dart';
-import '../../../widgets/item_click.dart';
-import '../../../widgets/my_text.dart';
+import '../models/statuses.dart';
+import '../../widgets/load_image.dart';
+import '../../widgets/item_click.dart';
+import '../../widgets/my_text.dart';
 
 class StatusesItem extends StatelessWidget {
   final Statuses statuse;

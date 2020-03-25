@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../res/resources.dart';
-
-import '../../../widgets/badge.dart';
-import '../../../widgets/my_text.dart';
-import '../../../widgets/my_card.dart';
-import '../../../widgets/load_image.dart';
-import '../../../widgets/clear_button.dart';
+import '../../widgets/my_card.dart';
 import '../../statuses/widgets/statuses_item_fake.dart';
 
 class InstrumentGridItemFake extends StatelessWidget {

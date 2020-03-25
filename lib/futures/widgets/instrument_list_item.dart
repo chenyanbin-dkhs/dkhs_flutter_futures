@@ -1,19 +1,18 @@
 import 'package:dkhs_flutter_futures/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import '../../../models/futures/instrument.dart';
-import '../../../res/resources.dart';
+import '../models/instrument.dart';
+import '../../res/resources.dart';
 
-import '../../../widgets/chart/line_chart/index.dart';
-import '../../../widgets/badge.dart';
-import '../../../widgets/my_text.dart';
-import '../../../widgets/my_card.dart';
-import '../../../widgets/load_image.dart';
-import '../../../widgets/clear_button.dart';
-import '../../../widgets/finance_value.dart';
+import '../../widgets/chart/line_chart/index.dart';
+import '../../widgets/badge.dart';
+import '../../widgets/my_text.dart';
+import '../../widgets/my_card.dart';
+import '../../widgets/clear_button.dart';
+import '../../widgets/finance_value.dart';
 import 'package:provider/provider.dart';
-import '../../../websocket/socket_market_snap_provider.dart';
-import '../../../websocket/socket_market_time_line_provider.dart';
-import '../../../utils/number_util.dart';
+import '../../websocket/socket_market_snap_provider.dart';
+import '../../websocket/socket_market_time_line_provider.dart';
+import '../../utils/number_util.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})

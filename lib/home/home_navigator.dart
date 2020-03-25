@@ -5,9 +5,9 @@ import '../res/resources.dart';
 import '../widgets/load_image.dart';
 
 import './home_page.dart';
-import '../pages/futures/instruments_page.dart';
-import '../pages/statuses/statuses_page.dart';
-import '../pages/mine/mine_page.dart';
+import '../futures/pages/instruments_page.dart';
+import '../statuses/pages/statuses_page.dart';
+import '../accounts/pages/mine_page.dart';
 
 class HomeNavigator extends StatefulWidget {
   HomeNavigator({Key key}) : super(key: key);

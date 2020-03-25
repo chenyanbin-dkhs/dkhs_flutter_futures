@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../models/futures/instrument.dart';
-import '../../../res/resources.dart';
+import '../models/instrument.dart';
+import '../../res/resources.dart';
 
-import '../../../widgets/badge.dart';
-import '../../../widgets/my_text.dart';
-import '../../../widgets/my_card.dart';
-import '../../../widgets/load_image.dart';
-import '../../../widgets/clear_button.dart';
+import '../../widgets/badge.dart';
+import '../../widgets/my_text.dart';
+import '../../widgets/my_card.dart';
+import '../../widgets/load_image.dart';
+import '../../widgets/clear_button.dart';
 
 class InstrumentGridItem extends StatelessWidget {
   const InstrumentGridItem({Key key, @required this.instrument})

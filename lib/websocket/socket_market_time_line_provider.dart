@@ -10,9 +10,9 @@ import './socket_channle.dart';
 import './socket_request.dart';
 import './socket_response.dart';
 
-import '../models/futures/instrument.dart';
-import '../models/futures/instrument_time_line.dart';
-import '../models/futures/instrument_quote.dart';
+import '../futures/models/instrument.dart';
+import '../futures/models/instrument_time_line.dart';
+import '../futures/models/instrument_quote.dart';
 
 /*
  * 1、请求合约列表，给每个合约生成一个Instrument.TimeLinesMap<TimeString,null> 的值 

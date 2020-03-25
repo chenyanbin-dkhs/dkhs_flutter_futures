@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../http/statuses_http.dart';
-import '../../models/statuses/statuses.dart';
-import '../../pages/statuses/widgets/statuses_item.dart';
-import '../../pages/statuses/widgets/statuses_item_fake.dart';
+import '../http/statuses_http.dart';
+import '../models/statuses.dart';
+import './statuses_item.dart';
+import './statuses_item_fake.dart';
 import '../../res/resources.dart';
 import '../../widgets/list_header.dart';
 import '../../widgets/item_click.dart';
 import '../../widgets/async_loader.dart';
 
-class StatusesTimeline extends StatelessWidget {
-  const StatusesTimeline({Key key}) : super(key: key);
+class HomeTimelineStatuses extends StatelessWidget {
+  const HomeTimelineStatuses({Key key}) : super(key: key);
   // final GlobalKey<AsyncLoaderState> _asyncLoaderState =
   //     new GlobalKey<AsyncLoaderState>();
   @override
