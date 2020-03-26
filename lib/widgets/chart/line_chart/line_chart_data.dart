@@ -1,5 +1,4 @@
 import 'dart:math' as DartMath;
-import 'package:flutter/material.dart';
 
 class Point {
   double x, y;

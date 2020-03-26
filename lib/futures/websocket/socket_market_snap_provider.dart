@@ -14,6 +14,7 @@ import '../models/instrument_quote.dart';
 
 class SocketMarketSnapProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
+  static IOWebSocketChannel channelLive;
 
   /// 保存每个合约的行情
   Map<String, InstrumentQuote> mapInstrumentQuotes = {};
@@ -21,12 +22,16 @@ class SocketMarketSnapProvider with ChangeNotifier {
   /// 获取每个合约的行情
   InstrumentQuote quoteByCode(String code) => mapInstrumentQuotes[code];
 
-  createWebsocket() {
+  createWebSocket() {
     channel = initializeWebSocketTradeChannel();
-    print('建立连接' + DateTime.now().toString());
-    //监听到服务器返回消息
     channel.stream.listen((data) => listenMessage(data),
         onError: onError, onDone: onDone);
+  }
+
+  createLiveWebSocket() {
+    channelLive = initializeWebSocketQuoteChannel();
+    channelLive.stream.listen((data) => listenMessage(data),
+        onError: onError, onDone: onLiveSocketDone);
   }
 
   listenMessage(data) {
@@ -39,29 +44,24 @@ class SocketMarketSnapProvider with ChangeNotifier {
       var newQuote =
           InstrumentQuote.fromJson(SocketResponse.fromJson(obj).payload);
       if (newQuote != null) {
-        var olderQuote = mapInstrumentQuotes[newQuote.id];
-        // 对比下新推送过来的行情，如果有变化，再发出通知。
-        if (olderQuote == null ||
-            olderQuote.time != newQuote.time ||
-            olderQuote.price != newQuote.price) {
-          mapInstrumentQuotes[newQuote.id] = newQuote;
-
-          notifyListeners();
-
-          print('marketSnap notifyListeners:' + newQuote.id);
-        }
+        mapInstrumentQuotes[newQuote.id] = newQuote;
+        //todo 是否要对比一下，跟上次的更新时间
+        notifyListeners();
       }
     }
   }
 
-  /// 请求历史行情 
   requestQuotes(List<String> instrumentCodes) {
     if (channel == null) {
-      createWebsocket();
+      createWebSocket();
     }
     for (var code in instrumentCodes) {
       var req = SocketRequest.reqMarketSnap(code);
       channel.sink.add(req.parameters);
+    }
+
+    if (channelLive == null) {
+      createLiveWebSocket();
     }
   }
 
@@ -69,10 +69,11 @@ class SocketMarketSnapProvider with ChangeNotifier {
     print('error------------>${error}');
   }
 
-  void onDone() {
-    print('websocket断开了');
-    // createWebsocket();
-    // print('websocket重连');
+  onDone() {}
+
+  onLiveSocketDone() {
+    print('onLiveSocket websocket断开了');
+    createLiveWebSocket();
   }
 
   closeWebSocket() {
@@ -80,6 +81,11 @@ class SocketMarketSnapProvider with ChangeNotifier {
     if (channel != null) {
       channel.sink?.close(status.goingAway);
       channel = null;
+    }
+
+    if (channelLive != null) {
+      channelLive.sink?.close(status.goingAway);
+      channelLive = null;
     }
     //notifyListeners();
   }

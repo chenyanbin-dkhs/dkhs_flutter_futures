@@ -22,7 +22,7 @@ import '../models/instrument_quote.dart';
 class SocketMarketTimeLineProvider with ChangeNotifier {
   static IOWebSocketChannel channel;
   List<Instrument> _listInstrument = [];
-
+  int _receivedLength = 0;
   Instrument getInstrument(String code) => _listInstrument
       .firstWhere((item) => item.code == code, orElse: () => null);
 
@@ -41,8 +41,8 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
     });
 
     if (shouldNotify) {
-      print('通过 marketSnap 更新 timeline 涨跌');
-      notifyListeners();
+      //print('通过 marketSnap 更新 timeline 涨跌');
+      //notifyListeners();
     }
   }
 
@@ -65,28 +65,27 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
           InstrumentTimeLine.fromJson(SocketResponse.fromJson(obj).payload);
 
       if (marketTimeLine != null) {
-        String code = marketTimeLine.instrument;
-        int instrumentIndex =
-            _listInstrument.indexWhere((item) => item.code == code);
-        if (instrumentIndex >= 0) {
-          var oldTimeLineMap = _listInstrument[instrumentIndex].timeLineMap;
-          var newTimeLines = marketTimeLine.timeLine;
-
-          for (var timeline in newTimeLines) {
-            oldTimeLineMap[timeline.time.substring(0, 5)] = timeline;
-          }
-        }
-        // var newTimeline = timeLine;
-        // var oldTimeline = mapInstrumentTimelines[code];
-        // if (oldTimeline == null ||
-        //     oldTimeline.timeLine.length != newTimeline.timeLine.length) {
-        //   mapInstrumentTimelines[code] = timeLine;
-
-        //   shouldNotify = true;
-        // }
+        updateInstrumentTimeLine(
+            marketTimeLine.instrument, marketTimeLine.timeLine);
       }
     }
-    notifyListeners();
+    _receivedLength++;
+    if (_receivedLength >= _listInstrument.length) {
+      print(_receivedLength);
+      notifyListeners();
+    }
+  }
+
+  void updateInstrumentTimeLine(String code, List<TimeLine> newTimeLines) {
+    var instrument = _listInstrument.firstWhere((item) => item.code == code,
+        orElse: () => null);
+    if (instrument != null) {
+      var oldTimeLineMap = instrument.timeLineMap;
+      var newTimeLineMap = {
+        for (var item in newTimeLines) item.time.substring(0, 5): item
+      };
+      oldTimeLineMap.addAll(newTimeLineMap);
+    }
   }
 
   requestTimeline(String instrumentCode) {
@@ -98,6 +97,7 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
     if (channel == null) {
       createWebsocket();
     }
+    _receivedLength = 0; // reset
     this._listInstrument = list;
     for (var item in list) {
       requestTimeline(item.code);
@@ -109,7 +109,7 @@ class SocketMarketTimeLineProvider with ChangeNotifier {
   }
 
   void onDone() {
-    print('websocket断开了');
+    print('SocketMarketTimeLineProvider websocket断开了');
     // createWebsocket();
     // print('websocket重连');
   }

@@ -53,8 +53,8 @@ class Http {
       if (statusCode == 404) {
         throw Exception('404:接口请求路径有误');
       }
-      print('请求地址：【' + method + '  ' + API_PREFIX + url + '】');
-      print('请求参数：' + data.toString());
+      //print('请求地址：【' + method + '  ' + API_PREFIX + url + '】');
+      //print('请求参数：' + data.toString());
       throw e;
     }
 

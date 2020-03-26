@@ -5,7 +5,9 @@ part 'instrument_quote.g.dart';
 class InstrumentQuote {
   /// instrument code
   String id; 
+  // 2020-03-25
   String date;
+  // 2020-03-25 15:11:29
   String time;
   String price;
   String vol;

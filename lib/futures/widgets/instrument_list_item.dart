@@ -1,18 +1,16 @@
-import 'package:dkhs_flutter_futures/widgets/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../models/instrument.dart';
 import '../../res/resources.dart';
 
-import '../../widgets/chart/line_chart/index.dart';
 import '../../widgets/badge.dart';
 import '../../widgets/my_text.dart';
 import '../../widgets/my_card.dart';
 import '../../widgets/clear_button.dart';
 import '../../widgets/finance_value.dart';
-import 'package:provider/provider.dart';
 import '../websocket/socket_market_snap_provider.dart';
-import '../websocket/socket_market_time_line_provider.dart';
-import '../../utils/number_util.dart';
+import './instrument_list_item_timeline.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})
@@ -49,7 +47,13 @@ class InstrumentListItem extends StatelessWidget {
                   Container(
                     width: 120,
                     padding: EdgeInsets.all(2),
-                    child: _buildTimeline(),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 0.1,
+                        color: Theme.of(context).textTheme.subtitle.color,
+                      ),
+                    ),
+                    child: InstrumentListItemTimeline(instrument.code),
                   ),
                   Gaps.hGap15,
                   Container(
@@ -85,31 +89,6 @@ class InstrumentListItem extends StatelessWidget {
             ),
           ),
         ]);
-      },
-    );
-  }
-
-  Widget _buildTimeline() {
-    return Consumer<SocketMarketTimeLineProvider>(
-      builder: (context, value, child) {
-        var instrument = value.getInstrument(this.instrument.code);
-        var isPercentagePositive =
-            value.instrumentPercentageMap[this.instrument.code];
-        if (instrument != null && isPercentagePositive != null) {
-          Color color = financeColor(context, isPercentagePositive ? 1 : -1);
-
-          return new LineChartSimple(
-            instrument.timeLinePrices,
-            color: color,
-            width: 120,
-            height: 40,
-          );
-        }
-
-        return SizedBox(
-          width: 120,
-          height: 40,
-        );
       },
     );
   }

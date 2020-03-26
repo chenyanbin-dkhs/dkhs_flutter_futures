@@ -25,6 +25,7 @@ class InstrumentTimeLine {
 }
 
 class TimeLine {
+  // 09:19:00
   String time;
   String price;
   String volume;
