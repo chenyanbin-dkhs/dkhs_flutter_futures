@@ -14,7 +14,7 @@ class ClearButton extends StatelessWidget {
       type: MaterialType.transparency,
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {},
+        onTap: this.onTap,
         child: child,
       ),
     );

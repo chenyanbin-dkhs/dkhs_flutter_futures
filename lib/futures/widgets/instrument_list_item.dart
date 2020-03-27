@@ -11,6 +11,7 @@ import '../../widgets/clear_button.dart';
 import '../../widgets/finance_value.dart';
 import '../websocket/socket_market_snap_provider.dart';
 import './instrument_list_item_timeline.dart';
+import '../futures_router.dart';
 
 class InstrumentListItem extends StatelessWidget {
   const InstrumentListItem({Key key, @required this.instrument})
@@ -24,7 +25,7 @@ class InstrumentListItem extends StatelessWidget {
           color: Theme.of(context).dividerColor,
           noPadding: true,
           child: ClearButton(
-            onTap: () => {},
+            onTap: () => {FuturesRouter.instrumentInfo(context, instrument)},
             child: Container(
                 padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
                 child: Row(children: [

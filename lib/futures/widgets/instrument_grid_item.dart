@@ -7,6 +7,7 @@ import '../../widgets/my_text.dart';
 import '../../widgets/my_card.dart';
 import '../../widgets/load_image.dart';
 import '../../widgets/clear_button.dart';
+import '../futures_router.dart';
 
 class InstrumentGridItem extends StatelessWidget {
   const InstrumentGridItem({Key key, @required this.instrument})
@@ -18,7 +19,7 @@ class InstrumentGridItem extends StatelessWidget {
         color: Theme.of(context).dividerColor,
         noPadding: true,
         child: ClearButton(
-          onTap: () => {},
+          onTap: () => {FuturesRouter.instrumentInfo(context, instrument)},
           child: Stack(
             children: <Widget>[
               new Positioned(
