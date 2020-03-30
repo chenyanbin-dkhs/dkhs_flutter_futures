@@ -19,7 +19,7 @@ class InstrumentGridItem extends StatelessWidget {
         color: Theme.of(context).dividerColor,
         noPadding: true,
         child: ClearButton(
-          onTap: () => {FuturesRouter.instrumentInfo(context, instrument)},
+          onTap: () => {FuturesRouter.goInstrumentInfo(context, instrument,null)},
           child: Stack(
             children: <Widget>[
               new Positioned(

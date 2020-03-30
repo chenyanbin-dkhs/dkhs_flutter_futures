@@ -25,7 +25,18 @@ class InstrumentListItem extends StatelessWidget {
           color: Theme.of(context).dividerColor,
           noPadding: true,
           child: ClearButton(
-            onTap: () => {FuturesRouter.instrumentInfo(context, instrument)},
+            onTap: () {
+              final spanProvider =
+                  Provider.of<SocketMarketSnapProvider>(context, listen: false);
+              FuturesRouter.goInstrumentInfo(context, instrument, spanProvider);
+              // return Consumer<SocketMarketSnapProvider>(
+              //   builder: (context, value, child) {
+              //     return FuturesRouter.goInstrumentInfo(
+              //         context, instrument, value);
+              //   },
+              // );
+            },
+            //onTap: () => {FuturesRouter.goInstrumentInfo(context, instrument)},
             child: Container(
                 padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
                 child: Row(children: [

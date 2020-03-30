@@ -17,7 +17,7 @@ class MyHeaderBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       title: titleWidget == null ? Text(title) : titleWidget,
-      centerTitle: titleWidget == null,
+      centerTitle: true,
       actions: actions != null && actions.length > 0 ? actions : null,
     );
   }

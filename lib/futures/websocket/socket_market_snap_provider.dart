@@ -13,8 +13,8 @@ import './socket_response.dart';
 import '../models/instrument_quote.dart';
 
 class SocketMarketSnapProvider with ChangeNotifier {
-  static IOWebSocketChannel channel;
-  static IOWebSocketChannel channelLive;
+  IOWebSocketChannel channel;
+  IOWebSocketChannel channelLive;
 
   /// 保存每个合约的行情
   Map<String, InstrumentQuote> mapInstrumentQuotes = {};
@@ -26,12 +26,14 @@ class SocketMarketSnapProvider with ChangeNotifier {
     channel = initializeWebSocketTradeChannel();
     channel.stream.listen((data) => listenMessage(data),
         onError: onError, onDone: onDone);
+    print('onSnapSocket websocket连接');
   }
 
   createLiveWebSocket() {
     channelLive = initializeWebSocketQuoteChannel();
     channelLive.stream.listen((data) => listenMessage(data),
         onError: onError, onDone: onLiveSocketDone);
+    print('onLiveSocket websocket连接');
   }
 
   listenMessage(data) {
@@ -69,14 +71,20 @@ class SocketMarketSnapProvider with ChangeNotifier {
     print('error------------>${error}');
   }
 
-  onDone() {}
+  onDone() {
+    channel = null;
+    print('onSnap websocket断开了');
+    createWebSocket();
+  }
 
   onLiveSocketDone() {
+    channelLive = null;
     print('onLiveSocket websocket断开了');
     createLiveWebSocket();
   }
 
   closeWebSocket() {
+    print('closeWebSocket');
     //关闭链接
     if (channel != null) {
       channel.sink?.close(status.goingAway);

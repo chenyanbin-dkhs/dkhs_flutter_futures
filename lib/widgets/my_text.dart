@@ -24,8 +24,12 @@ class MyText extends StatelessWidget {
     final fontSize = _buildSize(this.size);
     final textTheme = Theme.of(context).textTheme;
     final fontColor = this.color ?? _buildColor(textTheme, this.size);
+    String display = this.text;
+    if (this.text == null || this.text.isEmpty) {
+      display = '';
+    }
     return Text(
-      this.text,
+      display,
       maxLines: this.maxLines,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
