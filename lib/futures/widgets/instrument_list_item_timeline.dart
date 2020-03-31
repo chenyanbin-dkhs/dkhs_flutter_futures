@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../websocket/socket_market_time_line_provider.dart';
-import '../../widgets/finance_value.dart';
+import '../../widgets/finance_text.dart';
 import '../../widgets/chart/line_chart/index.dart';
 
 class InstrumentListItemTimeline extends StatelessWidget {

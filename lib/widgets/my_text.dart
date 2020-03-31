@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../res/resources.dart';
 
-enum TextSizeType { tiny, small, def, large }
+enum TextSizeType { tiny, small, def, large, xLarge, xxLarge }
+
 enum TextColorType { def, light, muted }
 
 class MyText extends StatelessWidget {
@@ -21,7 +22,7 @@ class MyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fontSize = _buildSize(this.size);
+    final fontSize = buildMyTextSize(this.size);
     final textTheme = Theme.of(context).textTheme;
     final fontColor = this.color ?? _buildColor(textTheme, this.size);
     String display = this.text;
@@ -39,19 +40,6 @@ class MyText extends StatelessWidget {
     );
   }
 
-  double _buildSize(TextSizeType sizeType) {
-    switch (sizeType) {
-      case TextSizeType.tiny:
-        return Dimens.font_sp10;
-      case TextSizeType.small:
-        return Dimens.font_sp12;
-      case TextSizeType.large:
-        return Dimens.font_sp16;
-      default:
-        return Dimens.font_sp14;
-    }
-  }
-
   Color _buildColor(TextTheme textTheme, TextSizeType sizeType) {
     switch (sizeType) {
       case TextSizeType.tiny:
@@ -60,6 +48,23 @@ class MyText extends StatelessWidget {
       default:
         return textTheme.body1.color;
     }
+  }
+}
+
+double buildMyTextSize(TextSizeType sizeType) {
+  switch (sizeType) {
+    case TextSizeType.tiny:
+      return Dimens.font_sp10;
+    case TextSizeType.small:
+      return Dimens.font_sp12;
+    case TextSizeType.large:
+      return Dimens.font_sp16;
+    case TextSizeType.xLarge:
+      return Dimens.font_sp18;
+    case TextSizeType.xxLarge:
+      return Dimens.font_sp20;
+    default:
+      return Dimens.font_sp14;
   }
 }
 

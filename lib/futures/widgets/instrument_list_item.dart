@@ -8,7 +8,7 @@ import '../../widgets/badge.dart';
 import '../../widgets/my_text.dart';
 import '../../widgets/my_card.dart';
 import '../../widgets/clear_button.dart';
-import '../../widgets/finance_value.dart';
+import '../../widgets/finance_text.dart';
 import '../websocket/socket_market_snap_provider.dart';
 import './instrument_list_item_timeline.dart';
 import '../futures_router.dart';
@@ -83,9 +83,9 @@ class InstrumentListItem extends StatelessWidget {
         var quote = value.quoteByCode(this.instrument.code);
 
         return Column(children: [
-          FinanceValue(quote?.price),
+          FinanceText(quote?.price),
           Gaps.vGap5,
-          FinanceValue(
+          FinanceText(
             quote?.percentage,
             percentable: true,
             colorable: true,

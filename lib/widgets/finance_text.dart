@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import '../res/colors.dart';
+import '../res/resources.dart';
+import './my_text.dart';
 
 typedef Widget BuildCallback({String text, double value, Color color});
 
-class FinanceValue extends StatelessWidget {
-  const FinanceValue(this.value,
+class FinanceText extends StatelessWidget {
+  const FinanceText(this.value,
       {Key key,
       this.decimal = 2,
+      this.size = TextSizeType.def,
       this.error = '--',
       this.colorable = false,
       this.percentable = false,
+      this.balance,
       this.onBuild})
       : super(key: key);
+
   final dynamic value;
+  final TextSizeType size;
+
   final int decimal;
   final String error;
   final bool colorable;
   final bool percentable;
   final BuildCallback onBuild;
+  final dynamic balance;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +42,21 @@ class FinanceValue extends StatelessWidget {
     }
     var _color = Theme.of(context).accentColor;
     if (this.colorable) {
-      _color = financeColor(context, this.value);
+      if (this.balance != null) {
+        _color = financeColor(context, this.balance);
+      } else {
+        _color = financeColor(context, _value);
+      }
     }
 
     if (this.onBuild == null) {
-      return Text(displayValue);
+      return Text(
+        displayValue,
+        style: TextStyle(
+          color: _color,
+          fontSize: buildMyTextSize(this.size),
+        ),
+      );
     } else {
       return this.onBuild(text: displayValue, value: _value, color: _color);
     }

@@ -5,10 +5,12 @@ import '../models/instrument.dart';
 import '../../widgets/my_header_bar.dart';
 import '../../widgets/my_text.dart';
 import '../../widgets/badge.dart';
-import '../../widgets/finance_value.dart';
+import '../../widgets/finance_text.dart';
 
 import '../../res/gaps.dart';
 import '../websocket/socket_market_snap_provider.dart';
+import '../widgets/instrument_info/summary_info.dart';
+import '../widgets/instrument_info/header_bar.dart';
 
 class InstrumentInfo extends StatefulWidget {
   InstrumentInfo(this.instrument, {Key key}) : super(key: key);
@@ -41,34 +43,7 @@ class _InstrumentInfoState extends State<InstrumentInfo> {
     return Scaffold(
       key: _scaffold,
       appBar: MyHeaderBar(
-        titleWidget: Container(
-          width: 200,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Text(widget.instrument.name),
-                      Text(widget.instrument.code),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Badge(
-                        '闭市中',
-                        Colors.green,
-                        fill: true,
-                      ),
-                      MySmallText('下次开市时间13:00'),
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+        titleWidget: InstrumentHeaderBar(widget.instrument),
       ),
       body: SingleChildScrollView(
         padding: Gaps.defaultPadding,
@@ -77,31 +52,7 @@ class _InstrumentInfoState extends State<InstrumentInfo> {
             Consumer<SocketMarketSnapProvider>(
               builder: (context, value, child) {
                 var quote = value.quoteByCode(widget.instrument.code);
-                var price = quote?.price ?? '';
-                return Row(
-                  children: [
-                    Expanded(
-                      child: Row(children: [
-                        MyLargeText(price),
-                        Gaps.hGap8,
-                        Column(children: [
-                          MyText('2'),
-                          Gaps.vGap4,
-                          MyText('2'),
-                        ])
-                      ]),
-                      flex: 2,
-                    ),
-                    Expanded(
-                      child: Text('1'),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: Text('1'),
-                      flex: 1,
-                    ),
-                  ],
-                );
+                return InstrumentSummaryInfo(quote);
               },
             ),
           ],
