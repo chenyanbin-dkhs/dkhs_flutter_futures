@@ -1,10 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'instrument_quote.g.dart';
 
+//enum InstrumentQuoteStatus { running, stopped }
+const quoteStatusRunning = '0';
+const quoteStatusStopped = '1';
+
 @JsonSerializable()
 class InstrumentQuote {
   /// instrument code
-  String id; 
+  String id;
   // 2020-03-25
   String date;
   // 2020-03-25 15:11:29
@@ -29,6 +33,10 @@ class InstrumentQuote {
   String settle;
   String turnover;
   String preclose;
+  String status;
+
+  @JsonKey(name: 'status_info')
+  String statusInfo;
 
   double get percentage {
     var _pre = double.tryParse(this.pre) ?? null;
@@ -43,6 +51,14 @@ class InstrumentQuote {
       }
     }
     return _pre;
+  }
+
+  bool get isStatusRunning {
+    return this.status == quoteStatusRunning;
+  }
+
+  String get statusDisplay {
+    return this.status == quoteStatusRunning ? '交易中' : '休市中';
   }
 
   InstrumentQuote(
@@ -68,7 +84,9 @@ class InstrumentQuote {
       this.deltav,
       this.settle,
       this.turnover,
-      this.preclose});
+      this.preclose,
+      this.status,
+      this.statusInfo});
 
 //       - (NSString *)percentage {
 //     CGFloat pre = self.pre.floatValue;

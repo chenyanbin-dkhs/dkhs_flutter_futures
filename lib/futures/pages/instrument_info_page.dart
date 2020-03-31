@@ -15,6 +15,7 @@ import '../widgets/instrument_info/header_bar.dart';
 class InstrumentInfo extends StatefulWidget {
   InstrumentInfo(this.instrument, {Key key}) : super(key: key);
   final Instrument instrument;
+
   @override
   _InstrumentInfoState createState() => _InstrumentInfoState();
 }
@@ -43,7 +44,12 @@ class _InstrumentInfoState extends State<InstrumentInfo> {
     return Scaffold(
       key: _scaffold,
       appBar: MyHeaderBar(
-        titleWidget: InstrumentHeaderBar(widget.instrument),
+        titleWidget: Consumer<SocketMarketSnapProvider>(
+          builder: (context, value, child) {
+            var quote = value.quoteByCode(widget.instrument.code);
+            return InstrumentHeaderBar(widget.instrument, quote);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: Gaps.defaultPadding,

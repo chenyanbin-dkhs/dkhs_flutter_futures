@@ -31,6 +31,8 @@ InstrumentQuote _$InstrumentQuoteFromJson(Map<String, dynamic> json) {
     settle: json['settle'] as String,
     turnover: json['turnover'] as String,
     preclose: json['preclose'] as String,
+    status: json['status'] as String,
+    statusInfo: json['status_info'] as String,
   );
 }
 
@@ -59,4 +61,6 @@ Map<String, dynamic> _$InstrumentQuoteToJson(InstrumentQuote instance) =>
       'settle': instance.settle,
       'turnover': instance.turnover,
       'preclose': instance.preclose,
+      'status': instance.status,
+      'status_info': instance.statusInfo,
     };
