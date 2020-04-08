@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import './line_chart_data.dart';
+import './dash_line.dart';
 
 class LineChartPainter {
   Paint paint;
   Canvas canvas;
   Size size;
+
   LineChartPainter(Canvas canvas, Size size) {
     this.canvas = canvas;
     this.size = size;
@@ -35,8 +37,23 @@ class LineChartPainter {
           from.dy != null &&
           to.dx != null &&
           to.dy != null) {
-        canvas.drawLine(points[i], points[i + 1], paint);
+        canvas.drawLine(from, to, paint);
       }
     }
+  }
+
+  /// 画水平曲线
+  void drawHorizontalLines(int yTickSize) {
+    var tickHeight = _tickHeight(yTickSize);
+
+    for (int i = 0; i < yTickSize; i++) {
+      double endY = i * tickHeight;
+      DashLine.drawHorizontalLine(canvas, size, endY);
+    }
+  }
+
+  /// Y轴上面每个刻度之间的间隔
+  double _tickHeight(int yTickSize) {
+    return this.size.height / (yTickSize - 1);
   }
 }

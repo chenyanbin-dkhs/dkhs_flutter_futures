@@ -4,6 +4,9 @@ import 'package:web_socket_channel/io.dart';
 const tradeUrl = 'wss://ws.dkhs.com/futures/trade';
 const quoteUrl = 'wss://ws.dkhs.com/futures/quote';
 
+const devTradeUrl = 'wss://dev.dev.dkhs.com:8888/futures/trade';
+const devQuoteUrl = 'wss://dev.dev.dkhs.com:8888/futures/quote';
+
 enum SocketChannleType { trade, quote }
 
 // class SocketChannle {

@@ -55,6 +55,8 @@ dependencies:
   # https://pub.dev/packages/web_socket_channel
   web_socket_channel: ^1.1.0
   intl: ^0.16.1
+  # https://pub.dev/packages/tuple
+  tuple: ^1.0.3
   
 dev_dependencies:
   flutter_test:

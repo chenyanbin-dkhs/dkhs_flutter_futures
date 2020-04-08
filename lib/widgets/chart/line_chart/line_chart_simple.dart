@@ -35,6 +35,7 @@ class MyPainter extends CustomPainter {
       painter.setPaintColor(this.color);
     }
     var lineData = new LineChartData(data);
+    painter.drawHorizontalLines(lineData.yTickSize);
     painter.drawLine(lineData);
   }
 

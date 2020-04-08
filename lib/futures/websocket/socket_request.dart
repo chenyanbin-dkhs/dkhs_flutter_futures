@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 const reqMarketSnap = 'req_market_snap';
+const reqMarketLive = 'req_market_sub'; // 还是比较喜欢 Live这个命名
 const reqMarketTimeLine = 'req_market_time_line';
 
 class SocketRequest {
@@ -10,8 +11,12 @@ class SocketRequest {
 
   SocketRequest(this.action, this.instrumentCode, {this.index = 0});
 
-  /// 获取合约最新行情
+  /// 获取合约最新行情，已弃用
   SocketRequest.reqMarketSnap(String instrumentCode)
+      : this(reqMarketSnap, instrumentCode);
+
+  /// 
+  SocketRequest.reqMarketLive(String instrumentCode)
       : this(reqMarketSnap, instrumentCode);
 
   SocketRequest.reqMarketTimeLine(String instrumentCode, int _index)

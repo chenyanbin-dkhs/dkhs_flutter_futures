@@ -58,7 +58,7 @@ class InstrumentSummaryInfo extends StatelessWidget {
           flex: 1,
         ),
         Container(
-          width: 95,
+          width: 110,
           child: Column(
             children: [
               Row(
@@ -103,7 +103,7 @@ class InstrumentSummaryInfo extends StatelessWidget {
         ),
         Gaps.hGap16,
         Container(
-          width: 75,
+          width: 90,
           child: Column(
             children: [
               Row(

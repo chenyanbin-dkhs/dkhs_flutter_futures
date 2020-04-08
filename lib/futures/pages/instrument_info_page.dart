@@ -11,6 +11,7 @@ import '../../res/gaps.dart';
 import '../websocket/socket_market_snap_provider.dart';
 import '../widgets/instrument_info/summary_info.dart';
 import '../widgets/instrument_info/header_bar.dart';
+import '../widgets/instrument_info/instrument_chart_type.dart';
 
 class InstrumentInfo extends StatefulWidget {
   InstrumentInfo(this.instrument, {Key key}) : super(key: key);
@@ -61,6 +62,8 @@ class _InstrumentInfoState extends State<InstrumentInfo> {
                 return InstrumentSummaryInfo(quote);
               },
             ),
+            Gaps.vGap10,
+            InstrumentChartType(),
           ],
         ),
       ),

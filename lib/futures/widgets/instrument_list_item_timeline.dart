@@ -16,7 +16,6 @@ class InstrumentListItemTimeline extends StatelessWidget {
         var isPercentagePositive = value.instrumentPercentageMap[this.code];
         if (instrument != null && isPercentagePositive != null) {
           Color color = financeColor(context, isPercentagePositive ? 1 : -1);
-          
           return LineChartSimple(
             instrument.timeLinePrices,
             color: color,
