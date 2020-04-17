@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import './line_chart_data.dart';
 import './dash_line.dart';
+import './canvas_text.dart';
 
 class LineChartPainter {
+  BuildContext context;
   Paint paint;
   Canvas canvas;
   Size size;
 
-  LineChartPainter(Canvas canvas, Size size) {
+  LineChartPainter(BuildContext context, Canvas canvas, Size size,
+      {Color color}) {
+    this.context = context;
     this.canvas = canvas;
     this.size = size;
     this.paint = Paint()
-      ..color = Colors.black
+      ..color = color ?? Colors.black
       ..strokeWidth = 0.8;
   }
 
@@ -51,6 +55,16 @@ class LineChartPainter {
       DashLine.drawHorizontalLine(canvas, size, endY);
     }
   }
+
+  // void drawHorizontalLabel(int yTickSize) {
+  //   var tickHeight = _tickHeight(yTickSize);
+
+  //   for (int i = 0; i < yTickSize; i++) {
+  //     double endY = i * tickHeight;
+  //     DashLine.drawHorizontalLine(canvas, size, endY);
+  //     CanvasText('12.22%', 0, endY).draw(canvas);
+  //   }
+  // }
 
   /// Y轴上面每个刻度之间的间隔
   double _tickHeight(int yTickSize) {

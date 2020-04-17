@@ -30,6 +30,11 @@ class _MinePageState extends State<MinePage>
         appBar: AppBar(
           title: Text('我的'),
         ),
-        body: SingleChildScrollView(child: DotLineDraw()));
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            DotLineDraw(),
+          ],
+        )));
   }
 }

@@ -10,6 +10,7 @@ class LineChartSimple extends StatelessWidget {
   final List<double> data;
   final double width;
   final double height;
+
   /// 曲线颜色
   final Color color;
 
@@ -17,23 +18,23 @@ class LineChartSimple extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(this.width, this.height),
-      painter: MyPainter(this.data, this.color),
+      painter: MyPainter(context, this.data, this.color),
     );
   }
 }
 
 class MyPainter extends CustomPainter {
+  BuildContext context;
+
   List<double> data;
   final Color color;
-  MyPainter(this.data, this.color);
+  MyPainter(this.context, this.data, this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
-    
-    var painter = new LineChartPainter(canvas, size);
-    if (this.color != null) {
-      painter.setPaintColor(this.color);
-    }
+    var painter =
+        new LineChartPainter(context, canvas, size, color: this.color);
+
     var lineData = new LineChartData(data);
     painter.drawHorizontalLines(lineData.yTickSize);
     painter.drawLine(lineData);

@@ -58,7 +58,6 @@ class InstrumentListItem extends StatelessWidget {
                   Spacer(),
                   Container(
                     width: 120,
-                    padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 0.1,

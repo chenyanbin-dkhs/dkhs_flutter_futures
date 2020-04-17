@@ -1,5 +1,7 @@
+import 'package:dkhs_flutter_futures/widgets/chart/line_chart/y_axis.dart';
 import 'package:flutter/material.dart';
 import '../widgets/chart/line_chart/index.dart';
+import '../widgets/chart/line_chart/y_axis.dart';
 
 class DotLineDraw extends StatelessWidget {
   const DotLineDraw({Key key}) : super(key: key);
@@ -8,19 +10,24 @@ class DotLineDraw extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(MediaQuery.of(context).size.width, 400),
-      painter: MyPainter(),
+      painter: MyPainter(context),
     );
   }
 }
 
 class MyPainter extends CustomPainter {
-  MyPainter();
+  BuildContext context;
+  MyPainter(this.context);
 
   @override
   void paint(Canvas canvas, Size size) {
-    DashLine.drawHorizontalLine(canvas, size, 0);
-    DashLine.drawHorizontalLine(canvas, size, 100);
-    DashLine.drawHorizontalLine(canvas, size, 200);
+    var painter =
+        new LineChartPainter(context, canvas, size, color: Colors.red);
+    var lineData = new LineChartData([1, 2, 3, 4, -2, 9, -3, 2, 5]);
+    print(lineData.tickValues);
+    painter.drawHorizontalLines(lineData.yTickSize);
+    painter.drawLine(lineData);
+    new YAxis(canvas, size.height).drawPercentage(lineData.tickValues);
   }
 
   @override
