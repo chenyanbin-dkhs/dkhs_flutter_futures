@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 
-class DashLine {
+class HorzontalLine {
   static double _dashWidth = 5;
   static double _dashSpace = 4;
+
+  Canvas canvas;
+  double width;
+  Color color;
+  HorzontalLine(this.canvas, this.width, {this.color = Colors.black12});
 
   static double get _eachWidth {
     return _dashWidth + _dashSpace;
   }
 
-  static Paint get paint {
+  Paint get paint {
     return Paint()
       ..strokeWidth = 1
       ..isAntiAlias = true
-      ..color = Color(0x77cdb175);
+      ..color = color;
   }
 
   /// 画图表背景水平线
-  static void drawHorizontalLine(Canvas canvas, Size size, double startY) {
-    double chartWidth = size.width;
-
+  void draw(double startY) {
     double startX = 0;
 
-    while (startX < chartWidth) {
+    while (startX < width) {
       canvas.drawLine(
         Offset(startX, startY),
         Offset(startX + _dashWidth, startY),

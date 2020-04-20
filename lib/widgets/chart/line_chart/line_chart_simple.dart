@@ -36,8 +36,10 @@ class MyPainter extends CustomPainter {
         new LineChartPainter(context, canvas, size, color: this.color);
 
     var lineData = new LineChartData(data);
-    painter.drawHorizontalLines(lineData.yTickSize);
-    painter.drawLine(lineData);
+    painter
+      ..setChartData(lineData)
+      ..drawHorizontalLines()
+      ..drawLine();
   }
 
   @override

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import './line_chart_data.dart';
-import './dash_line.dart';
-import './canvas_text.dart';
+import './horizontal_line.dart';
+import './y_axis.dart';
 
 class LineChartPainter {
   BuildContext context;
   Paint paint;
   Canvas canvas;
   Size size;
+  LineChartData lineChartData;
 
   LineChartPainter(BuildContext context, Canvas canvas, Size size,
       {Color color}) {
@@ -23,7 +24,14 @@ class LineChartPainter {
     this.paint.color = color;
   }
 
-  void drawLine(LineChartData lineChartData) {
+  void setChartData(LineChartData lineChartData) {
+    this.lineChartData = lineChartData;
+  }
+
+  void drawLine() {
+    if (lineChartData == null) {
+      throw Exception('drawLine 未设置数据源');
+    }
     var list = lineChartData.list;
     var xScale = lineChartData.xScale;
     var yScale = lineChartData.yScale;
@@ -47,24 +55,35 @@ class LineChartPainter {
   }
 
   /// 画水平曲线
-  void drawHorizontalLines(int yTickSize) {
+  void drawHorizontalLines() {
+    if (lineChartData == null) {
+      throw Exception('drawLine 未设置数据源');
+    }
+    int yTickSize = lineChartData.yTickSize;
     var tickHeight = _tickHeight(yTickSize);
 
     for (int i = 0; i < yTickSize; i++) {
       double endY = i * tickHeight;
-      DashLine.drawHorizontalLine(canvas, size, endY);
+      HorzontalLine(canvas, size.width).draw(endY);
     }
   }
 
-  // void drawHorizontalLabel(int yTickSize) {
-  //   var tickHeight = _tickHeight(yTickSize);
+  //画Y轴上面的刻度值
+  void drawYAxisPercentage() {
+    if (lineChartData == null) {
+      throw Exception('drawLine 未设置数据源');
+    }
 
-  //   for (int i = 0; i < yTickSize; i++) {
-  //     double endY = i * tickHeight;
-  //     DashLine.drawHorizontalLine(canvas, size, endY);
-  //     CanvasText('12.22%', 0, endY).draw(canvas);
-  //   }
-  // }
+    YAxisPercentage(canvas, size.height).draw(lineChartData.tickValues);
+  }
+
+  void drawYAxisPercentageAndValue() {
+    if (lineChartData == null) {
+      throw Exception('drawLine 未设置数据源');
+    }
+
+    YAxisPercentageAndValue(canvas, size.height).draw(lineChartData.tickValues);
+  }
 
   /// Y轴上面每个刻度之间的间隔
   double _tickHeight(int yTickSize) {

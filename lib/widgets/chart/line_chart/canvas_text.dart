@@ -15,7 +15,7 @@ class CanvasText {
   CanvasText(this.text, this.x, this.y,
       {this.color = Colors.black,
       this.textAlign = TextAlign.left,
-      this.fontSize = 12.0});
+      this.fontSize = 10.0});
 
   TextSpan get _span {
     return TextSpan(

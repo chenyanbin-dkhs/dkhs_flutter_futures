@@ -21,13 +21,17 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var painter =
+    final painter =
         new LineChartPainter(context, canvas, size, color: Colors.red);
-    var lineData = new LineChartData([1, 2, 3, 4, -2, 9, -3, 2, 5]);
-    print(lineData.tickValues);
-    painter.drawHorizontalLines(lineData.yTickSize);
-    painter.drawLine(lineData);
-    new YAxis(canvas, size.height).drawPercentage(lineData.tickValues);
+
+    final lineData = new LineChartData([1, 2, -1, 4, 2, 9, -3, 2, 5],
+        domainType: DataDomainType.middleZero);
+
+    painter
+      ..setChartData(lineData)
+      ..drawHorizontalLines()
+      ..drawLine()
+      ..drawYAxisPercentage();
   }
 
   @override

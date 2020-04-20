@@ -1,24 +1,22 @@
 import 'dart:math' as DartMath;
 import 'package:tuple/tuple.dart';
 
-class Point {
-  double x, y;
-  Point(this.x, this.y);
-}
+enum DataDomainType { auto, startZero, middleZero }
 
 class LineChartData {
   List<double> list;
 
   double min;
   double max;
+  DataDomainType domainType;
 
   int yTickSize;
-  double middleValue;
 
-  LineChartData(List<double> list) {
-    this.yTickSize = 5;
+  LineChartData(List<double> list,
+      {int yTickSize = 5, DataDomainType domainType = DataDomainType.auto}) {
+    this.yTickSize = yTickSize;
     this.list = list;
-
+    this.domainType = domainType;
     Tuple2<double, double> _minAndMaxValues = _getMinAndMaxValues();
     this.min = _minAndMaxValues?.item1;
     this.max = _minAndMaxValues?.item2;
@@ -43,8 +41,21 @@ class LineChartData {
     final w = diffValue.abs() * 1.1;
     final step = w / (yTickSize - 1);
 
-    final finalyMax = _max + 0.05 * (_max - _min);
-    final finalyMin = finalyMax - (yTickSize - 1) * step;
+    double finalyMax = _max + 0.05 * (_max - _min);
+    double finalyMin = finalyMax - (yTickSize - 1) * step;
+
+    /// 中间是0，上下对称
+    if (domainType == DataDomainType.middleZero) {
+      if (finalyMax.abs() > finalyMin.abs()) {
+        finalyMin = 0 - finalyMax.abs();
+      } else {
+        finalyMax = finalyMin.abs();
+      }
+    } else if (domainType == DataDomainType.startZero) {
+      finalyMax = finalyMax.abs();
+      finalyMin = 0;
+    }
+
     return new Tuple2(finalyMin, finalyMax);
   }
 
