@@ -1,3 +1,5 @@
+import '../../utils/number_util.dart';
+
 class InstrumentTimeLine {
   String instrument;
   List<TimeLine> timeLine;
@@ -30,6 +32,10 @@ class TimeLine {
   String price;
   String volume;
   String openVol;
+  double percentage(double baseValue) {
+    double _price = NumberUtils.doubleParse(price);
+    return _price == null ? null : ((_price / baseValue) - 1) * 100;
+  }
 
   TimeLine({this.time, this.price, this.volume, this.openVol});
 

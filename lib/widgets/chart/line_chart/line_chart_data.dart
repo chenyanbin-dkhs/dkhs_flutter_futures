@@ -38,7 +38,7 @@ class LineChartData {
     }
 
     final diffValue = _max - _min;
-    final w = diffValue.abs() * 1.1;
+    final w = diffValue.abs() * 1.25;
     final step = w / (yTickSize - 1);
 
     double finalyMax = _max + 0.05 * (_max - _min);

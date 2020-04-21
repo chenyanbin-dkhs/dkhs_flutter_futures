@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './canvas_text.dart';
 import './line_chart_data.dart';
+import '../../../utils/number_util.dart';
 
 const fontHeight = 12.5;
 
@@ -43,7 +44,9 @@ class YAxisPercentage extends YAxis {
 }
 
 class YAxisPercentageAndValue extends YAxisPercentage {
-  YAxisPercentageAndValue(Canvas canvas, double height) : super(canvas, height);
+  double baseValue;
+  YAxisPercentageAndValue(Canvas canvas, double height, this.baseValue)
+      : super(canvas, height);
 
   @override
   void draw(List<double> percentages) {
@@ -51,13 +54,17 @@ class YAxisPercentageAndValue extends YAxisPercentage {
 
     if (size > 0) {
       for (int i = 0; i < size; i++) {
-        final percentage = _percentageText(percentages[i], decimal);
+        final percentage = percentages[i];
+        final percentageDisplay = _percentageText(percentage, decimal);
         final y = _yPosition(height, size, i, 2);
-        final color = _color(percentages[i], 0);
+        final color = _color(percentage, 0);
+        final price = baseValue * (1 + percentage);
 
-        CanvasText(percentage, 0, y, color: color).draw(canvas);
+        CanvasText(percentageDisplay, 0, y, color: color).draw(canvas);
 
-        CanvasText('12322.22', 0, y + fontHeight, color: color).draw(canvas);
+        CanvasText(price.toStringAsFixed(decimal), 0, y + fontHeight,
+                color: color)
+            .draw(canvas);
       }
     }
   }

@@ -33,7 +33,10 @@ class _MinePageState extends State<MinePage>
         body: SingleChildScrollView(
             child: Column(
           children: [
-            DotLineDraw(),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: DotLineDraw(),
+            ),
           ],
         )));
   }

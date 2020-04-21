@@ -38,7 +38,7 @@ class MyPainter extends CustomPainter {
     var lineData = new LineChartData(data);
     painter
       ..setChartData(lineData)
-      ..drawHorizontalLines()
+      ..drawBackground()
       ..drawLine();
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HorzontalLine {
-  static double _dashWidth = 5;
-  static double _dashSpace = 4;
+  static double _dashWidth = 3;
+  static double _dashSpace = 3;
 
   Canvas canvas;
   double width;
@@ -21,9 +21,7 @@ class HorzontalLine {
   }
 
   /// 画图表背景水平线
-  void draw(double startY) {
-    double startX = 0;
-
+  void draw(double startX, double startY) {
     while (startX < width) {
       canvas.drawLine(
         Offset(startX, startY),
